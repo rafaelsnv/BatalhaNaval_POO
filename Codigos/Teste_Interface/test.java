@@ -17,81 +17,94 @@ public class test{
 
 
     public static void inserir(){
-                //Porta Avioes 1
-                matriz[1][5] = "P";
-                matriz[1][6] = "P";
-                matriz[1][7] = "P";
-                matriz[1][8] = "P";
-                matriz[1][9] = "P";
-        
-                //Ecouraçado 1
-                matriz[5][8] = "E";
-                matriz[5][9] = "E";
-                matriz[5][10] = "E";
-                matriz[5][11] = "E";
+        //Porta Avioes 1
+        matriz[1][5] = "P";
+        matriz[1][6] = "P";
+        matriz[1][7] = "P";
+        matriz[1][8] = "P";
+        matriz[1][9] = "P";
 
-                //Ecouraçado 2
-                matriz[11][10] = "E";
-                matriz[11][11] = "E";
-                matriz[11][12] = "E";
-                matriz[11][13] = "E";
+        //Ecouraçado 1
+        matriz[5][8] = "E";
+        matriz[5][9] = "E";
+        matriz[5][10] = "E";
+        matriz[5][11] = "E";
 
-                //Hidroaviao 1
-                matriz[3][5] = "H";
-                matriz[4][4] = "H";
-                matriz[4][6] = "H";
+        //Ecouraçado 2
+        matriz[11][10] = "E";
+        matriz[11][11] = "E";
+        matriz[11][12] = "E";
+        matriz[11][13] = "E";
 
-                //Hidroaviao 2
-                matriz[7][3] = "H";
-                matriz[8][2] = "H";
-                matriz[8][4] = "H";
+        //Hidroaviao 1
+        matriz[3][5] = "H";
+        matriz[4][4] = "H";
+        matriz[4][6] = "H";
 
-                //Hidroaviao 3
-                matriz[12][7] = "H";
-                matriz[13][6] = "H";
-                matriz[13][8] = "H";
-                
-                //Submarino 1
-                matriz[2][1] = "S";
+        //Hidroaviao 2
+        matriz[7][3] = "H";
+        matriz[8][2] = "H";
+        matriz[8][4] = "H";
 
-                //Submarino 2
-                matriz[6][6] = "S";
+        //Hidroaviao 3
+        matriz[12][7] = "H";
+        matriz[13][6] = "H";
+        matriz[13][8] = "H";
 
-                //Submarino 3
-                matriz[8][11] = "S";
+        //Submarino 1
+        matriz[2][1] = "S";
 
-                //Submarino 4
-                matriz[10][5] = "S";
-    
-                
-                //Cruzador 1
-                matriz[1][11] = "C";
-                matriz[1][12] = "C";
-                
-                //Cruzador 1
-                matriz[7][8] = "C";
-                matriz[7][9] = "C";
-        
-                //Cruzador 3
-                matriz[12][1] = "C";
-                matriz[12][2] = "C";
+        //Submarino 2
+        matriz[6][6] = "S";
+
+        //Submarino 3
+        matriz[8][11] = "S";
+
+        //Submarino 4
+        matriz[10][5] = "S";
+
+
+        //Cruzador 1
+        matriz[1][11] = "C";
+        matriz[1][12] = "C";
+
+        //Cruzador 1
+        matriz[7][8] = "C";
+        matriz[7][9] = "C";
+
+        //Cruzador 3
+        matriz[12][1] = "C";
+        matriz[12][2] = "C";
 
 
     }
 
 
-    public static void imprimirTudo(){        
+    public static void imprimirTudo(){
         int l = 0;
         int c = 0;
 
-        while (l!= linhas && c!= colunas);
+        while(l!= 14 || c <= 14){
             imprimir(matriz[l][c]);
+//            if (c!= 14 && matriz[l][c+1]!=null && matriz[l][c+1]==matriz[l][c]){
+//                imprimir(matriz[l][c]);
+//            }
+//            else {
+                System.out.print("  ");
+//            }
 
-            if ((l+1)>linhas){
+            if (c==14){
+                if (l==14){
+                    break;
+                }
                 System.out.println();
-                l=0; 
-                c++;}
-            else {l++;}
+                l++;
+                c=0;
+            }
+            else {
+                c++;
+            }
+        }
     }
 
 
@@ -111,7 +124,4 @@ public class test{
         imprimirTudo();
 
     }
-        
-
-
 }
