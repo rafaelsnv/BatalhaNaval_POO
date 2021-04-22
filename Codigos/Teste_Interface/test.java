@@ -1,10 +1,9 @@
 public class test{
 
-    public static int linhas=15;
-    public static int colunas=15;
+    // 
+    public static String matriz[][] = new String [15][15];
 
-    public static String matriz[][] = new String [linhas][colunas];
-
+    //Algumas cores para usarmos (Ainda temos livre Preto, Branco e Azul)
     public static String ANSI_RESET = "\u001B[0m";
     public static String ANSI_BLACK = "\u001B[30m";
     public static String ANSI_RED = "\u001B[31m";
@@ -15,8 +14,9 @@ public class test{
     public static String ANSI_CYAN = "\u001B[36m";
     public static String ANSI_WHITE = "\u001B[37m";
 
-
-    public static void inserir(){
+    // No trabalho, o usuario vai escolher as posições ou vao ser criadas aleatoriamente (caso seja bot)
+    // Para esse exemplo, escolhi posições pré defenidas com base no vídeo que usamos para entender sobre o jogo
+    public static void inserir(){ 
         //Porta Avioes 1
         matriz[1][5] = "P";
         matriz[1][6] = "P";
@@ -79,13 +79,22 @@ public class test{
 
     }
 
-
+    // Esse método imprime considerando o tamanho da matriz e imprime a legenda
     public static void imprimirTudo(){
-        int l = 0;
-        int c = 0;
+        int l = 0, c = 0;
 
-        while(l!= 14 || c <= 14){
+        while(l!= 14 || c <= 14){    
+
+            //Cada vez que a coluna é resetada, a legenda é adicionada
+            if (c == 0) {                                                  
+                if ((l+1) < 10){System.out.print("0"+(l+1)+" ");}
+                else       {System.out.print((l+1)+" ");}
+            }
+            
             imprimir(matriz[l][c]);
+
+            //Regra de espaçamento (não implementada ainda)
+
 //            if (c!= 14 && matriz[l][c+1]!=null && matriz[l][c+1]==matriz[l][c]){
 //                imprimir(matriz[l][c]);
 //            }
@@ -93,8 +102,9 @@ public class test{
                 System.out.print("  ");
 //            }
 
+            // Verificação para quebra de linha
             if (c==14){
-                if (l==14){
+                if (l==(14)){
                     break;
                 }
                 System.out.println();
@@ -105,10 +115,13 @@ public class test{
                 c++;
             }
         }
+        System.out.println();
+        System.out.print("   A  B  C  D  E  F  G  H  I  J  K  L  M  N  O");
+
     }
 
-
-    public static void imprimir(String c){
+    // Método de impressão em uma posição específica da matriz
+    private static void imprimir(String c){
 
         if (c == null){System.out.print(" ");}
         else if (c == "P") {System.out.print(ANSI_YELLOW + "■" + ANSI_RESET);}
