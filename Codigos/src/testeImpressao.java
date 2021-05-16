@@ -85,7 +85,6 @@ public class testeImpressao {
         tabuleiro[12][1] = "C";
         tabuleiro[12][2] = "C";
 
-
     }
 
     // Esse método imprime considerando o tamanho da matriz e imprime a legenda
