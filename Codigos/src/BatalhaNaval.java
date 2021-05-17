@@ -1,3 +1,4 @@
+import JogadorPKG.*;
 import java.util.concurrent.Semaphore;
 
 public class BatalhaNaval {

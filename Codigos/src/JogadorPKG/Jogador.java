@@ -1,4 +1,4 @@
-import java.util.jar.JarOutputStream;
+package JogadorPKG;
 
 public class Jogador {
     private int numero;
