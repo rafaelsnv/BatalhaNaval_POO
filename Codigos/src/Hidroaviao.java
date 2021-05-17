@@ -1,4 +1,4 @@
-public class Hidroaviao {
+public class Hidroaviao extends Embarcacao {
 
     public Hidroaviao(){
         

@@ -1,4 +1,4 @@
-public class PortaAvioes {
+public class PortaAvioes extends Embarcacao {
     
     public PortaAvioes(){
         

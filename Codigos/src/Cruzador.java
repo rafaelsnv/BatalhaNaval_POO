@@ -1,4 +1,4 @@
-public class Cruzador {
+public class Cruzador extends Embarcacao {
 
     public Cruzador(){
         

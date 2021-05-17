@@ -1,4 +1,4 @@
-public class Submarino {
+public class Submarino extends Embarcacao {
     
     public Submarino(){
         
