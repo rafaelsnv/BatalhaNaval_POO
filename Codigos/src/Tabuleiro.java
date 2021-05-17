@@ -1,7 +1,9 @@
-public class Tabuleiro {
-    private static String [ ][ ] GRADE = new String[15][15];
+import Embarcacoes.Embarcacao;
 
-    public Tabuleiro(){
+public class Tabuleiro {
+    private static String[][] GRADE = new String[15][15];
+
+    public Tabuleiro() {
 
     }
 
