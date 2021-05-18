@@ -1,30 +1,59 @@
 package Embarcacoes;
 
 import java.util.ArrayList;
-import Casa.Casa;
+import Regras.Casa;
 
 public class Embarcacao {
+    protected int ID; // Identificador da embarcação
     protected String descricao; //
-    protected boolean orientacaoEmbarcacao; // false = horizontal | true = vertical
+    protected boolean orientacaoVertical; // false = horizontal | true = vertical
     protected ArrayList<Casa> casasOcupadas; //
     protected boolean inserido; //
+    protected int tamanho; // Número de casas que a embarcação ocupa
 
-    public Embarcacao() {
+
+     /**
+     * Construtor sem parametros. 
+     * Cria sempre uma embarcação ocupando apenas uma casa.
+     */
+    public Embarcacao(){
         casasOcupadas = new ArrayList<Casa>();
+        casasOcupadas.add(new Casa());
+    }
+
+    /**
+     * Construtor com parametros. 
+     * Cria uma embarcação ocupando o número de casas que receber.
+     * @param size (int) - Tamanho da embarcação desejada. 
+     */
+    public Embarcacao(int size) {
+        casasOcupadas = new ArrayList<Casa>();
+        setTamanho(size);
+        for(int i = 0; i<this.tamanho; i++){
+        casasOcupadas.add(new Casa());
+        }
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
-    public void setOrientacaoEmbarcacao() {
-        this.orientacaoEmbarcacao = true;
+    /**
+     * 
+     * @param vertical (boolean) - Se true = embarcação na vertical
+     *                           - Se false = embarcação na horizontal
+     */
+    public void setOrientacaoVertical(boolean vertical) {
+        this.orientacaoVertical = true;
     }
 
     public void setInserido() {
         this.inserido = true;
     }
 
+    public void setTamanho(int size){
+        this.tamanho = size;
+    }
     public String getDescricao() {
         return this.descricao;
     }
@@ -32,8 +61,8 @@ public class Embarcacao {
     /**
      * @return false = horizontal | true = vertical
      */
-    public boolean getOrientacaoEmbarcacao() {
-        return this.orientacaoEmbarcacao;
+    public boolean getOrientacaoVertical() {
+        return this.orientacaoVertical;
     }
 
     public boolean getInserido() {
@@ -45,7 +74,7 @@ public class Embarcacao {
      * @param coluna (int) Coordenada da coluna.
      */
     public boolean inserir(int linha, int coluna) {
-        Casa novaCasa = new Casa();
+        Casa novaCasa = new Casa(linha, coluna);
         return casasOcupadas.add(novaCasa);
     }
 
@@ -86,7 +115,6 @@ public class Embarcacao {
      */
     public boolean afundou() {
         int size = this.casasOcupadas.size();
-
         for (int i = size; i > 0; i--) { // Percorre todas as casas da embarcação.
             Casa aux = this.casasOcupadas.get(i);
             if (aux.foiBombardeada() == true) // Testa se a casa foi bombardeada.

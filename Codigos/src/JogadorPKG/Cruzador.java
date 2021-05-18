@@ -1,4 +1,6 @@
-public class Cruzador extends Embarcacao {
+package JogadorPKG;
+
+public class Cruzador {
 
     public Cruzador(){
         

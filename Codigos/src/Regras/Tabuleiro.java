@@ -1,3 +1,6 @@
+package Regras;
+
+import Embarcacoes.*;
 import java.util.ArrayList;
 
 public class Tabuleiro {
@@ -23,7 +26,7 @@ public class Tabuleiro {
         }
 
         for(int j=0; j < MAX_ENCOURACADO; j++) {
-            this.minhaEsquadra.add(new Encouracado(id));
+            this.minhaEsquadra.add(new Encouracados(id));
             id++;
         }
 
@@ -56,6 +59,14 @@ public class Tabuleiro {
      */
     protected boolean coordenadaValida(int linha, int coluna) {
         return (coluna >= 0 & coluna < MAX_COLUNAS) & (linha >= 0 & linha < MAX_LINHAS);
+    }
+
+    public ArrayList<Embarcacao> getMinhaEsquadra() {
+        return minhaEsquadra;
+    }
+
+    public void setMinhaEsquadra(ArrayList<Embarcacao> minhaEsquadra) {
+        this.minhaEsquadra = minhaEsquadra;
     }
 
     /**
@@ -145,7 +156,7 @@ public class Tabuleiro {
      * @param coluna (int) Coordenada da coluna. (0 a MAX_COLUNAS-1)
      * @return Verdadeiro se a inserção tiver sido realizada com sucesso.
      */
-    protected boolean inserirEmbarcacao(Embarcacao qual, int linha, int coluna) {
+    public boolean inserirEmbarcacao(Embarcacao qual, int linha, int coluna) {
         boolean inseriu = false;
 
         // Essa parte precisa ser verificada junto à implementação da Embarcação.
@@ -181,18 +192,18 @@ public class Tabuleiro {
 
         if (!casa.foiBombardeada())
             casa.bombardear();
-            if (casa.foiOcupada()) {
-                // Note como o fato de a casa e a embarcação guardarem os IDs facilita muito o processo.
-                // A casa comunica ao tabuleiro qual embarcação está nela, o tabuleiro procura a
-                // embarcação no ArrayList e finalmente o alveja.
-               Embarcacao alvejada = this.getEmbarcacao(casa.getOcupanteID());
-               alvejada.atingir(linha, coluna);
+        if (casa.foiOcupada()) {
+            // Note como o fato de a casa e a embarcação guardarem os IDs facilita muito o processo.
+            // A casa comunica ao tabuleiro qual embarcação está nela, o tabuleiro procura a
+            // embarcação no ArrayList e finalmente o alveja.
+            Embarcacao alvejada = this.getEmbarcacao(casa.getOcupanteID());
+            alvejada.atingir(linha, coluna);
 
-               // Atualizar os dados da embarcação também é facilitado pelo ID.
-               this.updateEmbarcacao(alvejada.getID(), alvejada);
+            // Atualizar os dados da embarcação também é facilitado pelo ID.
+            this.updateEmbarcacao(alvejada.getID(), alvejada);
 
-               return true;
-            }
+            return true;
+        }
 
         return false;
     }
