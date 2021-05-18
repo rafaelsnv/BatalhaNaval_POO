@@ -1,3 +1,7 @@
+package Regras;
+
+import JogadorPKG.Jogador;
+
 import java.util.concurrent.Semaphore;
 
 public class BatalhaNaval {

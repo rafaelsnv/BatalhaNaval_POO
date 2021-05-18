@@ -1,3 +1,5 @@
+package Regras;
+
 import Embarcacoes.Embarcacao;
 
 public class Tabuleiro {

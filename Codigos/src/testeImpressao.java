@@ -73,15 +73,15 @@ public class testeImpressao {
         tabuleiro[10][5] = "S";
 
 
-        //Cruzador 1
+        //JogadorPKG.Cruzador 1
         tabuleiro[1][11] = "C";
         tabuleiro[1][12] = "C";
 
-        //Cruzador 1
+        //JogadorPKG.Cruzador 1
         tabuleiro[7][8] = "C";
         tabuleiro[7][9] = "C";
 
-        //Cruzador 3
+        //JogadorPKG.Cruzador 3
         tabuleiro[12][1] = "C";
         tabuleiro[12][2] = "C";
 

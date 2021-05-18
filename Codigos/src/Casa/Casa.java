@@ -2,7 +2,7 @@ package Casa;
 
 public class Casa {
    private int linha; // - Linha e coluna assumem as coordenadas
-   private String coluna; // que identificam a casa no tabuleiro;
+   private int coluna; // que identificam a casa no tabuleiro;
    private boolean bombardeada; // - Define se a casa foi bombardeada;
    private boolean ocupada; // - Define se uma embarcação ocupou a casa.
 
@@ -12,7 +12,7 @@ public class Casa {
     */
    public Casa() {
       this.linha = -1;
-      this.coluna = "";
+      this.coluna = -1;
       this.bombardeada = false;
       this.ocupada = false;
    }
@@ -24,7 +24,7 @@ public class Casa {
     * @param linha  (int) Coordenada da linha.
     * @param coluna (String) Coordenada da coluna.
     */
-   public Casa(int linha, String coluna) {
+   public Casa(int linha, int coluna) {
       this.linha = linha;
       this.coluna = coluna;
       this.bombardeada = false;
@@ -37,7 +37,7 @@ public class Casa {
     * @param linha  (int) Coordenada da linha.
     * @param coluna (String) Coordenada da coluna.
     */
-   public void setCoordenadas(int linha, String coluna) {
+   public void setCoordenadas(int linha, int coluna) {
       this.linha = linha;
       this.coluna = coluna;
    }
@@ -56,7 +56,7 @@ public class Casa {
     * 
     * @return (String) Coluna ocupada pela casa.
     */
-   public String getColuna() {
+   public int getColuna() {
       return this.coluna;
    }
 
@@ -66,7 +66,7 @@ public class Casa {
     * @return (boolean) Falso se não tiver assumido.
     */
    public boolean validar() {
-      return this.linha != -1 & !this.coluna.equals("");
+      return this.linha != -1 & this.coluna != -1;
    }
 
    /**
