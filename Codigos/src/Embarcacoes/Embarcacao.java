@@ -11,26 +11,26 @@ public class Embarcacao {
     protected boolean inserido; //
     protected int tamanho; // Número de casas que a embarcação ocupa
 
-
-     /**
-     * Construtor sem parametros. 
-     * Cria sempre uma embarcação ocupando apenas uma casa.
+    /**
+     * Construtor sem parametros. Cria sempre uma embarcação ocupando apenas uma
+     * casa.
      */
-    public Embarcacao(){
+    public Embarcacao() {
         casasOcupadas = new ArrayList<Casa>();
         casasOcupadas.add(new Casa());
     }
 
     /**
-     * Construtor com parametros. 
-     * Cria uma embarcação ocupando o número de casas que receber.
-     * @param size (int) - Tamanho da embarcação desejada. 
+     * Construtor com parametros. Cria uma embarcação ocupando o número de casas que
+     * receber.
+     * 
+     * @param size (int) - Tamanho da embarcação desejada.
      */
     public Embarcacao(int size) {
         casasOcupadas = new ArrayList<Casa>();
         setTamanho(size);
-        for(int i = 0; i<this.tamanho; i++){
-        casasOcupadas.add(new Casa());
+        for (int i = 0; i < this.tamanho; i++) {
+            casasOcupadas.add(new Casa());
         }
     }
 
@@ -40,8 +40,8 @@ public class Embarcacao {
 
     /**
      * 
-     * @param vertical (boolean) - Se true = embarcação na vertical
-     *                           - Se false = embarcação na horizontal
+     * @param vertical (boolean) - Se true = embarcação na vertical - Se false =
+     *                 embarcação na horizontal
      */
     public void setOrientacaoVertical(boolean vertical) {
         this.orientacaoVertical = true;
@@ -51,9 +51,10 @@ public class Embarcacao {
         this.inserido = true;
     }
 
-    public void setTamanho(int size){
+    public void setTamanho(int size) {
         this.tamanho = size;
     }
+
     public String getDescricao() {
         return this.descricao;
     }
@@ -67,6 +68,10 @@ public class Embarcacao {
 
     public boolean getInserido() {
         return this.inserido;
+    }
+
+    public Casa getCasasOcupadas() {
+        return this.casasOcupadas;
     }
 
     /**
