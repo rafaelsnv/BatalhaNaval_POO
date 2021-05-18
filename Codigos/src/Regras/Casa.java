@@ -1,4 +1,4 @@
-package Casa;
+package Regras;
 
 public class Casa {
    private int linha; // - Linha e coluna assumem as coordenadas

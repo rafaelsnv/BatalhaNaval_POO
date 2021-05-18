@@ -1,4 +1,5 @@
 package JogadorPKG;
+
 import Regras.Tabuleiro;
 import Embarcacoes.*;
 
@@ -15,7 +16,7 @@ public class Jogador {
     public Jogador(){
         this.nome = "";
         this.tipoJogador = new IJogador();
-        this.meuTabuleiro = new Tabuleiro();
+        //this.meuTabuleiro = new Tabuleiro();
     }
 
     /**
@@ -80,10 +81,10 @@ public class Jogador {
 
     /**
      * Método para informar quando o jogador perdeu.
-     * @return !Esperando definição da implementação do naufrágio.
+     * @return ! Esperando definição da implementação do naufrágio !
      */
     public boolean perdeu ( ){
-        if (this.meuTabuleiro.minhaEsquadra.size() == 0)
+        if (this.meuTabuleiro.getMinhaEsquadra().size() == 0)
             return true;
         else
             return false;
@@ -97,7 +98,7 @@ public class Jogador {
      * @return true se for possível inserir, false se não foi possível.
      */
     public boolean inserirEmbarcacao (Embarcacao qual, int linha, int col){
-        if (this.meuTabuleiro.inserirEmbarcacao(qual, linha, col))
+        if (this.meuTabuleiro.inserirEmbarcacao(qual, linha, col) == true)
             return true;
         return false;
     }
