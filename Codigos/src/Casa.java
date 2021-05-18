@@ -1,14 +1,12 @@
-package Casa;
-
 public class Casa {
-   private int linha; // - Linha e coluna assumem as coordenadas
-   private String coluna; // que identificam a casa no tabuleiro;
-   private boolean bombardeada; // - Define se a casa foi bombardeada;
-   private boolean ocupada; // - Define se uma embarcação ocupou a casa.
+   private int linha;            // - Linha e coluna assumem as coordenadas
+   private String coluna;        //   que identificam a casa no tabuleiro;
+   private boolean bombardeada;  // - Define se a casa foi bombardeada;
+   private boolean ocupada;      // - Define se uma embarcação ocupou a casa.
 
    /**
-    * Construtor sem parâmetros. Não define a posição que a casa assumirá no
-    * tabuleiro, podendo ser realizada a posteriori.
+    * Construtor sem parâmetros. Não define a posição que a casa assumirá no tabuleiro,
+    * podendo ser realizada a posteriori.
     */
    public Casa() {
       this.linha = -1;
@@ -18,8 +16,8 @@ public class Casa {
    }
 
    /**
-    * Construtor com parâmetros. Já define a posição que a casa assumirá no
-    * tabuleiro. Pode ser usada para instanciar as casas do tabuleiro.
+    * Construtor com parâmetros. Já define a posição que a casa assumirá no tabuleiro.
+    * Pode ser usada para instanciar as casas do tabuleiro.
     *
     * @param linha  (int) Coordenada da linha.
     * @param coluna (String) Coordenada da coluna.
@@ -33,7 +31,6 @@ public class Casa {
 
    /**
     * Configura as coordenadas da casa.
-    * 
     * @param linha  (int) Coordenada da linha.
     * @param coluna (String) Coordenada da coluna.
     */
@@ -44,7 +41,6 @@ public class Casa {
 
    /**
     * Método get para linha assumida pela casa.
-    * 
     * @return (int) Linha ocupada pela casa.
     */
    public int getLinha() {
@@ -53,7 +49,6 @@ public class Casa {
 
    /**
     * Método get para coluna assumida pela casa.
-    * 
     * @return (String) Coluna ocupada pela casa.
     */
    public String getColuna() {
@@ -62,7 +57,6 @@ public class Casa {
 
    /**
     * Valida se a casa assumiu alguma posição.
-    * 
     * @return (boolean) Falso se não tiver assumido.
     */
    public boolean validar() {
@@ -78,7 +72,6 @@ public class Casa {
 
    /**
     * Verifica se a casa foi ocupada por uma embarcação.
-    * 
     * @return (boolean) Verdadeiro se tiver sido ocupada.
     */
    public boolean foiOcupada() {
@@ -94,7 +87,6 @@ public class Casa {
 
    /**
     * Verifica se a casa foi bombardeada pelo jogador.
-    * 
     * @return (boolean) Verdadeiro se tiver sido bombardeada.
     */
    public boolean foiBombardeada() {
