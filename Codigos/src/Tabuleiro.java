@@ -9,7 +9,7 @@ public class Tabuleiro {
     private static final int MAX_SUBMARINO = 4;
     private static final int MAX_CRUZADOR = 3;
 
-    private Casa[][] GRADE = new Casa[POS_MAX_LINHA + 1][POS_MAX_COLUNA + 1];
+    private final Casa[][] GRADE = new Casa[POS_MAX_LINHA + 1][POS_MAX_COLUNA + 1];
     protected ArrayList<Embarcacao> minhaEsquadra = new ArrayList<>();
 
     protected Tabuleiro() {
@@ -30,39 +30,25 @@ public class Tabuleiro {
 
         for(int linha=0; linha <= POS_MAX_LINHA; linha++)
             for(int coluna=0; coluna <= POS_MAX_COLUNA; coluna++)
-                this.GRADE[linha][coluna] = new Casa(linha, letraColuna(coluna));
+                this.GRADE[linha][coluna] = new Casa(linha, coluna);
     }
 
-    private int indexLinha(int linha) {
-        return linha - 1;
+    private boolean coordenadaValida(int linha, int coluna) {
+        return (coluna >= 0 & coluna <= POS_MAX_COLUNA) & (linha >= 0 & linha <= POS_MAX_LINHA);
     }
 
-    private int indexColuna(String coluna) {
-        return coluna.toUpperCase().charAt(0)-'A';
-    }
-
-    private String letraColuna(int indexColuna) {
-        return "ABCDEFGHIJKLMNOPQRSTUVXYWZ".substring(indexColuna,indexColuna);
-    }
-
-    private boolean coordenadaValida(int linha, String coluna) {
-        int indexCol = indexColuna(coluna);
-        int indexLin = indexLinha(linha);
-        return (indexCol >= 0 & indexCol <= POS_MAX_COLUNA) & (indexLin >= 0 & indexLin <= POS_MAX_LINHA);
-    }
-
-    protected Casa getCasaTabuleiro(int linha, String coluna) {
+    protected Casa getCasaTabuleiro(int linha, int coluna) {
         if (coordenadaValida(linha, coluna))
-            return GRADE[indexLinha(linha)][indexColuna(coluna)];
+            return GRADE[linha][coluna];
         return null;
     }
 
     protected boolean setCasaTabuleiro(Casa qual) {
         int linha = qual.getLinha();
-        String coluna = qual.getColuna();
+        int coluna = qual.getColuna();
 
         if( coordenadaValida(linha, coluna) ) {
-            GRADE[indexLinha(linha)][indexColuna(coluna)] = qual;
+            GRADE[linha][coluna] = qual;
             return true;
         }
 
@@ -73,7 +59,15 @@ public class Tabuleiro {
         return minhaEsquadra.get(index);
     }
 
-    protected boolean inserirEmbarcacao(Embarcacao qual, int linha, String coluna) {
+    protected boolean setEmbarcacao(int embarcacaoID, Embarcacao qual) {
+        if (embarcacaoID >= 0 & embarcacaoID <= this.minhaEsquadra.size() - 1) {
+            this.minhaEsquadra.set(embarcacaoID, qual);
+            return true;
+        }
+        return false;
+    }
+
+    protected boolean inserirEmbarcacao(Embarcacao qual, int linha, int coluna) {
         boolean inseriu = false;
 
         // Essa parte precisa ser verificada junto à implementação da Embarcação
@@ -83,13 +77,20 @@ public class Tabuleiro {
         return inseriu;
     }
 
-    protected boolean atingirEmbarcacao(int linha, String coluna) {
-        for(Embarcacao embarcacao : minhaEsquadra) {
-            boolean atingiu = embarcacao.atingir(linha, coluna);
+    protected boolean bombardear(int linha, int coluna) {
+        Casa casa = this.getCasaTabuleiro(linha, coluna);
 
-            if(atingiu)
-                return true;
-        }
+        if (!casa.foiBombardeada())
+            if (casa.foiOcupada()) {
+               Embarcacao alvejada = this.getEmbarcacao(casa.getOcupanteID());
+               alvejada.atingir(linha, coluna);
+
+               this.setEmbarcacao(casa.getOcupanteID(), alvejada);
+               casa.bombardear();
+
+               return true;
+            }
+
         return false;
     }
 

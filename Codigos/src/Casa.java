@@ -1,8 +1,8 @@
 public class Casa {
    private int linha;            // - Linha e coluna assumem as coordenadas
-   private String coluna;        //   que identificam a casa no tabuleiro;
+   private int coluna;           //   que identificam a casa no tabuleiro;
    private boolean bombardeada;  // - Define se a casa foi bombardeada;
-   private boolean ocupada;      // - Define se uma embarcação ocupou a casa.
+   private int ocupanteID;       // - Define o ID da embarcação e se a casa foi ocupada (se valor != -1)
 
    /**
     * Construtor sem parâmetros. Não define a posição que a casa assumirá no tabuleiro,
@@ -10,9 +10,9 @@ public class Casa {
     */
    public Casa() {
       this.linha = -1;
-      this.coluna = "";
+      this.coluna = -1;
       this.bombardeada = false;
-      this.ocupada = false;
+      this.ocupanteID = -1;
    }
 
    /**
@@ -22,11 +22,11 @@ public class Casa {
     * @param linha  (int) Coordenada da linha.
     * @param coluna (String) Coordenada da coluna.
     */
-   public Casa(int linha, String coluna) {
+   public Casa(int linha, int coluna) {
       this.linha = linha;
       this.coluna = coluna;
       this.bombardeada = false;
-      this.ocupada = false;
+      this.ocupanteID = -1;
    }
 
    /**
@@ -34,7 +34,7 @@ public class Casa {
     * @param linha  (int) Coordenada da linha.
     * @param coluna (String) Coordenada da coluna.
     */
-   public void setCoordenadas(int linha, String coluna) {
+   public void setCoordenadas(int linha, int coluna) {
       this.linha = linha;
       this.coluna = coluna;
    }
@@ -51,7 +51,7 @@ public class Casa {
     * Método get para coluna assumida pela casa.
     * @return (String) Coluna ocupada pela casa.
     */
-   public String getColuna() {
+   public int getColuna() {
       return this.coluna;
    }
 
@@ -60,14 +60,15 @@ public class Casa {
     * @return (boolean) Falso se não tiver assumido.
     */
    public boolean validar() {
-      return this.linha != -1 & !this.coluna.equals("");
+      return this.linha != -1 & this.coluna != -1;
    }
 
    /**
-    * Sinaliza à casa que ela foi ocupada por uma embarcação.
+    * Sinaliza à casa que ela foi ocupada por uma embarcação e indica qual delas.
+    * ID deve ser a posição no ArrayList do tabuleiro.
     */
-   public void ocupar() {
-      this.ocupada = true;
+   public void ocupar(int embarcacaoID) {
+      this.ocupanteID = embarcacaoID;
    }
 
    /**
@@ -75,7 +76,16 @@ public class Casa {
     * @return (boolean) Verdadeiro se tiver sido ocupada.
     */
    public boolean foiOcupada() {
-      return ocupada;
+      return this.ocupanteID != -1;
+   }
+
+   /**
+    * Método get para identificador do ocupante.
+    * Simboliza a casa do ArrayList onde a embarcação está.
+    * @return (int) ID do ocupante.
+    */
+   public int getOcupanteID() {
+      return this.ocupanteID;
    }
 
    /**
