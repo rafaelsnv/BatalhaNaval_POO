@@ -2,6 +2,7 @@ package Regras;
 
 import Embarcacoes.*;
 import java.util.ArrayList;
+import Embarcacoes.Embarcacao;
 
 public class Tabuleiro {
     private static final int MAX_LINHAS = 15;

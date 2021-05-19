@@ -1,8 +1,20 @@
 package JogadorPKG;
+import Embarcacoes.Embarcacao;
 
 public class IJogador {
 
-    public boolean inserirEmbarcacao(Embarcacoes embarcacao, String coluna, int linha) {
+    private static String tipo;
+
+    public String getTipo (){
+        return tipo;
+    }
+
+    public void setTipo(String texto){
+        this.tipo = texto;
+    }
+
+
+    public boolean inserirEmbarcacao(Embarcacao embarcacao, String coluna, int linha) {
         boolean livre = false;
 
         //  O código fica aqui
@@ -12,7 +24,7 @@ public class IJogador {
 
     }
 
-    public boolean girarAntiHorario(Embarcacoes embarcacao) {
+    public boolean girarAntiHorario(Embarcacao embarcacao) {
         boolean livre = false;
 
         //  O código fica aqui
@@ -22,7 +34,7 @@ public class IJogador {
 
     }
 
-    public boolean girarHorario(Embarcacoes embarcacao) {
+    public boolean girarHorario(Embarcacao embarcacao) {
         boolean livre = false;
 
         //  O código fica aqui

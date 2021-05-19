@@ -3,8 +3,6 @@ package JogadorPKG;
 import Regras.Tabuleiro;
 import Embarcacoes.*;
 
-import java.util.ArrayList;
-
 public class Jogador {
     private String nome;
     private IJogador tipoJogador;
