@@ -9,3 +9,6 @@ Trabalho acadêmico da discplina de Programação Orientada a Objetos
 * Frederico Henrique Pires da Silva
 * João Dias
 * Rafael Santos Nunes Vieira
+
+## Diagrama de Classes - UML
+![Diagrama de Classes - UML](UML/Diagrama1.png)
