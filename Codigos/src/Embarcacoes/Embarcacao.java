@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Regras.*;
 
 public class Embarcacao {
-    protected int ID; // Identificador da embarcação
+    protected String ID; // Identificador da embarcação
     protected String descricao; //
     protected boolean orientacaoVertical; // false = horizontal | true = vertical
     protected ArrayList<Casa> embarcacao; //
@@ -76,20 +76,14 @@ public class Embarcacao {
         return this.inserido;
     }
 
+    public int getTamanho() {
+        return this.tamanho;
+    }
+
     /** @return (ArrayList<Casa>) Retorna a embarcação. */
     public ArrayList<Casa> getEmbarcacao() {
         return this.embarcacao;
     }
-
-    // /**
-    // * @param tabuleiro
-    // * @param linha (int) Coordenada da linha.
-    // * @param coluna (int) Coordenada da coluna.
-    // */
-    // public boolean inserir(Tabuleiro tabuleiro, int linha, int coluna) {
-    // Casa novaCasa = new Casa(linha, coluna);
-    // return embarcacao.add(novaCasa);
-    // }
 
     /**
      * @param casaAtingida (Casa) - Casa do tabuleiro onde foi efetuado o disparo.
