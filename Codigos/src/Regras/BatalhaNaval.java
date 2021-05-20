@@ -3,11 +3,9 @@ package Regras;
 import JogadorPKG.Jogador;
 
 import java.util.ArrayList;
-import java.util.concurrent.Semaphore;
-
 public class BatalhaNaval {
 
-    private Semaphore turno;
+    private int turno;
     private Jogador vencedor;
     private Jogador novoJogador;
     ArrayList <Jogador> jogadores = new ArrayList<>(); 
@@ -46,10 +44,31 @@ public class BatalhaNaval {
             System.out.println("2º Player: " + jogadores.get(1).getNome()); // Player CPU
         }
         this.turno += 1;
+    }  
+
+    public Jogador getVencedor() {
+        return vencedor;
     }
 
-    /**
-     * Método retornará o player vencedor
-     */
-    // public void playerVencedor(){}        
+    public void setVencedor(Jogador vencedor) {
+        this.vencedor = vencedor;
+    }
+
+    public Jogador getNovoJogador() {
+        return novoJogador;
+    }
+
+    public void setNovoJogador(Jogador novoJogador) {
+        this.novoJogador = novoJogador;
+    }
+
+    public ArrayList<Jogador> getJogadores() {
+        return jogadores;
+    }
+
+    public void setJogadores(ArrayList<Jogador> jogadores) {
+        this.jogadores = jogadores;
+    }
+
+           
 }
