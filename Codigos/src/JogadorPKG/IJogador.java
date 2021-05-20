@@ -1,9 +1,11 @@
 package JogadorPKG;
-import Embarcacoes.Embarcacao;
+import Regras.Tabuleiro;
+import Embarcacoes.*;
 
 public class IJogador {
 
-    private static String tipo;
+    private String tipo;
+    private Tabuleiro meuTabuleiro;
 
     public String getTipo (){
         return tipo;
@@ -14,8 +16,9 @@ public class IJogador {
     }
 
 
-    public boolean inserirEmbarcacao(Embarcacao embarcacao, String coluna, int linha) {
+    public boolean inserirEmbarcacao(Embarcacao embarcacao, int coluna, int linha) {
         boolean livre = false;
+        boolean coordenada = this.meuTabuleiro.coordenadaValida(linha, coluna);
 
         //  O código fica aqui
 
@@ -44,7 +47,7 @@ public class IJogador {
 
     }
 
-    public boolean bombardear(String coluna, int linha) {
+    public boolean bombardear(int coluna, int linha) {
         boolean livre = false;
 
         //  O código fica aqui
