@@ -3,10 +3,10 @@ package Embarcacoes;
 import Regras.*;
 
 public class PortaAvioes extends Embarcacao {
+    private static final int TAMANHO = 5; // Quantidade de casas que irá ocupar.
 
     public PortaAvioes() {
-        this.tamanho = 5; // Quantidade de casas que irá ocupar.
-        Embarcacao(tamanho);
+        super(TAMANHO);
     }
 
     /**

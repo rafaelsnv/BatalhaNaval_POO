@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import Regras.*;
 
 public class Cruzador extends Embarcacao {
+    private static final int TAMANHO = 2; // Quantidade de casas que irá ocupar.
 
     /** Método construtor sem parâmetros */
     public Cruzador() {
-        this.tamanho = 2; // Quantidade de casas que irá ocupar.
-        Embarcacao(tamanho);
+        super(TAMANHO);
     }
 
     /**

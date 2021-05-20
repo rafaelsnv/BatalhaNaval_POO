@@ -3,10 +3,10 @@ package Embarcacoes;
 import Regras.*;
 
 public class Encouracados extends Embarcacao {
+    private static final int TAMANHO = 4; // Quantidade de casas que irá ocupar.
 
     public Encouracados() {
-        this.tamanho = 4; // Quantidade de casas que irá ocupar.
-        Embarcacao(tamanho);
+        super(TAMANHO);
     }
 
     /**
