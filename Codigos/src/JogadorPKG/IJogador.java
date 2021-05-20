@@ -10,13 +10,14 @@ public abstract class IJogador {
         return this.meuTabuleiro.inserirEmbarcacao(qual, linha, coluna);
     }
 
-    public boolean girarAntiHorario(Embarcacao embarcacao) {
-
+    //Vamos ter que alterar futuramente para horário e anti horário
+    public void girarVertical(Embarcacao embarcacao) {
+        embarcacao.setOrientacaoVertical(true);
     }
 
-    public boolean girarHorario(Embarcacao embarcacao) {
-
-
+    //Vamos ter que alterar futuramente para horário e anti horário
+    public void girarHorizontal(Embarcacao embarcacao) {
+        embarcacao.setOrientacaoVertical(false);
     }
 
     public boolean bombardear(int linha, int coluna) {
