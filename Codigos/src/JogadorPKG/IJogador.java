@@ -1,5 +1,5 @@
 package JogadorPKG;
-import Regras.Tabuleiro;
+import Regras.*;
 import Embarcacoes.*;
 
 public class IJogador {
@@ -16,18 +16,12 @@ public class IJogador {
     }
 
 
-    public boolean inserirEmbarcacao(Embarcacao embarcacao, int coluna, int linha) {
-        boolean livre = false;
-        boolean coordenada = this.meuTabuleiro.coordenadaValida(linha, coluna);
-
-        //  O código fica aqui
-
-        if (livre) {return true;}
-        else       {return false;}
-
+    public boolean inserirEmbarcacao(Embarcacao qual, int coluna, int linha) {
+        return this.meuTabuleiro.inserirEmbarcacao(qual, linha, coluna);
     }
 
     public boolean girarAntiHorario(Embarcacao embarcacao) {
+        
         boolean livre = false;
 
         //  O código fica aqui
@@ -47,14 +41,8 @@ public class IJogador {
 
     }
 
-    public boolean bombardear(int coluna, int linha) {
-        boolean livre = false;
-
-        //  O código fica aqui
-
-        if (livre) {return true;}
-        else       {return false;}
-
+    public boolean bombardear(int linha, int coluna) {
+        return this.meuTabuleiro.bombardear(linha, coluna);
     }
 
 

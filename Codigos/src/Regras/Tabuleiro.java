@@ -179,7 +179,7 @@ public class Tabuleiro {
      * @param coluna (int) Coordenada da coluna. (0 a MAX_COLUNAS-1)
      * @return Verdadeiro se houver acertado uma embarcação.
      */
-    protected boolean bombardear(int linha, int coluna) {
+    public boolean bombardear(int linha, int coluna) {
         Casa casa = this.getCasa(linha, coluna);
 
         // Isso precisa ser revisto. Provavelmente um TryCatch seja melhor aplicável à situação.
