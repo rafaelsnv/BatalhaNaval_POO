@@ -1,5 +1,7 @@
 package Embarcacoes;
 
+import Regras.*;
+
 public class Ovni extends Embarcacao {
 
     public Ovni() {

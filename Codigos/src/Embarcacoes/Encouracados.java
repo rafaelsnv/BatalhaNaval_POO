@@ -1,5 +1,7 @@
 package Embarcacoes;
 
+import Regras.*;
+
 public class Encouracados extends Embarcacao {
 
     public Encouracados() {
@@ -23,13 +25,13 @@ public class Encouracados extends Embarcacao {
         if (vertical == false) // Se embarcação estiver na horizontal.
             for (int i = 1; i < this.tamanho; i++) { // - Próximas casas recebem
                 pedaco = this.casasOcupadas.get(i);
-                pedaco.setCoordenada(linha, coluna + i); // mesma linha mas colunas diferentes.
+                pedaco.setCoordenadas(linha, coluna + i); // mesma linha mas colunas diferentes.
                 embarcacao.set(i, pedaco);
             }
         else // Se não.
             for (int i = 1; i < this.tamanho; i++) { // - Próximas casas recebem
                 pedaco = this.casasOcupadas.get(i);
-                pedaco.setCoordenada(linha + i, coluna); // mesma coluna mas linhas diferentes.
+                pedaco.setCoordenadas(linha + i, coluna); // mesma coluna mas linhas diferentes.
                 embarcacao.set(i, pedaco);
             }
     }

@@ -1,5 +1,7 @@
 package Embarcacoes;
 
+import Regras.*;
+
 public class PortaAvioes extends Embarcacao {
 
     public PortaAvioes() {

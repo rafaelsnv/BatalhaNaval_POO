@@ -2,6 +2,8 @@ package Embarcacoes;
 
 import java.util.ArrayList;
 
+import Regras.*;
+
 public class Cruzador extends Embarcacao {
 
     /** Método construtor sem parâmetros */

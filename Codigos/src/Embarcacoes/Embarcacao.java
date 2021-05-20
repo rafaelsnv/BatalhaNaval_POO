@@ -1,8 +1,8 @@
 package Embarcacoes;
 
 import java.util.ArrayList;
+
 import Regras.*;
-import Regras.Tabuleiro;
 
 public class Embarcacao {
     protected int ID; // Identificador da embarcação

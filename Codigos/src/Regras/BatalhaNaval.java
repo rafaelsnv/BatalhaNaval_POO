@@ -25,6 +25,10 @@ public class BatalhaNaval {
         jogadores.add(novoJogador);
     }
 
+    public void rmvJogador(int posicao){
+        jogadores.remove(posicao);
+    }
+
     
     public void listaJogador(){
         int n = jogadores.size();

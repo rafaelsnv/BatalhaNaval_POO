@@ -1,5 +1,7 @@
 package Embarcacoes;
 
+import Regras.*;
+
 public class Submarino extends Embarcacao {
 
     public Submarino() {
