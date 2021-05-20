@@ -233,4 +233,12 @@ public class Tabuleiro {
         return this.minhaEsquadra.size() == 0;
     }
 
+    public static int getMaxLinhas(){
+        return MAX_LINHAS;
+    }
+
+    public static int getMaxColunas(){
+        return MAX_COLUNAS;
+    }
+
 }

@@ -7,6 +7,14 @@ public abstract class IJogador {
 
     private Tabuleiro meuTabuleiro;
 
+    public Tabuleiro getTabuleiro (){
+        return this.meuTabuleiro;
+    }
+
+    public void setTabuleiro(Tabuleiro tabuleiro) {
+        this.meuTabuleiro = tabuleiro;
+    }
+
     public boolean inserirEmbarcacao(Embarcacao qual, int coluna, int linha) {
         return this.meuTabuleiro.inserirEmbarcacao(qual, linha, coluna);
     }
