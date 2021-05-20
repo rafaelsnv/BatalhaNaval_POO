@@ -8,7 +8,7 @@ public class Embarcacao {
     protected int ID; // Identificador da embarcação
     protected String descricao; //
     protected boolean orientacaoVertical; // false = horizontal | true = vertical
-    protected ArrayList<Casa> casasOcupadas; //
+    protected ArrayList<Casa> embarcacao; //
     protected boolean inserido; //
     protected int tamanho; // Número de casas que a embarcação ocupa
 
@@ -17,8 +17,9 @@ public class Embarcacao {
      * casa.
      */
     public Embarcacao() {
-        casasOcupadas = new ArrayList<Casa>();
-        this.casasOcupadas.add(new Casa());
+        embarcacao = new ArrayList<Casa>();
+        this.embarcacao.add(new Casa());
+        this.descricao = "Não Identificado.";
     }
 
     /**
@@ -28,10 +29,10 @@ public class Embarcacao {
      * @param size (int) - Tamanho da embarcação desejada.
      */
     public Embarcacao(int size) {
-        casasOcupadas = new ArrayList<Casa>();
+        embarcacao = new ArrayList<Casa>();
         setTamanho(size);
         for (int i = 0; i < this.tamanho; i++) {
-            casasOcupadas.add(new Casa());
+            embarcacao.add(new Casa());
         }
     }
 
@@ -56,6 +57,10 @@ public class Embarcacao {
         this.tamanho = size;
     }
 
+    public void setID(String id) {
+        this.ID = id;
+    }
+
     public String getDescricao() {
         return this.descricao;
     }
@@ -71,19 +76,20 @@ public class Embarcacao {
         return this.inserido;
     }
 
-    public ArrayList<Casa> getCasasOcupadas() {
-        return this.casasOcupadas;
+    /** @return (ArrayList<Casa>) Retorna a embarcação. */
+    public ArrayList<Casa> getEmbarcacao() {
+        return this.embarcacao;
     }
 
-    /**
-     * @param tabuleiro
-     * @param linha  (int) Coordenada da linha.
-     * @param coluna (int) Coordenada da coluna.
-     */
-    public boolean inserir(Tabuleiro tabuleiro, int linha, int coluna) {
-        Casa novaCasa = new Casa(linha, coluna);
-        return casasOcupadas.add(novaCasa);
-    }
+    // /**
+    // * @param tabuleiro
+    // * @param linha (int) Coordenada da linha.
+    // * @param coluna (int) Coordenada da coluna.
+    // */
+    // public boolean inserir(Tabuleiro tabuleiro, int linha, int coluna) {
+    // Casa novaCasa = new Casa(linha, coluna);
+    // return embarcacao.add(novaCasa);
+    // }
 
     /**
      * @param casaAtingida (Casa) - Casa do tabuleiro onde foi efetuado o disparo.
@@ -92,12 +98,12 @@ public class Embarcacao {
     public boolean atingiu(Casa casaAtingida) {
         boolean atingiu = false;
 
-        for (int i = this.casasOcupadas.size(); i > 0; i--) { // Percorre todas as casas da embarcação, até encontrar a
-                                                              // certa.
+        for (int i = this.embarcacao.size(); i > 0; i--) { // Percorre todas as casas da embarcação, até encontrar a
+                                                           // certa.
             boolean linhaMatch = false; // - Variáveis usadas para comparar
             boolean colunaMatch = false; //
 
-            Casa aux = this.casasOcupadas.get(i); // Auxiliar para comparação
+            Casa aux = this.embarcacao.get(i); // Auxiliar para comparação
 
             if (casaAtingida.getColuna() == aux.getColuna())
                 colunaMatch = true;
@@ -108,7 +114,7 @@ public class Embarcacao {
             if (colunaMatch == true && linhaMatch == true) { // Se encontrar a casa certa
                 atingiu = true; // Embarcação atingida.
                 aux.bombardear(); // Casa bombardeada.
-                casasOcupadas.set(i, aux);
+                embarcacao.set(i, aux);
                 i = 0; // Força o fim do loop.
             }
         }
@@ -121,9 +127,9 @@ public class Embarcacao {
      *         retorna true.
      */
     public boolean afundou() {
-        int size = this.casasOcupadas.size();
+        int size = this.embarcacao.size();
         for (int i = size; i > 0; i--) { // Percorre todas as casas da embarcação.
-            Casa aux = this.casasOcupadas.get(i);
+            Casa aux = this.embarcacao.get(i);
             if (aux.foiBombardeada() == true) // Testa se a casa foi bombardeada.
                 size--;
         }
