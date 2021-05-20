@@ -71,7 +71,7 @@ public class Embarcacao {
         return this.inserido;
     }
 
-    public Casa getCasasOcupadas() {
+    public ArrayList<Casa> getCasasOcupadas() {
         return this.casasOcupadas;
     }
 
