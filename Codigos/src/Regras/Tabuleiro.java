@@ -9,7 +9,7 @@ public class Tabuleiro {
     private static final int MAX_COLUNAS = 15;
     private static final int MAX_PORTA_AVIAO = 1;
     private static final int MAX_ENCOURACADO = 2;
-    private static final int MAX_HIDROAVIAO = 3;
+    private static final int MAX_OVNI = 4;
     private static final int MAX_SUBMARINO = 4;
     private static final int MAX_CRUZADOR = 3;
 
@@ -31,8 +31,8 @@ public class Tabuleiro {
             id++;
         }
 
-        for(int k=0; k < MAX_HIDROAVIAO; k++) {
-            this.minhaEsquadra.add(new Hidroaviao(id));
+        for(int k=0; k < MAX_OVNI; k++) {
+            this.minhaEsquadra.add(new Ovni(id));
             id++;
         }
 

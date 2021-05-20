@@ -2,6 +2,7 @@ package JogadorPKG;
 import Regras.*;
 import Embarcacoes.*;
 
+// Classe destinada como um "atalho". Teremos que analisar se vale a pena manter ela futuramente
 public abstract class IJogador {
 
     private Tabuleiro meuTabuleiro;
@@ -10,12 +11,10 @@ public abstract class IJogador {
         return this.meuTabuleiro.inserirEmbarcacao(qual, linha, coluna);
     }
 
-    //Vamos ter que alterar futuramente para horário e anti horário
     public void girarVertical(Embarcacao embarcacao) {
         embarcacao.setOrientacaoVertical(true);
     }
 
-    //Vamos ter que alterar futuramente para horário e anti horário
     public void girarHorizontal(Embarcacao embarcacao) {
         embarcacao.setOrientacaoVertical(false);
     }
