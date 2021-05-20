@@ -1,7 +1,8 @@
 package Embarcacoes;
 
 import java.util.ArrayList;
-import Regras.Casa;
+import Regras.*;
+import Regras.Tabuleiro;
 
 public class Embarcacao {
     protected int ID; // Identificador da embarcação
@@ -17,7 +18,7 @@ public class Embarcacao {
      */
     public Embarcacao() {
         casasOcupadas = new ArrayList<Casa>();
-        casasOcupadas.add(new Casa());
+        this.casasOcupadas.add(new Casa());
     }
 
     /**
@@ -75,10 +76,11 @@ public class Embarcacao {
     }
 
     /**
+     * @param tabuleiro
      * @param linha  (int) Coordenada da linha.
      * @param coluna (int) Coordenada da coluna.
      */
-    public boolean inserir(int linha, int coluna) {
+    public boolean inserir(Tabuleiro tabuleiro, int linha, int coluna) {
         Casa novaCasa = new Casa(linha, coluna);
         return casasOcupadas.add(novaCasa);
     }

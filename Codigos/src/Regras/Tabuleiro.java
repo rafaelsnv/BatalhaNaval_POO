@@ -2,7 +2,8 @@ package Regras;
 
 import Embarcacoes.*;
 import java.util.ArrayList;
-import Embarcacoes.Embarcacao;
+import Embarcacoes.*;
+import Regras.*;
 
 public class Tabuleiro {
     private static final int MAX_LINHAS = 15;
@@ -13,13 +14,13 @@ public class Tabuleiro {
     private static final int MAX_SUBMARINO = 4;
     private static final int MAX_CRUZADOR = 3;
 
-    private final Casa[][] GRADE = new Casa[MAX_LINHAS][MAX_COLUNAS];
-    protected ArrayList<Embarcacao> minhaEsquadra = new ArrayList<>();
+    private Casa[][] GRADE = new Casa[MAX_LINHAS][MAX_COLUNAS];
+    private ArrayList<Embarcacao> minhaEsquadra = new ArrayList<>();
 
     /**
      * Construtor do tabuleiro
      */
-    protected Tabuleiro() {
+    public Tabuleiro() {
         int id = 0;
         for(int i=0; i < MAX_PORTA_AVIAO; i++) {
             this.minhaEsquadra.add(new PortaAvioes(id));
@@ -58,7 +59,7 @@ public class Tabuleiro {
      * @param coluna  (int) Coordenada da coluna. (0 a MAX_COLUNAS-1)
      * @return Verdadeiro se a coordenada for válida.
      */
-    protected boolean coordenadaValida(int linha, int coluna) {
+    public boolean coordenadaValida(int linha, int coluna) {
         return (coluna >= 0 & coluna < MAX_COLUNAS) & (linha >= 0 & linha < MAX_LINHAS);
     }
 
@@ -70,13 +71,17 @@ public class Tabuleiro {
         this.minhaEsquadra = minhaEsquadra;
     }
 
+    public Casa[][] getGRADE() {
+        return this.GRADE;
+    }
+
     /**
      * Adquire casa do tabuleiro.
      * @param linha (int) Coordenada da linha. (0 a MAX_LINHAS-1)
      * @param coluna  (int) Coordenada da coluna. (0 a MAX_COLUNAS-1)
      * @return (Casa) Casa do tabuleiro solicitada. Retorna nulo se coordenada for inválida.
      */
-    protected Casa getCasa(int linha, int coluna) {
+    public Casa getCasa(int linha, int coluna) {
         if (coordenadaValida(linha, coluna))
             return GRADE[linha][coluna];
         return null;
@@ -89,7 +94,7 @@ public class Tabuleiro {
      * @param qual (Casa) Casa a ser inserida.
      * @return Verdadeiro se as coordenadas da casa forem válidas.
      */
-    protected boolean setCasa(Casa qual) {
+    public boolean setCasa(Casa qual) {
         int linha = qual.getLinha();
         int coluna = qual.getColuna();
 
@@ -107,8 +112,8 @@ public class Tabuleiro {
      * @param coluna  (int) Coordenada da coluna. (0 a MAX_COLUNAS-1)
      * @return Verdadeiro se tiver sido ocupada.
      */
-    protected boolean casaOcupada(int linha, int coluna) {
-        Casa casa = this.GRADE[linha][coluna];
+    public boolean casaOcupada(int linha, int coluna) {
+        Casa casa = this.getGRADE().get[linha][coluna];
         return casa.foiOcupada();
     }
 
@@ -117,7 +122,7 @@ public class Tabuleiro {
      * @param id (int) Identificador da embarcação.
      * @return (Embarcacao) Embarcação encontrada. Retorna nulo se não encontrá-la.
      */
-    protected Embarcacao getEmbarcacao(int id) {
+    public Embarcacao getEmbarcacao(int id) {
         Embarcacao aux = null;
 
         for (Embarcacao embarcacao : this.minhaEsquadra) {
@@ -137,7 +142,7 @@ public class Tabuleiro {
      * @param qual (Embarcacao) Embarcação cujos dados foram atualizados.
      * @return Verdadeiro se a embarcação tiver sido encontrada e atualizada com sucesso.
      */
-    protected boolean updateEmbarcacao(int id, Embarcacao qual) {
+    public boolean updateEmbarcacao(int id, Embarcacao qual) {
         for (int i=0; i < this.minhaEsquadra.size(); i++) {
             Embarcacao aux = this.minhaEsquadra.get(i);
 
@@ -180,7 +185,7 @@ public class Tabuleiro {
      * @return Verdadeiro se houver acertado uma embarcação.
      */
     public boolean bombardear(int linha, int coluna) {
-        Casa casa = this.getCasa(linha, coluna);
+        Casa casa = this.GRADE.get(linha, coluna);
 
         // Isso precisa ser revisto. Provavelmente um TryCatch seja melhor aplicável à situação.
         // Isso porque geraríamos um sinal ambíguo para false. Temos quatro estados para dois sinais de retorno.
@@ -213,7 +218,7 @@ public class Tabuleiro {
      * Verifica se alguma embarcação afundou. Remove da minhaEsquadra se tiver afundado.
      * @return (Embarcacao) Se houver afundado, retorna a embarcação naufragada.
      */
-    protected Embarcacao afundou() {
+    public Embarcacao afundou() {
         for(int i=0; i < minhaEsquadra.size(); i++) {
             Embarcacao embarcacao = minhaEsquadra.get(i);
 
@@ -229,15 +234,15 @@ public class Tabuleiro {
      * Verifica se dono do tabuleiro perdeu o jogo.
      * @return Verdadeiro se tiver perdido.
      */
-    protected boolean perdeu() {
+    public boolean perdeu() {
         return this.minhaEsquadra.size() == 0;
     }
 
-    public static int getMaxLinhas(){
+    public int getMaxLinhas(){
         return MAX_LINHAS;
     }
 
-    public static int getMaxColunas(){
+    public int getMaxColunas(){
         return MAX_COLUNAS;
     }
 

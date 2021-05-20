@@ -1,35 +1,15 @@
 package JogadorPKG;
 import Regras.*;
 import Embarcacoes.*;
+public interface IJogador {
 
-// Classe destinada como um "atalho". Teremos que analisar se vale a pena manter ela futuramente
-public abstract class IJogador {
+    public void setTabuleiro(Tabuleiro tabuleiro);
 
-    private Tabuleiro meuTabuleiro;
+    public boolean inserirEmbarcacao(Embarcacao qual, int coluna, int linha);
 
-    public Tabuleiro getTabuleiro (){
-        return this.meuTabuleiro;
-    }
+    public void girarVertical(Embarcacao embarcacao);
 
-    public void setTabuleiro(Tabuleiro tabuleiro) {
-        this.meuTabuleiro = tabuleiro;
-    }
-
-    public boolean inserirEmbarcacao(Embarcacao qual, int coluna, int linha) {
-        return this.meuTabuleiro.inserirEmbarcacao(qual, linha, coluna);
-    }
-
-    public void girarVertical(Embarcacao embarcacao) {
-        embarcacao.setOrientacaoVertical(true);
-    }
-
-    public void girarHorizontal(Embarcacao embarcacao) {
-        embarcacao.setOrientacaoVertical(false);
-    }
-
-    public boolean bombardear(int linha, int coluna) {
-        return this.meuTabuleiro.bombardear(linha, coluna);
-    }
-
+    public void girarHorizontal(Embarcacao embarcacao);
+    public boolean bombardear(int linha, int coluna);
 
 }

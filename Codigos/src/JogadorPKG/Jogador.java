@@ -1,6 +1,6 @@
 package JogadorPKG;
 
-import Regras.Tabuleiro;
+import Regras.*;
 import Embarcacoes.*;
 
 public class Jogador {
@@ -13,8 +13,8 @@ public class Jogador {
      */
     public Jogador(){
         this.nome = "";
-        this.tipoJogador = new IJogador();
-        //this.meuTabuleiro = new Tabuleiro();
+//        this.tipoJogador = new IJogador().;
+//        this.meuTabuleiro = new Tabuleiro();
     }
 
     /**
