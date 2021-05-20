@@ -1,4 +1,4 @@
 package JogadorPKG;
 
-public class CpuFacil {
+public class CpuFacil extends IJogador {
 }

@@ -1,4 +1,4 @@
 package JogadorPKG;
 
-public class CpuMedio {
+public class CpuMedio extends IJogador {
 }

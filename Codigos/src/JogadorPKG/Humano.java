@@ -1,4 +1,4 @@
 package JogadorPKG;
 
-public class Humano {
+public class Humano extends IJogador {
 }
