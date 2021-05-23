@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Regras.*;
 
 public class Embarcacao {
-    protected String ID; // Identificador da embarcação
+    protected int ID; // Identificador da embarcação
     protected String descricao; //
     protected boolean orientacaoVertical; // false = horizontal | true = vertical
     protected ArrayList<Casa> embarcacao; //
@@ -13,7 +13,7 @@ public class Embarcacao {
     protected int tamanho; // Número de casas que a embarcação ocupa
 
     /**
-     * Construtor sem parametros. Cria sempre uma embarcação ocupando apenas uma
+     * Construtor sem parâmetros. Cria sempre uma embarcação ocupando apenas uma
      * casa.
      */
     public Embarcacao() {
@@ -23,14 +23,15 @@ public class Embarcacao {
     }
 
     /**
-     * Construtor com parametros. Cria uma embarcação ocupando o número de casas que
+     * Construtor com parâmetros. Cria uma embarcação ocupando o número de casas que
      * receber.
      * 
      * @param size (int) - Tamanho da embarcação desejada.
      */
-    public Embarcacao(int size) {
+    public Embarcacao(int size, int id) {
         embarcacao = new ArrayList<Casa>();
-        setTamanho(size);
+        this.setTamanho(size);
+        this.setID(id);
         for (int i = 0; i < this.tamanho; i++) {
             embarcacao.add(new Casa());
         }
@@ -57,7 +58,7 @@ public class Embarcacao {
         this.tamanho = size;
     }
 
-    public void setID(String id) {
+    public void setID(int id) {
         this.ID = id;
     }
 
@@ -92,7 +93,7 @@ public class Embarcacao {
     public boolean atingiu(Casa casaAtingida) {
         boolean atingiu = false;
 
-        for (int i = this.embarcacao.size(); i > 0; i--) { // Percorre todas as casas da embarcação, até encontrar a
+        for (int i = this.embarcacao.size()-1; i > 0; i--) { // Percorre todas as casas da embarcação, até encontrar a
                                                            // certa.
             boolean linhaMatch = false; // - Variáveis usadas para comparar
             boolean colunaMatch = false; //
@@ -105,7 +106,7 @@ public class Embarcacao {
             if (casaAtingida.getLinha() == aux.getLinha())
                 linhaMatch = true;
 
-            if (colunaMatch == true && linhaMatch == true) { // Se encontrar a casa certa
+            if (colunaMatch && linhaMatch) { // Se encontrar a casa certa
                 atingiu = true; // Embarcação atingida.
                 aux.bombardear(); // Casa bombardeada.
                 embarcacao.set(i, aux);
@@ -124,7 +125,7 @@ public class Embarcacao {
         int size = this.embarcacao.size();
         for (int i = size; i > 0; i--) { // Percorre todas as casas da embarcação.
             Casa aux = this.embarcacao.get(i);
-            if (aux.foiBombardeada() == true) // Testa se a casa foi bombardeada.
+            if (aux.foiBombardeada()) // Testa se a casa foi bombardeada.
                 size--;
         }
         if (size == 0)

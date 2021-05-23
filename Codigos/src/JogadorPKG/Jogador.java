@@ -82,10 +82,7 @@ public class Jogador {
      * @return ! Esperando definição da implementação do naufrágio !
      */
     public boolean perdeu ( ){
-        if (this.meuTabuleiro.getMinhaEsquadra().size() == 0)
-            return true;
-        else
-            return false;
+        return this.meuTabuleiro.getMinhaEsquadra().size() == 0;
     }
 
     /**
@@ -96,8 +93,6 @@ public class Jogador {
      * @return true se for possível inserir, false se não foi possível.
      */
     public boolean inserirEmbarcacao (Embarcacao qual, int linha, int col){
-        if (this.meuTabuleiro.inserirEmbarcacao(qual, linha, col) == true)
-            return true;
-        return false;
+        return this.meuTabuleiro.inserirEmbarcacao(qual, linha, col);
     }
 }

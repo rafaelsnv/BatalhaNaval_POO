@@ -7,11 +7,11 @@ import Regras.*;
 public class PortaAvioes extends Embarcacao {
     private static final int TAMANHO = 5; // Quantidade de casas que irá ocupar.
     private static final String DESC = "Porta-Aviões";
+    private static final int id =0;
 
     public PortaAvioes() {
-        super(TAMANHO);
+        super(TAMANHO,id);
         this.descricao = DESC;
-
     }
 
     /**
@@ -19,7 +19,7 @@ public class PortaAvioes extends Embarcacao {
      * 
      * @param linha  (int)
      * @param coluna (int)
-     * @return embarcacao (ArryList<Casa>)
+     * @return embarcacao (ArrayList<Casa>)
      */
     public ArrayList<Casa> setCoordenadas(int linha, int coluna) {
         boolean vertical = this.orientacaoVertical; // Orientação da embarcação, se true = vertical
@@ -28,7 +28,7 @@ public class PortaAvioes extends Embarcacao {
         embarcacao.set(0, pedaco); // Insere novas informações de casa na embarcação.
         pedaco = this.embarcacao.get(1); // Segundo pedaço da embarcação.
 
-        if (vertical == false) // Se embarcação estiver na horizontal.
+        if (!vertical) // Se embarcação estiver na horizontal.
             for (int i = 1; i < this.tamanho; i++) { // - Próximas casas recebem
                 pedaco = this.embarcacao.get(i);
                 pedaco.setCoordenadas(linha, coluna + i); // mesma linha mas colunas diferentes.

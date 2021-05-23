@@ -41,7 +41,6 @@ public class Tabuleiro {
             id++;
         }
 
-
         for(int m=0; m < MAX_CRUZADOR; m++) {
             this.minhaEsquadra.add(new Cruzador(id));
             id++;
@@ -164,16 +163,17 @@ public class Tabuleiro {
     public boolean inserirEmbarcacao(Embarcacao qual, int linha, int coluna) {
         boolean inseriu = false;
 
-        // Essa parte precisa ser verificada junto à implementação da Embarcação.
-        // Se a concepção mais abaixo for válida, a embarcação colocaria seu próprio ID
-        // nas casas que ocupará. Outro modo de fazê-lo, seria a embarcação passar
-        // suas casas com as coordenadas já definidas para o tabuleiro. A partir disso
-        // o tabuleiro se encarrega de verificar se alguma das casas solicitadas já foi
-        // ocupada. Se não tiverem sido, ele as atualiza na GRADE, já inclusive atribuindo
-        // o ID da embarcação nelas. Mas por enquanto, deixo abaixo o modelo anterior:
+        /*
+        Essa parte precisa ser verificada junto à implementação da Embarcação.
+        Se a concepção mais abaixo for válida, a embarcação colocaria seu próprio ID
+        nas casas que ocupará. Outro modo de fazê-lo, seria a embarcação passar
+        suas casas com as coordenadas já definidas para o tabuleiro. A partir disso
+        o tabuleiro se encarrega de verificar se alguma das casas solicitadas já foi
+        ocupada. Se não tiverem sido, ele as atualiza na GRADE, já inclusive atribuindo
+        o ID da embarcação nelas. Mas por enquanto, deixo abaixo o modelo anterior:
+        */
         if (coordenadaValida(linha, coluna) & !casaOcupada(linha, coluna))
-            inseriu = qual.inserir(this, linha, coluna);
-
+            ArrayList<Casa> casas = qual.setCoordenadas(linha, coluna);
         return inseriu;
     }
 
@@ -244,5 +244,4 @@ public class Tabuleiro {
     public int getMaxColunas(){
         return MAX_COLUNAS;
     }
-
 }

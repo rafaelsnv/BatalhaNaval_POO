@@ -11,7 +11,7 @@ import java.util.Random;
  */
 public class CpuFacil implements IJogador {
     private final Random aleatorio = new Random(System.nanoTime());
-    private Tabuleiro meuTabuleiro;
+    private final Tabuleiro meuTabuleiro = new Tabuleiro();
 
      /**
       * Método para gerar uma linha aleatória considerando as linhas do tabuleiro

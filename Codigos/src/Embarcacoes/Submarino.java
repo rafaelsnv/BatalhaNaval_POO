@@ -18,7 +18,7 @@ public class Submarino extends Embarcacao {
      * 
      * @param linha  (int)
      * @param coluna (int)
-     * @return embarcacao (ArryList<Casa>)
+     * @return embarcacao (ArrayList<Casa>)
      */
     public ArrayList<Casa> setCoordenadas(int linha, int coluna) {
         Casa pedaco = this.embarcacao.get(0); // Primeiro pedaço da embarcação.

@@ -10,8 +10,6 @@ public class BatalhaNaval {
     private Jogador novoJogador;
     ArrayList <Jogador> jogadores = new ArrayList<>(); 
 
-    
-
     /**
      * Construtor
      */
@@ -29,7 +27,6 @@ public class BatalhaNaval {
         jogadores.remove(posicao);
     }
 
-    
     public void listaJogador(){
         int n = jogadores.size();
         for (int i = 0; i < n; i++) {
@@ -37,7 +34,6 @@ public class BatalhaNaval {
         }
     }
 
-    
     /**
      * Método alterna entre players a cada chamada
      */
@@ -73,6 +69,4 @@ public class BatalhaNaval {
     public void setJogadores(ArrayList<Jogador> jogadores) {
         this.jogadores = jogadores;
     }
-
-           
 }
