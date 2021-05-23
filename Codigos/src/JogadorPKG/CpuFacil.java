@@ -1,6 +1,8 @@
 package JogadorPKG;
 import Regras.*;
 import Embarcacoes.*;
+
+import javax.naming.directory.InvalidAttributesException;
 import java.util.Random;
 
 /**
@@ -57,7 +59,7 @@ public class CpuFacil implements IJogador {
      }
 
      @Override
-     public boolean bombardear(int linha, int coluna) {
+     public boolean bombardear(int linha, int coluna) throws InvalidAttributesException {
         linha = linhaAleatoria();
         coluna = colunaAleatoria();
         return this.meuTabuleiro.bombardear(linha, coluna);

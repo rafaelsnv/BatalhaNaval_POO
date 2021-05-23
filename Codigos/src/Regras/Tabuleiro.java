@@ -1,8 +1,9 @@
 package Regras;
 
 import Embarcacoes.*;
+
+import javax.naming.directory.InvalidAttributesException;
 import java.util.ArrayList;
-import Regras.*;
 
 public class Tabuleiro {
     private static final int MAX_LINHAS = 15;
@@ -13,7 +14,7 @@ public class Tabuleiro {
     private static final int MAX_SUBMARINO = 4;
     private static final int MAX_CRUZADOR = 3;
 
-    private Casa[][] GRADE = new Casa[MAX_LINHAS][MAX_COLUNAS];
+    private final Casa[][] GRADE = new Casa[MAX_LINHAS][MAX_COLUNAS];
     private ArrayList<Embarcacao> minhaEsquadra = new ArrayList<>();
 
     /**
@@ -86,32 +87,13 @@ public class Tabuleiro {
     }
 
     /**
-     * (A se verificar a necessidade) Insere casa no tabuleiro. Pode ser
-     * utilizada para atualização de dados das casas, caso a Embarcação
-     * precisar implementá-la.
-     * @param qual (Casa) Casa a ser inserida.
-     * @return Verdadeiro se as coordenadas da casa forem válidas.
-     */
-    public boolean setCasa(Casa qual) {
-        int linha = qual.getLinha();
-        int coluna = qual.getColuna();
-
-        if( coordenadaValida(linha, coluna) ) {
-            GRADE[linha][coluna] = qual;
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
      * Verifica se casa do tabuleiro já foi ocupada
      * @param linha (int) Coordenada da linha. (0 a MAX_LINHAS-1)
      * @param coluna  (int) Coordenada da coluna. (0 a MAX_COLUNAS-1)
      * @return Verdadeiro se tiver sido ocupada.
      */
     public boolean casaOcupada(int linha, int coluna) {
-        Casa casa = this.getGRADE().get[linha][coluna];
+        Casa casa = this.getCasa(linha, coluna);
         return casa.foiOcupada();
     }
 
@@ -122,7 +104,6 @@ public class Tabuleiro {
      */
     public Embarcacao getEmbarcacao(int id) {
         Embarcacao aux = null;
-
         for (Embarcacao embarcacao : this.minhaEsquadra) {
             // Método equals com ID ajuda a encontrar a embarcação correta no ArrayList
             if(embarcacao.equals(id)) {
@@ -130,7 +111,6 @@ public class Tabuleiro {
                 break;
             }
         }
-
         return aux;
     }
 
@@ -138,19 +118,14 @@ public class Tabuleiro {
      * Atualiza embarcação na lista minhaEsquadra.
      * @param id (int) Identificador da embarcação.
      * @param qual (Embarcacao) Embarcação cujos dados foram atualizados.
-     * @return Verdadeiro se a embarcação tiver sido encontrada e atualizada com sucesso.
      */
-    public boolean updateEmbarcacao(int id, Embarcacao qual) {
+    public void updateEmbarcacao(int id, Embarcacao qual) {
         for (int i=0; i < this.minhaEsquadra.size(); i++) {
             Embarcacao aux = this.minhaEsquadra.get(i);
 
-            // Método equals com ID ajuda a encontrar a embarcação correta no ArrayList
-            if (aux.equals(id)) {
+            if (aux.equals(id))
                 this.minhaEsquadra.set(i, qual);
-                return true;
-            }
         }
-        return false;
     }
 
     /**
@@ -161,19 +136,20 @@ public class Tabuleiro {
      * @return Verdadeiro se a inserção tiver sido realizada com sucesso.
      */
     public boolean inserirEmbarcacao(Embarcacao qual, int linha, int coluna) {
-        boolean inseriu = false;
+        boolean inseriu = true;
+        ArrayList<Casa> casas;
 
-        /*
-        Essa parte precisa ser verificada junto à implementação da Embarcação.
-        Se a concepção mais abaixo for válida, a embarcação colocaria seu próprio ID
-        nas casas que ocupará. Outro modo de fazê-lo, seria a embarcação passar
-        suas casas com as coordenadas já definidas para o tabuleiro. A partir disso
-        o tabuleiro se encarrega de verificar se alguma das casas solicitadas já foi
-        ocupada. Se não tiverem sido, ele as atualiza na GRADE, já inclusive atribuindo
-        o ID da embarcação nelas. Mas por enquanto, deixo abaixo o modelo anterior:
-        */
-        if (coordenadaValida(linha, coluna) & !casaOcupada(linha, coluna))
-            ArrayList<Casa> casas = qual.setCoordenadas(linha, coluna);
+        if (coordenadaValida(linha, coluna) & !casaOcupada(linha, coluna)) {
+            casas = qual.setCoordenadas(linha, coluna);
+            for (Casa casa : casas)
+                if (!coordenadaValida(casa.getLinha(), casa.getColuna())) {
+                    inseriu = false;
+                    break;
+                }
+        }
+        else
+            inseriu = false;
+
         return inseriu;
     }
 
@@ -183,33 +159,24 @@ public class Tabuleiro {
      * @param coluna (int) Coordenada da coluna. (0 a MAX_COLUNAS-1)
      * @return Verdadeiro se houver acertado uma embarcação.
      */
-    public boolean bombardear(int linha, int coluna) {
-        Casa casa = this.GRADE.get(linha, coluna);
+    public boolean bombardear(int linha, int coluna) throws InvalidAttributesException {
+        Casa casa = this.getCasa(linha, coluna);
 
-        // Isso precisa ser revisto. Provavelmente um TryCatch seja melhor aplicável à situação.
-        // Isso porque geraríamos um sinal ambíguo para false. Temos quatro estados para dois sinais de retorno.
-        // Os sinais seriam "true" e "false". Um dos estados seria "Acertar embarcação", que assumiria true.
-        // Já false está assumindo muitos papéis: "Errar", "Casa já foi bombardeada anteriormente" e
-        // "Coordenadas inválidas". Os dois últimos casos deveriam gerar uma mensagem de erro, não false.
-        // Cenas dos próximos capítulos de POO. ;)
         if(casa == null)
-            return false;
+            throw new InvalidAttributesException("A casa tem coordenadas inválidas.");
 
         if (!casa.foiBombardeada())
             casa.bombardear();
+        else
+            throw new InvalidAttributesException("A casa já foi bombardeada.");
+
         if (casa.foiOcupada()) {
-            // Note como o fato de a casa e a embarcação guardarem os IDs facilita muito o processo.
-            // A casa comunica ao tabuleiro qual embarcação está nela, o tabuleiro procura a
-            // embarcação no ArrayList e finalmente o alveja.
             Embarcacao alvejada = this.getEmbarcacao(casa.getOcupanteID());
-            alvejada.atingir(linha, coluna);
+            alvejada.atingiu(casa);
 
-            // Atualizar os dados da embarcação também é facilitado pelo ID.
             this.updateEmbarcacao(alvejada.getID(), alvejada);
-
             return true;
         }
-
         return false;
     }
 

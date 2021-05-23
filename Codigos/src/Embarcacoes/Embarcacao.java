@@ -5,19 +5,19 @@ import java.util.ArrayList;
 import Regras.*;
 
 public class Embarcacao {
-    protected int ID; // Identificador da embarcação
-    protected String descricao; //
+    protected int ID;                     // Identificador da embarcação
+    protected String descricao;           //
     protected boolean orientacaoVertical; // false = horizontal | true = vertical
     protected ArrayList<Casa> embarcacao; //
-    protected boolean inserido; //
-    protected int tamanho; // Número de casas que a embarcação ocupa
+    protected boolean inserido;           //
+    protected int tamanho;                // Número de casas que a embarcação ocupa
 
     /**
      * Construtor sem parâmetros. Cria sempre uma embarcação ocupando apenas uma
      * casa.
      */
     public Embarcacao() {
-        embarcacao = new ArrayList<Casa>();
+        embarcacao = new ArrayList<>();
         this.embarcacao.add(new Casa());
         this.descricao = "Não Identificado.";
     }
@@ -28,10 +28,9 @@ public class Embarcacao {
      * 
      * @param size (int) - Tamanho da embarcação desejada.
      */
-    public Embarcacao(int size, int id) {
-        embarcacao = new ArrayList<Casa>();
+    public Embarcacao(int size) {
+        embarcacao = new ArrayList<>();
         this.setTamanho(size);
-        this.setID(id);
         for (int i = 0; i < this.tamanho; i++) {
             embarcacao.add(new Casa());
         }
@@ -60,6 +59,10 @@ public class Embarcacao {
 
     public void setID(int id) {
         this.ID = id;
+    }
+
+    public int getID() {
+        return this.ID;
     }
 
     public String getDescricao() {
@@ -134,4 +137,11 @@ public class Embarcacao {
             return false;
     }
 
+    public boolean equals(int id) {
+        return this.ID == id;
+    }
+
+    public ArrayList<Casa> setCoordenadas(int linha, int coluna) {
+        return null;
+    }
 }

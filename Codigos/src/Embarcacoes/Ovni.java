@@ -8,10 +8,10 @@ public class Ovni extends Embarcacao {
     private static final int TAMANHO = 4; // Quantidade de casas que irá ocupar.
     private static final String DESC = "OVNI";
 
-    public Ovni() {
+    public Ovni(int id) {
         super(TAMANHO);
         this.descricao = DESC;
-
+        this.ID = id;
     }
 
     /**
@@ -21,8 +21,8 @@ public class Ovni extends Embarcacao {
      * @param coluna (int)
      * @return embarcacao (ArryList<Casa>)
      */
+    @Override
     public ArrayList<Casa> setCoordenadas(int linha, int coluna) {
-
         Casa pedaco = this.embarcacao.get(0); // Primeiro pedaço da embarcação.
         pedaco.setCoordenadas(linha, coluna); // Insere na primeira casa da embarcação as coordenadas.
 

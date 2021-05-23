@@ -9,9 +9,10 @@ public class PortaAvioes extends Embarcacao {
     private static final String DESC = "Porta-Aviões";
     private static final int id =0;
 
-    public PortaAvioes() {
-        super(TAMANHO,id);
+    public PortaAvioes(int id) {
+        super(TAMANHO);
         this.descricao = DESC;
+        this.ID = id;
     }
 
     /**
@@ -21,6 +22,7 @@ public class PortaAvioes extends Embarcacao {
      * @param coluna (int)
      * @return embarcacao (ArrayList<Casa>)
      */
+    @Override
     public ArrayList<Casa> setCoordenadas(int linha, int coluna) {
         boolean vertical = this.orientacaoVertical; // Orientação da embarcação, se true = vertical
         Casa pedaco = this.embarcacao.get(0); // Primeiro pedaço da embarcação.

@@ -1,10 +1,12 @@
 package Regras;
 
 public class Casa {
-   private int linha; // - Linha e coluna assumem as coordenadas
-   private int coluna; // que identificam a casa no tabuleiro;
-   private boolean bombardeada; // - Define se a casa foi bombardeada;
-   private boolean ocupada; // - Define se uma embarcação ocupou a casa.
+   private int linha;            // - Linha e coluna assumem as coordenadas
+   private int coluna;           //   que identificam a casa no tabuleiro;
+   private boolean bombardeada;  // - Define se a casa foi bombardeada;
+   private String ocupanteTag;   // - Tipo do ocupante
+   private int ocupanteID;       // - Define qual embarcação ocupou a casa (ID da embarcação).
+                                 //   Se o valor for -1 é água.
 
    /**
     * Construtor sem parâmetros. Não define a posição que a casa assumirá no
@@ -13,8 +15,9 @@ public class Casa {
    public Casa() {
       this.linha = -1;
       this.coluna = -1;
+      this.ocupanteTag = "A";
       this.bombardeada = false;
-      this.ocupada = false;
+      this.ocupanteID = -1;
    }
 
    /**
@@ -27,8 +30,9 @@ public class Casa {
    public Casa(int linha, int coluna) {
       this.linha = linha;
       this.coluna = coluna;
+      this.ocupanteTag = "A";
       this.bombardeada = false;
-      this.ocupada = false;
+      this.ocupanteID = -1;
    }
 
    /**
@@ -44,7 +48,6 @@ public class Casa {
 
    /**
     * Método get para linha assumida pela casa.
-    * 
     * @return (int) Linha ocupada pela casa.
     */
    public int getLinha() {
@@ -72,8 +75,9 @@ public class Casa {
    /**
     * Sinaliza à casa que ela foi ocupada por uma embarcação.
     */
-   public void ocupar() {
-      this.ocupada = true;
+   public void setOcupante(int id, String tipo) {
+      this.ocupanteID = id;
+      this.ocupanteTag = tipo;
    }
 
    /**
@@ -82,7 +86,15 @@ public class Casa {
     * @return (boolean) Verdadeiro se tiver sido ocupada.
     */
    public boolean foiOcupada() {
-      return ocupada;
+      return this.ocupanteID != -1;
+   }
+
+   /**
+    * Método get para identificador do ocupante.
+    * @return Retorna o id da embarcação ou -1 se for água.
+    */
+   public int getOcupanteID() {
+      return this.ocupanteID;
    }
 
    /**
