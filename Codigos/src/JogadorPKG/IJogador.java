@@ -10,6 +10,6 @@ public interface IJogador {
     public void girarVertical(Embarcacao embarcacao);
 
     public void girarHorizontal(Embarcacao embarcacao);
-    public boolean bombardear(int linha, int coluna);
 
+    public boolean bombardear(int linha, int coluna);
 }

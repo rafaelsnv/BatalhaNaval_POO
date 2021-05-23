@@ -5,28 +5,24 @@ import Embarcacoes.*;
 
 public class Jogador {
     private String nome;
-    private IJogador tipoJogador;
+    private int tipoJogador; // 0 para Humano; 1 para CpuFacil; 2 para CpuMedio; 3 para CpuDificil.
+    private IJogador iJogador;
     private Tabuleiro meuTabuleiro;
-
-    /**
-     * Método construtor sem parâmetros.
-     */
-    public Jogador(){
-        this.nome = "";
-//        this.tipoJogador = new IJogador().;
-//        this.meuTabuleiro = new Tabuleiro();
-    }
 
     /**
      * Método construtor com parâmetros.
      * @param oNome o nome a ser atribuído.
      * @param oTipo o tipo de IJogador a ser atribuído.
-     * @param oTabuleiro o Tabuleiro a ser atribuído.
      */
-    public Jogador(String oNome, IJogador oTipo, Tabuleiro oTabuleiro){
+    public Jogador(String oNome, int oTipo){
         this.setNome(oNome);
-        this.setTipoJogador(oTipo);
-        this.setMeuTabuleiro(oTabuleiro);
+        switch (oTipo) {
+            case (0) -> this.iJogador = new Humano();
+            case (1) -> this.iJogador = new CpuFacil();
+            case (2) -> this.iJogador = new CpuMedio();
+            case (3) -> this.iJogador = new CpuDificil();
+        }
+        this.meuTabuleiro = new Tabuleiro();
     }
 
     /**
@@ -49,16 +45,16 @@ public class Jogador {
      * Método get para o tipoJogador.
      * @return o tipo de Jogador (Humano/CpuFacil/CpuMedio/CpuDificil).
      */
-    public IJogador getTipoJogador() {
-        return this.tipoJogador;
+    public IJogador getiJogador() {
+        return this.iJogador;
     }
 
     /**
      * Método set para o qualTipo.
      * @param qualTipo o tipo a ser atribuído.
      */
-    public void setTipoJogador(IJogador qualTipo) {
-        this.tipoJogador = qualTipo;
+    public void setiJogador(IJogador qualTipo) {
+        this.iJogador = qualTipo;
     }
 
     /**

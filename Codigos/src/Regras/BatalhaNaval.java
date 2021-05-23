@@ -7,20 +7,17 @@ public class BatalhaNaval {
 
     private int turno;
     private Jogador vencedor;
-    private Jogador novoJogador;
-    ArrayList <Jogador> jogadores = new ArrayList<>(); 
+    ArrayList <Jogador> jogadores = new ArrayList<>();
 
     /**
      * Construtor
      */
     public BatalhaNaval() {
         this.turno = 0;
-        this.vencedor = new Jogador();
     }
 
-    public void addJogador(){
-        novoJogador = new Jogador();
-        jogadores.add(novoJogador);
+    public void addJogador(Jogador qual){
+        jogadores.add(qual);
     }
 
     public void rmvJogador(int posicao){
@@ -52,14 +49,6 @@ public class BatalhaNaval {
 
     public void setVencedor(Jogador vencedor) {
         this.vencedor = vencedor;
-    }
-
-    public Jogador getNovoJogador() {
-        return novoJogador;
-    }
-
-    public void setNovoJogador(Jogador novoJogador) {
-        this.novoJogador = novoJogador;
     }
 
     public ArrayList<Jogador> getJogadores() {
