@@ -4,12 +4,12 @@ import Embarcacoes.*;
 
 import javax.naming.directory.InvalidAttributesException;
 import java.util.Random;
-
+ 
 /**
  * Regras da CPU Fácil:
  * 1) A CPU insere as peças aleatoriamente, sem critério.
  * 2) A CPU ataca aleatoriamente, sem critério.
- * 3) A CPU não se preocupa em deixar a embarcação na vertical ou horizontal (insere na padrão).
+ * 3) A CPU não se preocupa em deixar a embarcação na vertical ou horizontal (insere na padrão)....
  */
 public class CpuFacil implements IJogador {
     private final Random aleatorio = new Random(System.nanoTime());
