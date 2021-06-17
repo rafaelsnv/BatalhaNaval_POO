@@ -127,11 +127,69 @@ public class Menu {
         System.out.println("|");
         System.out.println("V");
         qual.toString();
-        System.out.println("Insira onde quer posicionar sua embarcação. ");
-        System.out.println("Coluna: ");
-        String coluna = sc.nextLine();
-        System.out.println("Linha: ");
-        int linha = sc.nextInt();
+        System.out.println("");
+        System.out.println("Insira no seguinte formato (ColunaLinha), onde quer posicionar sua embarcação. ");
+        System.out.println("Ex.: A2; B5; G8 ... ");
+        String coord = sc.nextLine();
+        char col = coord.charAt(0);
+        char lin = coord.charAt(1);
+        col = Character.toUpperCase(col);
 
+        int linha = Integer.parseInt(String.valueOf(lin));
+        linha--;
+        int coluna = 0;
+
+        switch (col) {
+            case 'A':
+                coluna = 0;
+                break;
+            case 'B':
+                coluna = 1;
+                break;
+            case 'C':
+                coluna = 2;
+                break;
+            case 'D':
+                coluna = 3;
+                break;
+            case 'E':
+                coluna = 4;
+                break;
+            case 'F':
+                coluna = 5;
+                break;
+            case 'G':
+                coluna = 6;
+                break;
+            case 'H':
+                coluna = 7;
+                break;
+            case 'I':
+                coluna = 8;
+                break;
+            case 'J':
+                coluna = 9;
+                break;
+            case 'K':
+                coluna = 10;
+                break;
+            case 'L':
+                coluna = 11;
+                break;
+            case 'M':
+                coluna = 12;
+                break;
+            case 'N':
+                coluna = 13;
+                break;
+            case 'O':
+                coluna = 14;
+                break;
+        }
+
+        tabuleiro.inserirEmbarcacao(qual, linha, coluna);
+
+        return tabuleiro;
     }
+
 }
