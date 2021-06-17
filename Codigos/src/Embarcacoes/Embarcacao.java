@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import Regras.*;
 
 public class Embarcacao {
-    protected int ID;                     // Identificador da embarcação
-    protected String descricao;           //
+    protected int ID; // Identificador da embarcação
+    protected String descricao; //
     protected boolean orientacaoVertical; // false = horizontal | true = vertical
     protected ArrayList<Casa> embarcacao; //
-    protected boolean inserido;           //
-    protected int tamanho;                // Número de casas que a embarcação ocupa
+    protected boolean inserido; //
+    protected int tamanho; // Número de casas que a embarcação ocupa
 
     /**
      * Construtor sem parâmetros. Cria sempre uma embarcação ocupando apenas uma
@@ -20,6 +20,7 @@ public class Embarcacao {
         embarcacao = new ArrayList<>();
         this.embarcacao.add(new Casa());
         this.descricao = "Não Identificado.";
+        this.orientacaoVertical = false;
     }
 
     /**
@@ -29,11 +30,13 @@ public class Embarcacao {
      * @param size (int) - Tamanho da embarcação desejada.
      */
     public Embarcacao(int size) {
-        embarcacao = new ArrayList<>();
+        this.embarcacao = new ArrayList<>();
         this.setTamanho(size);
         for (int i = 0; i < this.tamanho; i++) {
-            embarcacao.add(new Casa());
+            this.embarcacao.add(new Casa());
         }
+        this.descricao = "Não Identificado.";
+        this.orientacaoVertical = false;
     }
 
     public void setDescricao(String descricao) {
@@ -42,13 +45,16 @@ public class Embarcacao {
 
     /**
      * Inverte a orientação da embarcação
-     * 
      */
-    public void setOrientacaoVertical() {
-        if(this.orientacaoVertical==true)
-            this.orientacaoVertical = true;
-        else if(this.orientacaoVertical==false)
-            this.orientacaoVertical = false;
+    public void inverteOrientacaoVertical() {
+        this.orientacaoVertical = !this.orientacaoVertical;
+    }
+
+    /**
+     * @param vertical true = vertical false = horizontal
+     */
+    public void setOrientacaoVertical(boolean vertical) {
+        this.orientacaoVertical = vertical;
     }
 
     public void setInserido() {
@@ -98,8 +104,8 @@ public class Embarcacao {
     public boolean atingiu(Casa casaAtingida) {
         boolean atingiu = false;
 
-        for (int i = this.embarcacao.size()-1; i > 0; i--) { // Percorre todas as casas da embarcação, até encontrar a
-                                                           // certa.
+        for (int i = this.embarcacao.size() - 1; i > 0; i--) { // Percorre todas as casas da embarcação, até encontrar a
+                                                               // certa.
             boolean linhaMatch = false; // - Variáveis usadas para comparar
             boolean colunaMatch = false; //
 
