@@ -41,12 +41,14 @@ public class Embarcacao {
     }
 
     /**
+     * Inverte a orientação da embarcação
      * 
-     * @param vertical (boolean) - Se true = embarcação na vertical - Se false =
-     *                 embarcação na horizontal
      */
-    public void setOrientacaoVertical(boolean vertical) {
-        this.orientacaoVertical = true;
+    public void setOrientacaoVertical() {
+        if(this.orientacaoVertical==true)
+            this.orientacaoVertical = true;
+        else if(this.orientacaoVertical==false)
+            this.orientacaoVertical = false;
     }
 
     public void setInserido() {
