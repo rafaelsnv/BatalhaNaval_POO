@@ -87,6 +87,15 @@ public class Tabuleiro {
     }
 
     /**
+     * Posiciona casa da embarcação no tabuleiro, participando do processo da inserção das embarcações.
+     * Deve ser um método exclusivamente interno do tabuleiro!
+     * @param casa Instância de uma casa da embarcação.
+     */
+    private void setCasa(Casa casa) {
+        this.GRADE[casa.getLinha()][casa.getColuna()] = casa;
+    }
+
+    /**
      * Verifica se casa do tabuleiro já foi ocupada
      * @param linha (int) Coordenada da linha. (0 a MAX_LINHAS-1)
      * @param coluna  (int) Coordenada da coluna. (0 a MAX_COLUNAS-1)
@@ -136,21 +145,24 @@ public class Tabuleiro {
      * @return Verdadeiro se a inserção tiver sido realizada com sucesso.
      */
     public boolean inserirEmbarcacao(Embarcacao qual, int linha, int coluna) {
-        boolean inseriu = true;
-        ArrayList<Casa> casas;
+        ArrayList<Casa> casasEmbarcacao;
 
         if (coordenadaValida(linha, coluna) & !casaOcupada(linha, coluna)) {
-            casas = qual.setCoordenadas(linha, coluna);
-            for (Casa casa : casas)
-                if (!coordenadaValida(casa.getLinha(), casa.getColuna())) {
-                    inseriu = false;
-                    break;
-                }
+            casasEmbarcacao = qual.setCoordenadas(linha, coluna);
+            for (Casa casa : casasEmbarcacao) {
+                int lin = casa.getLinha();
+                int col = casa.getColuna();
+                if (!coordenadaValida(lin, col) | casaOcupada(lin, col))
+                    return false;
+            }
         }
         else
-            inseriu = false;
+            return false;
 
-        return inseriu;
+        for (Casa casa : qual.getEmbarcacao())
+            setCasa(casa);
+
+        return true;
     }
 
     /**
