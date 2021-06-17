@@ -31,6 +31,42 @@ public class CpuFacil implements IJogador {
         return aleatorio.nextInt(this.meuTabuleiro.getMaxColunas());
     }
 
+    public void gerarTabuleiro(){
+        int sorteio[] = new int[15];
+        int auxSorteio;
+        int j = 0;
+
+
+        for (int i = 0; i <= meuTabuleiro.getMinhaEsquadra().size(); i++) {
+            
+            // Ideia de regra para geração automática
+
+            
+           /* do {
+                auxSorteio = aleatorio.nextInt(15);
+                
+                if (sorteio[j]  != auxSorteio ) {
+                        
+                        System.out.println("É diferente!");
+                        sorteio[j] = auxSorteio;
+                        System.out.println(sorteio[j]);
+                        j++;                       
+                } else {
+                    System.out.println("É igual!");
+                    System.out.println(sorteio[j]);
+                    i--;
+                }
+            } while (true);*/
+            
+        }
+
+        meuTabuleiro.inserirEmbarcacao(meuTabuleiro.getMinhaEsquadra().get(0), 5, 5);
+
+        System.out.println(meuTabuleiro.getMinhaEsquadra().get(0));
+     
+        
+    }
+
      @Override
      public void setTabuleiro(Tabuleiro tabuleiro) {
 
