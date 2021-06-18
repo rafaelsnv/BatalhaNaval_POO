@@ -1,10 +1,14 @@
 package Regras;
 
 public class Casa {
+   private final static String ANSI_RESET = "\u001B[0m";
+   private final static String ANSI_BLACK = "\u001B[30m";
+
    private int linha;            // - Linha e coluna assumem as coordenadas
    private int coluna;           //   que identificam a casa no tabuleiro;
    private boolean bombardeada;  // - Define se a casa foi bombardeada;
-   private String ocupanteTag;   // - Tipo do ocupante
+   private String corFonte;      // - Cor da fonte para o X do bombardeado;
+   private String corFundo;      // - Cor de fundo para a casa (Água ou Embarcação);
    private int ocupanteID;       // - Define qual embarcação ocupou a casa (ID da embarcação).
                                  //   Se o valor for -1 é água.
 
@@ -15,7 +19,7 @@ public class Casa {
    public Casa() {
       this.linha = -1;
       this.coluna = -1;
-      this.ocupanteTag = "A";
+      this.corFundo = "A";
       this.bombardeada = false;
       this.ocupanteID = -1;
    }
@@ -30,7 +34,8 @@ public class Casa {
    public Casa(int linha, int coluna) {
       this.linha = linha;
       this.coluna = coluna;
-      this.ocupanteTag = "A";
+      this.corFonte = "A";
+      this.corFundo = "A";
       this.bombardeada = false;
       this.ocupanteID = -1;
    }
@@ -44,6 +49,14 @@ public class Casa {
    public void setCoordenadas(int linha, int coluna) {
       this.linha = linha;
       this.coluna = coluna;
+   }
+
+   /**
+    * Configura a cor da casa. Deve ser utilizada apenas pela embarcação.
+    * @param corEmbarcacao Cor em formato unicode.
+    */
+   public void setCor(String corEmbarcacao) {
+      this.corFonte = this.corFundo = corEmbarcacao;
    }
 
    /**
@@ -77,7 +90,7 @@ public class Casa {
     */
    public void setOcupante(int id, String tipo) {
       this.ocupanteID = id;
-      this.ocupanteTag = tipo;
+      this.corFundo = tipo;
    }
 
    /**
@@ -98,10 +111,12 @@ public class Casa {
    }
 
    /**
-    * Sinaliza à casa que ela foi bombardeada.
+    * Sinaliza à casa que ela foi bombardeada. Altera a cor da fonte
+    * para exibir o bombardeamento.
     */
    public void bombardear() {
       this.bombardeada = true;
+      this.corFonte = ANSI_BLACK;
    }
 
    /**
@@ -111,5 +126,9 @@ public class Casa {
     */
    public boolean foiBombardeada() {
       return this.bombardeada;
+   }
+
+   public String toString() {
+      return this.corFundo + this.corFonte + "☒" + ANSI_RESET;
    }
 }
