@@ -28,6 +28,7 @@ public class Submarino extends Embarcacao {
         Casa pedaco = this.embarcacao.get(0); // Primeiro pedaço da embarcação.
         pedaco.setCoordenadas(linha, coluna); // Insere na primeira casa da embarcação as coordenadas.
         pedaco.setCor(this.corFonte, this.corFundo);
+        pedaco.setOcupante(this.ID);
         embarcacao.set(0, pedaco); // Insere novas informações de casa na embarcação.
         return embarcacao;
     }
