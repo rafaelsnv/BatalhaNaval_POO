@@ -4,44 +4,38 @@ import Regras.*;
 import Embarcacoes.*;
 
 public class Menu {
-    private Scanner sc;
 
-    public Menu() {
-        sc = new Scanner(System.in);
+    public static void limparTela(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     /**
      * Menu iniciar
-     * 
      * @return (int) escolha
      */
-    public int welcome() {
-        System.out.println("----------------------------------");
-        System.out.println("");
-        System.out.println("Bem vindo ao Batalha_magic");
-        System.out.println("1. Jogar");
-        System.out.println("0. Sair");
-        System.out.println("");
-        System.out.println("----------------------------------");
+    public int welcome(Scanner teclado) {
+        limparTela();
+        System.out.println("\n----------------------------------");
+        System.out.println("\nBem vindo ao Batalha_magic\n");
+        System.out.println("1 - Jogar");
+        System.out.println("0 - Sair");
+        System.out.println("\n----------------------------------\n");
 
-        int escolha = this.sc.nextInt();
+        System.out.print("Digite sua escolha: ");
+        int escolha = teclado.nextInt();
         return escolha;
     }
 
     /**
      * Permite ao jogador escolher um nickname
-     * 
      * @return (String) nick
      */
-    public String nickname() {
-        System.out.println("----------------------------------");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("Insira um apelido: ");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("----------------------------------");
-        String nick = this.sc.nextLine();
+    public String nickname(Scanner teclado) {
+        System.out.println("----------------------------------\n\n");
+        System.out.print("Insira um apelido: ");
+        String nick = teclado.nextLine();
+        System.out.println("\n\n----------------------------------");
 
         return nick;
     }
@@ -49,22 +43,20 @@ public class Menu {
     /**
      * Apresenta ao jogador os níveis da dificuldade da CPU e o faz decidir contra
      * qual quer jogar
-     * 
      * @return (int) escolha 1.Fácil 2.Médio 3.Difícil
      */
-    public int dificuldade() {
+    public int dificuldade(Scanner teclado) {
         int escolha = 9;
-        System.out.println("----------------------------------");
-        System.out.println("");
+        System.out.println("----------------------------------\n");
         System.out.println("Selecione o nível da dificuldade do oponente: ");
         System.out.println("1. Fácil");
         System.out.println("2. Médio");
         System.out.println("3. Difícil");
         System.out.println("0. Sair");
-        System.out.println("");
-        System.out.println("----------------------------------");
+        System.out.println("\n----------------------------------");
         do {
-            escolha = this.sc.nextInt();
+            System.out.print("Digite sua escolha: ");
+            escolha = teclado.nextInt();
             if (!(escolha == 1 || escolha == 2 || escolha == 3 || escolha == 0)) {
                 System.out.println("Escolha inválida! Tente novamente");
                 System.out.println("----------------------------------");
@@ -77,13 +69,12 @@ public class Menu {
     /**
      * Apresenta ao jogador o tabuleiro atual, permite selecionar em qual orientação
      * vai inserir a embarcação Insere a embarcação no tabuleiro
-     * 
      * @param tabuleiro (Tabuleiro)
      * @param qual      (Embarcacao)
      * @return tabuleiro (Tabuleiro) - Retorna o tabuleiro atualizado
      * 
      */
-    public Tabuleiro orientacaoEmbarcacao(Tabuleiro tabuleiro, Embarcacao qual) {
+    public Tabuleiro orientacaoEmbarcacao(Scanner teclado ,Tabuleiro tabuleiro, Embarcacao qual) {
         int escolha = 0;
 
         System.out.println("----------------------------------");
@@ -111,7 +102,9 @@ public class Menu {
         System.out.println("2. Vertical");
         System.out.println("");
         System.out.println("----------------------------------");
-        escolha = sc.nextInt();
+
+        System.out.print("Digite sua escolha: ");
+        escolha = teclado.nextInt();
         if (escolha == 1) {
             qual.inverteOrientacaoVertical();
         }
@@ -126,7 +119,8 @@ public class Menu {
         System.out.println("");
         System.out.println("Insira no seguinte formato (ColunaLinha), onde quer posicionar sua embarcação. ");
         System.out.println("Ex.: A2; B5; G8 ... ");
-        String coord = sc.nextLine();
+        System.out.print("Digite sua escolha: ");
+        String coord = teclado.nextLine();
         char col = coord.charAt(0);
         char lin = coord.charAt(1);
         col = Character.toUpperCase(col);
@@ -192,7 +186,6 @@ public class Menu {
 
     /**
      * Insere a embarcação no tabuleiro
-     * 
      * @param tabuleiro (Tabueliro)
      * @param qual      (Embarcacao)
      * @return tabuleiro (Tabuleiro)

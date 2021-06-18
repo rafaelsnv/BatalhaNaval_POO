@@ -35,7 +35,6 @@ public class CpuFacil implements IJogador {
                 }
                 linha = 1;
                 sorteio = 0;
-                i--;
 
             } else if (sorteio == 0) {
                 coluna += 6;
@@ -44,7 +43,6 @@ public class CpuFacil implements IJogador {
                 }
                 linha = 0;
                 sorteio = 1;
-                i--;
 
             }
 
@@ -68,6 +66,10 @@ public class CpuFacil implements IJogador {
      */
     private int colunaAleatoria() {
         return aleatorio.nextInt(this.meuTabuleiro.getMaxColunas());
+    }
+
+    public Tabuleiro getMeuTabuleiro() {
+        return meuTabuleiro;
     }
 
     @Override
