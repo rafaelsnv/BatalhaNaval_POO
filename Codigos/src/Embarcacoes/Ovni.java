@@ -52,10 +52,17 @@ public class Ovni extends Embarcacao {
 
     @Override
     public String toString() {
-        String str = "";
-        for (Casa pedaco : this.embarcacao)
-            str = str.concat(pedaco.toString());
-
+        String str = " ";
+        Casa pedaco = this.embarcacao.get(1);
+        str = str.concat(pedaco.toStringPlayer());
+        str = str.concat("\n");
+        pedaco = this.embarcacao.get(0);
+        str = str.concat(pedaco.toStringPlayer());
+        pedaco = this.embarcacao.get(2);
+        str = str.concat(" " + pedaco.toStringPlayer());
+        str = str.concat("\n");
+        pedaco = this.embarcacao.get(3);
+        str = str.concat(" " + pedaco.toStringPlayer());
         return str;
     }
 }

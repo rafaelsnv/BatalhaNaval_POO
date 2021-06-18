@@ -184,16 +184,18 @@ public class testeImpressao {
 
     public static void main(String[] args) throws InvalidAttributesException {
         Tabuleiro tab = new Tabuleiro();
+        Menu menu = new Menu();
 
-        Ovni ovni = new Ovni(0);
+        Encouracados ovni = new Encouracados(0);
+        menu.orientacaoEmbarcacao(tab, ovni);
         tab.inserirEmbarcacao(ovni, 5, 5);
 
         Encouracados enc = new Encouracados(1);
         boolean resultado = tab.inserirEmbarcacao(enc, 5, 5);
 
         System.out.println(resultado + "\n\n");
-        tab.bombardear(5,5);
-        tab.bombardear(4,4);
+        tab.bombardear(5, 5);
+        tab.bombardear(4, 4);
         System.out.println(tab.toStringPlayer());
         System.out.println("\n\n");
         System.out.println(tab.toStringEnemy());

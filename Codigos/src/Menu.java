@@ -88,16 +88,23 @@ public class Menu {
 
         System.out.println("----------------------------------");
         System.out.println("");
-//        tabuleiro.toString();
+        // tabuleiro.toString();
         System.out.println("Você deve inserir o " + qual.getDescricao() + " no tabuleiro acima");
         System.out.println("É possível inserir das seguintes formas: ");
         System.out.println("Horizontal: ");
-        System.out.println(qual);
-        System.out.println("            ↑ utilizaremos essa casa como referência para posicionar ");
-        System.out.println("             ");
+        if (qual.getDescricao() == "OVNI")
+            System.out.println(" ↓ utilizaremos essa casa como referência para posicionar");
+        else
+            System.out.println("↓ utilizaremos essa casa como referência para posicionar");
+        System.out.println(qual.toString());
+        System.out.println("");
         qual.inverteOrientacaoVertical();
-        System.out.println("          ↓ utilizaremos essa casa como referência para posicionar");
-        System.out.println("Vertical: " + qual.toString());
+        System.out.println("Vertical:");
+        if (qual.getDescricao() == "OVNI")
+            System.out.println(" ↓ utilizaremos essa casa como referência para posicionar");
+        else
+            System.out.println("↓ utilizaremos essa casa como referência para posicionar");
+        System.out.println(qual.toString());
         System.out.println("");
         System.out.println("Qual orientação gostaria de utilizar?");
         System.out.println("1. Horizontal");
@@ -190,7 +197,7 @@ public class Menu {
      * @param qual      (Embarcacao)
      * @return tabuleiro (Tabuleiro)
      */
-    public Tabuleiro inserirEmbarcacao(Tabuleiro tabuleiro, Embarcacao qual) {
+    private Tabuleiro inserirEmbarcacao(Tabuleiro tabuleiro, Embarcacao qual) {
         ArrayList<Casa> aux = new ArrayList<>();
         aux = qual.getEmbarcacao();
         Casa casa = aux.get(0);
