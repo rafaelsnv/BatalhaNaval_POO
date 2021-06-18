@@ -3,6 +3,7 @@ package Regras;
 public class Casa {
    private final static String ANSI_RESET = "\u001B[0m";
    private final static String ANSI_BLACK = "\u001B[30m";
+   private final static String BLUE = "\u001B[44m";
 
    private int linha;            // - Linha e coluna assumem as coordenadas
    private int coluna;           //   que identificam a casa no tabuleiro;
@@ -19,7 +20,7 @@ public class Casa {
    public Casa() {
       this.linha = -1;
       this.coluna = -1;
-      this.corFundo = "A";
+      this.corFonte = this.corFundo = BLUE;
       this.bombardeada = false;
       this.ocupanteID = -1;
    }
@@ -34,8 +35,7 @@ public class Casa {
    public Casa(int linha, int coluna) {
       this.linha = linha;
       this.coluna = coluna;
-      this.corFonte = "A";
-      this.corFundo = "A";
+      this.corFonte = this.corFundo = BLUE;
       this.bombardeada = false;
       this.ocupanteID = -1;
    }

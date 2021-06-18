@@ -1,6 +1,9 @@
 package JogadorPKG;
 import Regras.*;
 import Embarcacoes.*;
+
+import javax.naming.directory.InvalidAttributesException;
+
 public interface IJogador {
 
     public void setTabuleiro(Tabuleiro tabuleiro);
@@ -11,5 +14,5 @@ public interface IJogador {
 
     public void girarHorizontal(Embarcacao embarcacao);
 
-    public boolean bombardear(int linha, int coluna);
+    public boolean bombardear(int linha, int coluna) throws InvalidAttributesException;
 }

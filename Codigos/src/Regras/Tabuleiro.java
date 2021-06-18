@@ -228,6 +228,16 @@ public class Tabuleiro {
 
     @Override
     public String toString() {
-        return "";
+        StringBuilder aux = new StringBuilder();
+        for (int i=0; i < MAX_LINHAS; i++) {
+            aux.append(String.format("%02d ", i + 1));
+            for (int j=0; j < MAX_COLUNAS; j++) {
+                Casa casa = getCasa(i,j);
+                aux.append(casa.toString());
+            }
+            aux.append("\n");
+        }
+
+        return aux.toString();
     }
 }

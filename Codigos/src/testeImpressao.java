@@ -1,3 +1,5 @@
+import Regras.Tabuleiro;
+
 /* COMO CONFIGURAR O CONSOLE PARA IMPRIMIR CORRETAMENTE:
 
     - IntelliJ:
@@ -172,9 +174,7 @@ public class testeImpressao {
     }
 
     public static void main(String[] args) {
-
-        inserir();
-        imprimirTudo();
-
+        Tabuleiro tab = new Tabuleiro();
+        System.out.println(tab);
     }
 }
