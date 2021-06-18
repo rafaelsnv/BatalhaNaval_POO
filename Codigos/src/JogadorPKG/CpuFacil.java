@@ -4,6 +4,7 @@ import Regras.*;
 import Embarcacoes.*;
 
 import javax.naming.directory.InvalidAttributesException;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.Random;
 
 /**
@@ -16,40 +17,21 @@ public class CpuFacil implements IJogador {
     private final Tabuleiro meuTabuleiro = new Tabuleiro();
 
     public CpuFacil() {
-        int sorteio = aleatorio.nextInt(1);
-        int linha = sorteio;
-        int coluna = 0;
-
         for (int i = 0; i < meuTabuleiro.getMinhaEsquadra().size(); i++) {
-
-            if (linha < meuTabuleiro.getMaxLinhas()) {
-                meuTabuleiro.inserirEmbarcacao(meuTabuleiro.getEmbarcacao(i), linha, coluna);
-                System.out.println("i: " + i);
-                linha += 5;
-            } else if (sorteio == 1) {
-                System.out.println("i: " + i);
-                coluna += 6;
-
-                if (coluna > 14) {
-                    coluna = 0;
-                }
-                linha = 1;
-                sorteio = 0;
-
-            } else if (sorteio == 0) {
-                coluna += 6;
-                if (coluna > 14) {
-                    coluna = 0;
-                }
-                linha = 0;
-                sorteio = 1;
-
+            int linha = this.generateRandom();
+            int coluna = this.generateRandom();
+            boolean result = meuTabuleiro.inserirEmbarcacao(meuTabuleiro.getEmbarcacao(i), linha, coluna);
+            while (!result) {
+                linha = this.generateRandom();
+                coluna = this.generateRandom();
+                result = meuTabuleiro.inserirEmbarcacao(meuTabuleiro.getEmbarcacao(i), linha, coluna);
             }
-
         }
-
     }
 
+    private int generateRandom() {
+        return ThreadLocalRandom.current().nextInt(0, 14 + 1);
+    }
     /**
      * Método para gerar uma linha aleatória considerando as linhas do tabuleiro
      * 
