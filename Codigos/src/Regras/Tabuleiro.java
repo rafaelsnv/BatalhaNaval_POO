@@ -160,7 +160,9 @@ public class Tabuleiro {
             return false;
 
         for (Casa casa : qual.getEmbarcacao())
-            setCasa(casa);
+            this.setCasa(casa);
+
+        qual.setInserido();
 
         return true;
     }
@@ -175,7 +177,7 @@ public class Tabuleiro {
         Casa casa = this.getCasa(linha, coluna);
 
         if(casa == null)
-            throw new InvalidAttributesException("A casa tem coordenadas inválidas.");
+            throw new InvalidAttributesException("Coordenadas inválidas.");
 
         if (!casa.foiBombardeada())
             casa.bombardear();
@@ -222,5 +224,10 @@ public class Tabuleiro {
 
     public int getMaxColunas(){
         return MAX_COLUNAS;
+    }
+
+    @Override
+    public String toString() {
+        return "";
     }
 }
