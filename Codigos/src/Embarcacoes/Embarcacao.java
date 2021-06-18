@@ -153,4 +153,15 @@ public class Embarcacao {
     public ArrayList<Casa> setCoordenadas(int linha, int coluna) {
         return null;
     }
+
+    @Override
+    public String toString() {
+        String str = "";
+        for (int i = 0; i < this.embarcacao.size(); i++) {
+            Casa pedaco = embarcacao.get(i);
+            str = str.concat(pedaco.toString());
+            System.out.println(str);
+        }
+        return str;
+    }
 }

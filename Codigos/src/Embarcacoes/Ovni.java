@@ -49,4 +49,14 @@ public class Ovni extends Embarcacao {
         embarcacao.set(3, pedaco); // Insere novas informações de casa na embarcação.
         return embarcacao;
     }
+
+    @Override
+    public String toString() {
+        String str = "";
+        for (int i = 0; i < this.embarcacao.size(); i++) {
+            Casa pedaco = embarcacao.get(i);
+            str = str.concat(pedaco.toString());
+        }
+        return str;
+    }
 }
