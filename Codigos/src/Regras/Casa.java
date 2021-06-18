@@ -3,8 +3,10 @@ package Regras;
 public class Casa {
    private final static String ANSI_RESET = "\u001B[0m";
    private final static String ANSI_BLACK = "\u001B[30m";
+   private final static String ANSI_WHITE = "\u001B[37m";
    private final static String ANSI_BLUE = "\u001B[34m";
    private final static String BACKGROUND_BLUE = "\u001B[44m";
+   private final static String BACKGROUND_WHITE = "\u001B[47m";
 
    private int linha;            // - Linha e coluna assumem as coordenadas
    private int coluna;           //   que identificam a casa no tabuleiro;
@@ -131,7 +133,19 @@ public class Casa {
       return this.bombardeada;
    }
 
-   public String toString() {
+   public String toStringPlayer() {
       return this.corFundo + this.corFonte + "☒" + ANSI_RESET;
+   }
+   public String toStringEnemy() {
+      String aux = BACKGROUND_WHITE;
+
+      if (this.foiBombardeada())
+         aux += ANSI_BLACK;
+      else
+         aux += ANSI_WHITE;
+
+      aux += "☒" + ANSI_RESET;
+
+      return aux;
    }
 }

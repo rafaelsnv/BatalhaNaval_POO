@@ -228,14 +228,33 @@ public class Tabuleiro {
         return MAX_COLUNAS;
     }
 
-    @Override
-    public String toString() {
+    public String toStringPlayer() {
         StringBuilder tab = new StringBuilder();
         for (int i=0; i < MAX_LINHAS; i++) {
             tab.append(String.format("%02d ", i + 1));
             for (int j=0; j < MAX_COLUNAS; j++) {
                 Casa casa = getCasa(i,j);
-                tab.append(casa.toString());
+                tab.append(casa.toStringPlayer());
+            }
+            tab.append("\n");
+        }
+
+        tab.append("   ");
+        for (String letra : LETRAS) {
+            String aux = "\u200B" + letra + "\u2005";
+            tab.append(aux);
+        }
+
+        return tab.toString();
+    }
+
+    public String toStringEnemy() {
+        StringBuilder tab = new StringBuilder();
+        for (int i=0; i < MAX_LINHAS; i++) {
+            tab.append(String.format("%02d ", i + 1));
+            for (int j=0; j < MAX_COLUNAS; j++) {
+                Casa casa = getCasa(i,j);
+                tab.append(casa.toStringEnemy());
             }
             tab.append("\n");
         }

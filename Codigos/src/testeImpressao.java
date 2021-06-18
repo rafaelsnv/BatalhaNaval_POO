@@ -194,6 +194,8 @@ public class testeImpressao {
         System.out.println(resultado + "\n\n");
         tab.bombardear(5,5);
         tab.bombardear(4,4);
-        System.out.println(tab);
+        System.out.println(tab.toStringPlayer());
+        System.out.println("\n\n");
+        System.out.println(tab.toStringEnemy());
     }
 }
