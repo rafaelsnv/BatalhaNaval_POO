@@ -136,6 +136,7 @@ public class Casa {
    public String toStringPlayer() {
       return this.corFundo + this.corFonte + "☒" + ANSI_RESET;
    }
+
    public String toStringEnemy() {
       String aux = BACKGROUND_WHITE;
 
