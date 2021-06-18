@@ -1,6 +1,7 @@
 import Embarcacoes.Cruzador;
 import Embarcacoes.Encouracados;
 import Embarcacoes.Ovni;
+import JogadorPKG.CpuFacil;
 import Regras.Tabuleiro;
 
 import javax.naming.directory.InvalidAttributesException;
@@ -186,8 +187,9 @@ public class testeImpressao {
         Tabuleiro tab = new Tabuleiro();
         Menu menu = new Menu();
 
+        CpuFacil cpuTest = new CpuFacil();
+
         Encouracados ovni = new Encouracados(0);
-        menu.orientacaoEmbarcacao(tab, ovni);
         tab.inserirEmbarcacao(ovni, 5, 5);
 
         Encouracados enc = new Encouracados(1);

@@ -9,25 +9,11 @@ import Regras.*;
 
 public class App {
 
-    public static void limparTela(){
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
-    static void pausa(Scanner teclado){
-        System.out.println("Enter para continuar.");
-        teclado.nextLine();
-    }
-
     public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
         Menu menuApp = new Menu();
         int opcao = -1;
         String nickApp = "";
-
-        CpuFacil cpuTeste = new CpuFacil();
-
-        cpuTeste.getMeuTabuleiro().toStringEnemy();
 
         opcao = menuApp.welcome(teclado);
 
@@ -55,31 +41,15 @@ public class App {
                     break;
             }
 
+            for (int i=0;i<player.getMeuTabuleiro().getMinhaEsquadra().size();i++){
+                menuApp.orientacaoEmbarcacao(teclado, player.getMeuTabuleiro(), player.getMeuTabuleiro().getEmbarcacao(i));
+            }
 
-//            for (int i=0; i <13;i++){
-//                menuApp.orientacaoEmbarcacao(teclado, player.getMeuTabuleiro(),)
-//            }
-
-
-
+            System.out.println("In progress...");
         }
         else{
             System.out.println("FIM");
         }
-
-
-//            switch (opcao){
-//                case 0:
-//                    break;
-//                case 1:
-//                    menuApp.nickname(teclado);
-//                    break;
-//                default:
-//                    System.out.println("error");
-//                    break;
-//            }
-//
-//        }while (opcao!=0);
     }
 
 }
