@@ -131,7 +131,20 @@ public class Casa {
       return this.bombardeada;
    }
 
-   public String toString() {
+   public String toStringPlayer() {
       return this.corFundo + this.corFonte + "☒" + ANSI_RESET;
+   }
+
+   public String toStringEnemy() {
+      String aux = BACKGROUND_WHITE;
+
+      if (this.foiBombardeada())
+         aux += ANSI_BLACK;
+      else
+         aux += ANSI_WHITE;
+
+      aux += "☒" + ANSI_RESET;
+
+      return aux;
    }
 }
