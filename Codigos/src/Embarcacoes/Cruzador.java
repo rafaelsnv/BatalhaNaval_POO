@@ -42,4 +42,14 @@ public class Cruzador extends Embarcacao {
         return embarcacao;
     }
 
+    // @Override
+    // public String toString() {
+    // String str = "";
+    // for (int i = 0; i < this.embarcacao.size(); i++) {
+    // Casa pedaco = embarcacao.get(i);
+    // str = str.concat(pedaco.toString());
+    // }
+    // return str;
+    // }
+
 }

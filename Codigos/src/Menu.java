@@ -92,12 +92,12 @@ public class Menu {
         System.out.println("Você deve inserir o " + qual.getDescricao() + " no tabuleiro acima");
         System.out.println("É possível inserir das seguintes formas: ");
         System.out.println("Horizontal: " + qual.toString());
-        System.out.println("            ^");
-        System.out.println("            | utilizaremos essa casa como referência para posicionar ");
+        System.out.println("            ↑ utilizaremos essa casa como referência para posicionar ");
+        System.out.println("             ");
         qual.inverteOrientacaoVertical();
-        System.out.println("          | utilizaremos essa casa como referência para posicionar");
-        System.out.println("          v");
+        System.out.println("          ↓ utilizaremos essa casa como referência para posicionar");
         System.out.println("Vertical: " + qual.toString());
+        System.out.println("");
         System.out.println("Qual orientação gostaria de utilizar?");
         System.out.println("1. Horizontal");
         System.out.println("2. Vertical");
@@ -113,8 +113,7 @@ public class Menu {
         System.out.println("");
         System.out.println("Seguindo as coordenadas do tabuleiro de coluna(A-N) e linha(1-15)");
         System.out.println("E lembrando que seguimos como referência esta casa da embarcação");
-        System.out.println("|");
-        System.out.println("V");
+        System.out.println("↓");
         qual.toString();
         System.out.println("");
         System.out.println("Insira no seguinte formato (ColunaLinha), onde quer posicionar sua embarcação. ");
@@ -178,6 +177,8 @@ public class Menu {
 
         qual.setCoordenadas(linha, coluna);
         tabuleiro = inserirEmbarcacao(tabuleiro, qual);
+        tabuleiro.toString();
+
         return tabuleiro;
     }
 
