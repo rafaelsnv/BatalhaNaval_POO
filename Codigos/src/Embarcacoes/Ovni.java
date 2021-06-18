@@ -25,39 +25,37 @@ public class Ovni extends Embarcacao {
      */
     @Override
     public ArrayList<Casa> setCoordenadas(int linha, int coluna) {
+
+        for (Casa casa : this.embarcacao) {
+            casa.setCor(this.corFonte, this.corFundo);
+            casa.setOcupante(this.ID);
+        }
+
         Casa pedaco = this.embarcacao.get(0); // Primeiro pedaço da embarcação.
         pedaco.setCoordenadas(linha, coluna); // Insere na primeira casa da embarcação as coordenadas.
-        pedaco.setCor(this.corFonte, this.corFundo);
-
         embarcacao.set(0, pedaco); // Insere novas informações de casa na embarcação.
 
         pedaco = this.embarcacao.get(1); // Segundo pedaço da embarcação.
         pedaco.setCoordenadas(linha - 1, coluna + 1); // Segunda casa irá para a próxima coluna e uma linha acima.
-        pedaco.setCor(this.corFonte, this.corFundo);
-
         embarcacao.set(1, pedaco); // Insere novas informações de casa na embarcação.
 
         pedaco = this.embarcacao.get(2); // Terceiro pedaço da embarcação.
         pedaco.setCoordenadas(linha, coluna + 2); // Terceira casa irá para a próxima coluna na mesma linha
-        pedaco.setCor(this.corFonte, this.corFundo);
-
         embarcacao.set(2, pedaco); // Insere novas informações de casa na embarcação.
 
         pedaco = this.embarcacao.get(3); // Último pedaço da embarcação.
         pedaco.setCoordenadas(linha + 1, coluna + 1); // Última casa irá para a linha mais alta na coluna central
-        pedaco.setCor(this.corFonte, this.corFundo);
-
         embarcacao.set(3, pedaco); // Insere novas informações de casa na embarcação.
+
         return embarcacao;
     }
 
     @Override
     public String toString() {
         String str = "";
-        for (int i = 0; i < this.embarcacao.size(); i++) {
-            Casa pedaco = embarcacao.get(i);
+        for (Casa pedaco : this.embarcacao)
             str = str.concat(pedaco.toString());
-        }
+
         return str;
     }
 }
