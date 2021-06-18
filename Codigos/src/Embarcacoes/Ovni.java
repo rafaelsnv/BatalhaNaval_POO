@@ -25,6 +25,10 @@ public class Ovni extends Embarcacao {
      */
     @Override
     public ArrayList<Casa> setCoordenadas(int linha, int coluna) {
+
+        for (Casa casa : this.embarcacao)
+            casa.setOcupante(this.ID);
+
         Casa pedaco = this.embarcacao.get(0); // Primeiro pedaço da embarcação.
         pedaco.setCoordenadas(linha, coluna); // Insere na primeira casa da embarcação as coordenadas.
         pedaco.setCor(this.corFonte, this.corFundo);

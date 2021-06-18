@@ -88,10 +88,11 @@ public class Menu {
 
         System.out.println("----------------------------------");
         System.out.println("");
-        tabuleiro.toString();
+//        tabuleiro.toString();
         System.out.println("Você deve inserir o " + qual.getDescricao() + " no tabuleiro acima");
         System.out.println("É possível inserir das seguintes formas: ");
-        System.out.println("Horizontal: " + qual.toString());
+        System.out.println("Horizontal: ");
+        System.out.println(qual);
         System.out.println("            ↑ utilizaremos essa casa como referência para posicionar ");
         System.out.println("             ");
         qual.inverteOrientacaoVertical();

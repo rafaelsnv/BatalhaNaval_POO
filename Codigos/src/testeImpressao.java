@@ -1,6 +1,9 @@
 import Embarcacoes.Cruzador;
+import Embarcacoes.Encouracados;
 import Embarcacoes.Ovni;
 import Regras.Tabuleiro;
+
+import javax.naming.directory.InvalidAttributesException;
 
 /* COMO CONFIGURAR O CONSOLE PARA IMPRIMIR CORRETAMENTE:
 
@@ -179,13 +182,18 @@ public class testeImpressao {
         }
     }
 
-    public static void main(String[] args) {
-        Cruzador teste = new Cruzador(1);
-        Menu menu = new Menu();
+    public static void main(String[] args) throws InvalidAttributesException {
         Tabuleiro tab = new Tabuleiro();
-        menu.orientacaoEmbarcacao(tab, teste);
-        inserir();
-        imprimirTudo();
 
+        Ovni ovni = new Ovni(0);
+        tab.inserirEmbarcacao(ovni, 5, 5);
+
+        Encouracados enc = new Encouracados(1);
+        boolean resultado = tab.inserirEmbarcacao(enc, 5, 5);
+
+        System.out.println(resultado + "\n\n");
+        tab.bombardear(5,5);
+        tab.bombardear(4,4);
+        System.out.println(tab);
     }
 }
