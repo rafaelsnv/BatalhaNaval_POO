@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import Regras.*;
 import Embarcacoes.*;
@@ -74,14 +75,15 @@ public class Menu {
     }
 
     /**
-     * Apresenta ao jogador o tabuleiro atual e permite selecionar em qual
-     * orientação vai inserir a embarcação
+     * Apresenta ao jogador o tabuleiro atual, permite selecionar em qual orientação
+     * vai inserir a embarcação Insere a embarcação no tabuleiro
      * 
      * @param tabuleiro (Tabuleiro)
      * @param qual      (Embarcacao)
-     * @return embarcacao (Embarcacao)
+     * @return tabuleiro (Tabuleiro) - Retorna o tabuleiro atualizado
+     * 
      */
-    public Embarcacao orientacaoEmbarcacao(Tabuleiro tabuleiro, Embarcacao qual) {
+    public Tabuleiro orientacaoEmbarcacao(Tabuleiro tabuleiro, Embarcacao qual) {
         int escolha = 0;
 
         System.out.println("----------------------------------");
@@ -105,19 +107,6 @@ public class Menu {
         if (escolha == 1) {
             qual.inverteOrientacaoVertical();
         }
-
-        return qual;
-    }
-
-    /**
-     * 
-     * 
-     * @param tabuleiro (Tabueliro)
-     * @param qual      (Embarcacao)
-     * @return tabuleiro (Tabuleiro)
-     */
-    public Tabuleiro inserirEmbarcacao(Tabuleiro tabuleiro, Embarcacao qual) {
-
         System.out.println("----------------------------------");
         System.out.println("");
         tabuleiro.toString();
@@ -187,8 +176,26 @@ public class Menu {
                 break;
         }
 
-        tabuleiro.inserirEmbarcacao(qual, linha, coluna);
+        qual.setCoordenadas(linha, coluna);
+        tabuleiro = inserirEmbarcacao(tabuleiro, qual);
+        return tabuleiro;
+    }
 
+    /**
+     * Insere a embarcação no tabuleiro
+     * 
+     * @param tabuleiro (Tabueliro)
+     * @param qual      (Embarcacao)
+     * @return tabuleiro (Tabuleiro)
+     */
+    public Tabuleiro inserirEmbarcacao(Tabuleiro tabuleiro, Embarcacao qual) {
+        ArrayList<Casa> aux = new ArrayList<>();
+        aux = qual.getEmbarcacao();
+        Casa casa = aux.get(0);
+        int linha = casa.getLinha();
+        int coluna = casa.getColuna();
+
+        tabuleiro.inserirEmbarcacao(qual, linha, coluna);
         return tabuleiro;
     }
 
