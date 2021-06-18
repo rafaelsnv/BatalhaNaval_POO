@@ -13,6 +13,8 @@ public class Tabuleiro {
     private static final int MAX_OVNI = 4;
     private static final int MAX_SUBMARINO = 4;
     private static final int MAX_CRUZADOR = 3;
+    private static final String[] LETRAS = {"A", "B", "C", "D", "E", "F", "G", "H",
+                                            "I", "J", "K", "L", "M", "N", "O"};
 
     private final Casa[][] GRADE = new Casa[MAX_LINHAS][MAX_COLUNAS];
     private ArrayList<Embarcacao> minhaEsquadra = new ArrayList<>();
@@ -228,19 +230,22 @@ public class Tabuleiro {
 
     @Override
     public String toString() {
-        StringBuilder aux = new StringBuilder();
+        StringBuilder tab = new StringBuilder();
         for (int i=0; i < MAX_LINHAS; i++) {
-            aux.append(String.format("%02d ", i + 1));
+            tab.append(String.format("%02d ", i + 1));
             for (int j=0; j < MAX_COLUNAS; j++) {
                 Casa casa = getCasa(i,j);
-                aux.append(casa.toString());
+                tab.append(casa.toString());
             }
-            aux.append("\n");
+            tab.append("\n");
         }
 
+        tab.append("   ");
+        for (String letra : LETRAS) {
+            String aux = "\u200B" + letra + "\u2005";
+            tab.append(aux);
+        }
 
-
-
-        return aux.toString();
+        return tab.toString();
     }
 }

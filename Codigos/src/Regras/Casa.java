@@ -92,9 +92,8 @@ public class Casa {
    /**
     * Sinaliza à casa que ela foi ocupada por uma embarcação.
     */
-   public void setOcupante(int id, String tipo) {
+   public void setOcupante(int id) {
       this.ocupanteID = id;
-      this.corFundo = tipo;
    }
 
    /**
