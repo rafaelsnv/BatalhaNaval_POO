@@ -13,7 +13,8 @@ public class Cruzador extends Embarcacao {
         super(TAMANHO);
         this.descricao = DESC;
         this.ID = id;
-        this.cor = "\u001B[35m";
+        this.corFonte = "\u001B[35m";
+        this.corFundo = "\u001B[45m";
     }
 
     /**
@@ -28,7 +29,7 @@ public class Cruzador extends Embarcacao {
         boolean vertical = this.orientacaoVertical; // Orientação da embarcação, se true = vertical
         Casa pedaco = this.embarcacao.get(0); // Primeiro pedaço da embarcação.
         pedaco.setCoordenadas(linha, coluna); // Insere na primeira casa da embarcação as coordenadas.
-        pedaco.setCor(this.cor);
+        pedaco.setCor(this.corFonte, this.corFundo);
         embarcacao.set(0, pedaco); // Insere novas informações de casa na embarcação.
         pedaco = this.embarcacao.get(1); // Segundo pedaço da embarcação.
 
@@ -37,7 +38,7 @@ public class Cruzador extends Embarcacao {
         else // Se não.
             pedaco.setCoordenadas(linha + 1, coluna); // Segunda casa irá para a próxima linha na mesma coluna.
 
-        pedaco.setCor(this.cor);
+        pedaco.setCor(this.corFonte, this.corFundo);
         embarcacao.set(1, pedaco);
         return embarcacao;
     }

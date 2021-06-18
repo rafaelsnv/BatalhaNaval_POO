@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import Regras.*;
 
 public class Embarcacao {
-    protected int ID; // Identificador da embarcação
-    protected String descricao; //
+    protected int ID;                     // Identificador da embarcação
+    protected String descricao;           //
     protected boolean orientacaoVertical; // false = horizontal | true = vertical
     protected ArrayList<Casa> embarcacao; //
-    protected boolean inserido; //
-    protected int tamanho; // Número de casas que a embarcação ocupa
-    protected String cor; // Cor relacionada ao tipo de embarcação
+    protected boolean inserido;           //
+    protected int tamanho;                // Número de casas que a embarcação ocupa
+    protected String corFonte;            // Cor de Fonte relacionada ao tipo de embarcação
+    protected String corFundo;            // Cor de Fundo relacionada ao tipo de embarcação
 
     /**
      * Construtor sem parâmetros. Cria sempre uma embarcação ocupando apenas uma
@@ -160,7 +161,6 @@ public class Embarcacao {
         for (int i = 0; i < this.embarcacao.size(); i++) {
             Casa pedaco = embarcacao.get(i);
             str = str.concat(pedaco.toString());
-            System.out.println(str);
         }
         return str;
     }

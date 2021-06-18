@@ -3,7 +3,8 @@ package Regras;
 public class Casa {
    private final static String ANSI_RESET = "\u001B[0m";
    private final static String ANSI_BLACK = "\u001B[30m";
-   private final static String BLUE = "\u001B[44m";
+   private final static String ANSI_BLUE = "\u001B[34m";
+   private final static String BACKGROUND_BLUE = "\u001B[44m";
 
    private int linha;            // - Linha e coluna assumem as coordenadas
    private int coluna;           //   que identificam a casa no tabuleiro;
@@ -20,7 +21,8 @@ public class Casa {
    public Casa() {
       this.linha = -1;
       this.coluna = -1;
-      this.corFonte = this.corFundo = BLUE;
+      this.corFonte = ANSI_BLUE;
+      this.corFundo = BACKGROUND_BLUE;
       this.bombardeada = false;
       this.ocupanteID = -1;
    }
@@ -35,7 +37,8 @@ public class Casa {
    public Casa(int linha, int coluna) {
       this.linha = linha;
       this.coluna = coluna;
-      this.corFonte = this.corFundo = BLUE;
+      this.corFonte = ANSI_BLUE;
+      this.corFundo = BACKGROUND_BLUE;
       this.bombardeada = false;
       this.ocupanteID = -1;
    }
@@ -53,10 +56,11 @@ public class Casa {
 
    /**
     * Configura a cor da casa. Deve ser utilizada apenas pela embarcação.
-    * @param corEmbarcacao Cor em formato unicode.
+    * @param corFundo Cor em formato unicode.
     */
-   public void setCor(String corEmbarcacao) {
-      this.corFonte = this.corFundo = corEmbarcacao;
+   public void setCor(String corFonte, String corFundo) {
+      this.corFonte = corFonte;
+      this.corFundo = corFundo;
    }
 
    /**
