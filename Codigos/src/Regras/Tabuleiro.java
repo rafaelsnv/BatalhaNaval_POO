@@ -154,7 +154,9 @@ public class Tabuleiro {
             for (Casa casa : casasEmbarcacao) {
                 int lin = casa.getLinha();
                 int col = casa.getColuna();
-                if (!coordenadaValida(lin, col) | casaOcupada(lin, col))
+                if (!coordenadaValida(lin, col))
+                    return false;
+                if(casaOcupada(lin, col))
                     return false;
             }
         }
