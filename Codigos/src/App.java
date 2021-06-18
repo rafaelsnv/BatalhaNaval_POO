@@ -32,7 +32,7 @@ public class App {
 
         CpuFacil cpuFacil = new CpuFacil();
 
-        cpuFacil.gerarTabuleiro();
+        System.out.println(cpuFacil);
 
     }
 
