@@ -11,8 +11,6 @@ public class Embarcacao {
     protected ArrayList<Casa> minhasCasas; //
     protected boolean inserido;  //
     protected int tamanho;       // Número de casas que a embarcação ocupa
-    protected String corFonte;   // Cor de Fonte relacionada ao tipo de embarcação
-    protected String corFundo;   // Cor de Fundo relacionada ao tipo de embarcação
 
     /**
      * Construtor sem parâmetros. Cria sempre uma embarcação ocupando apenas uma

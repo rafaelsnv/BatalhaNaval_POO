@@ -63,15 +63,15 @@ public class CpuFacil implements IJogador {
 
     @Override
     public boolean bombardear(Jogador inimigo, int linha, int coluna) throws InvalidAttributesException {
+        Tabuleiro tabuleiroInimigo = inimigo.getMeuTabuleiro();
         boolean jaBombardeada;
         do {
             linha = randomRow();
             coluna = randomCol();
-            Casa casa = meuTabuleiro.getCasa(linha, coluna);
+            Casa casa = tabuleiroInimigo.getCasa(linha, coluna);
             jaBombardeada = casa.foiBombardeada();
         } while (jaBombardeada);
 
-        Tabuleiro tabuleiroInimigo = inimigo.getMeuTabuleiro();
         return tabuleiroInimigo.bombardear(linha, coluna);
     }
 }
