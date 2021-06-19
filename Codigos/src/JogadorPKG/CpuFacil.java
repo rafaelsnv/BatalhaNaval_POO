@@ -43,10 +43,12 @@ public class CpuFacil implements IJogador {
         return random.nextInt(this.meuTabuleiro.getMaxColunas() + 1);
     }
 
+    @Override
     public Tabuleiro getMeuTabuleiro() {
-        return meuTabuleiro;
+        return this.meuTabuleiro;
     }
 
+    @Override
     public void inverterOrientacao(Embarcacao embarcacao) {
         embarcacao.inverteOrientacao();
     }

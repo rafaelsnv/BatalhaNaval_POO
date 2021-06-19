@@ -7,12 +7,10 @@ import javax.naming.directory.InvalidAttributesException;
 
 public class Jogador {
     private String nome;
-    private Tabuleiro meuTabuleiro;
     private IJogador iJogador;
 
     public Jogador() {
         this.setNome("");
-        this.setMeuTabuleiro(new Tabuleiro());
     }
 
     /**
@@ -23,21 +21,7 @@ public class Jogador {
      */
     public Jogador(String oNome, int oTipo) {
         this.setNome(oNome);
-        switch (oTipo) {
-            case (0):
-                this.iJogador = new Humano();
-                break;
-            case (1):
-                this.iJogador = new CpuFacil();
-                break;
-            case (2):
-                this.iJogador = new CpuMedio();
-                break;
-            case (3):
-                this.iJogador = new CpuDificil();
-                break;
-        }
-        this.meuTabuleiro = new Tabuleiro();
+        this.setiJogador(oTipo);
     }
 
     /**
@@ -72,8 +56,21 @@ public class Jogador {
      * 
      * @param qualTipo o tipo a ser atribuído.
      */
-    public void setiJogador(IJogador qualTipo) {
-        this.iJogador = qualTipo;
+    public void setiJogador(int qualTipo) {
+        switch (qualTipo) {
+            case (0):
+                this.iJogador = new Humano();
+                break;
+            case (1):
+                this.iJogador = new CpuFacil();
+                break;
+            case (2):
+                this.iJogador = new CpuMedio();
+                break;
+            case (3):
+                this.iJogador = new CpuDificil();
+                break;
+        }
     }
 
     /**
@@ -82,7 +79,7 @@ public class Jogador {
      * @return o tabuleiro do Jogador.
      */
     public Tabuleiro getMeuTabuleiro() {
-        return this.meuTabuleiro;
+        return this.getiJogador().getMeuTabuleiro();
     }
 
     /**
@@ -91,7 +88,7 @@ public class Jogador {
      * @param qualTabuleiro o Tabuleiro a ser armazenado no Jogador.
      */
     public void setMeuTabuleiro(Tabuleiro qualTabuleiro) {
-        this.meuTabuleiro = qualTabuleiro;
+        this.getiJogador().setTabuleiro(qualTabuleiro);
     }
 
     /**
@@ -100,7 +97,7 @@ public class Jogador {
      * @return ! Esperando definição da implementação do naufrágio !
      */
     public boolean perdeu() {
-        return this.meuTabuleiro.getMinhaEsquadra().size() == 0;
+        return this.getiJogador().getMeuTabuleiro().getMinhaEsquadra().size() == 0;
     }
 
     /**
@@ -113,7 +110,7 @@ public class Jogador {
      * @return true se for possível inserir, false se não foi possível.
      */
     public boolean inserirEmbarcacao(Embarcacao qual, int linha, int col) {
-        return this.meuTabuleiro.inserirEmbarcacao(qual, linha, col);
+        return this.getiJogador().inserirEmbarcacao(qual, linha, col);
     }
 
     public boolean bombardear(Jogador inimigo, int linha, int coluna) throws InvalidAttributesException {
