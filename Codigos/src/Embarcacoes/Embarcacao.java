@@ -35,7 +35,9 @@ public class Embarcacao {
         this.embarcacao = new ArrayList<>();
         this.setTamanho(size);
         for (int i = 0; i < this.tamanho; i++) {
-            this.embarcacao.add(new Casa());
+            Casa casa = new Casa();
+            casa.setCor(this.corFonte, this.corFundo);
+            this.embarcacao.add(casa);
         }
         this.descricao = "Não Identificado.";
         this.orientacaoVertical = false;

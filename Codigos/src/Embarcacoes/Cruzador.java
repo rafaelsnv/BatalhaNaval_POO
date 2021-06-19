@@ -26,34 +26,30 @@ public class Cruzador extends Embarcacao {
      */
     @Override
     public ArrayList<Casa> setCoordenadas(int linha, int coluna) {
-        boolean vertical = this.orientacaoVertical;   // Orientação da embarcação, se true = vertical
-        Casa pedaco = this.embarcacao.get(0);         // Primeiro pedaço da embarcação.
-        pedaco.setCoordenadas(linha, coluna);         // Insere na primeira casa da embarcação as coordenadas.
-        pedaco.setCor(this.corFonte, this.corFundo);
-        pedaco.setOcupante(this.ID);
-        embarcacao.set(0, pedaco);                    // Insere novas informações de casa na embarcação.
+        for (int i = 0; i < this.tamanho; i++) {
+            Casa pedaco = this.embarcacao.get(i);
 
-        pedaco = this.embarcacao.get(1);              // Segundo pedaço da embarcação.
-        pedaco.setCor(this.corFonte, this.corFundo);
-        pedaco.setOcupante(this.ID);
+            if (this.orientacaoVertical)
+                pedaco.setCoordenadas(linha + i, coluna);
+            else
+                pedaco.setCoordenadas(linha, coluna + i);
 
-        if (!vertical) // Se embarcação estiver na horizontal.
-            pedaco.setCoordenadas(linha, coluna + 1); // Segunda casa irá para a próxima coluna na mesma linha.
-        else // Se não.
-            pedaco.setCoordenadas(linha + 1, coluna); // Segunda casa irá para a próxima linha na mesma coluna.
+            pedaco.setCor(this.corFonte, this.corFundo);
+            pedaco.setOcupante(this.ID);
 
-        embarcacao.set(1, pedaco);
+            embarcacao.set(i, pedaco);
+        }
         return embarcacao;
     }
 
-    // @Override
-    // public String toString() {
-    // String str = "";
-    // for (int i = 0; i < this.embarcacao.size(); i++) {
-    // Casa pedaco = embarcacao.get(i);
-    // str = str.concat(pedaco.toString());
-    // }
-    // return str;
-    // }
-
+     @Override
+         public String toString() {
+         String str = "";
+         for (Casa casa : this.embarcacao) {
+             str = str.concat(casa.toString());
+             if(this.orientacaoVertical)
+                 str += "\n";
+         }
+         return str;
+     }
 }

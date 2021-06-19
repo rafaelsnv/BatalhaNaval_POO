@@ -5,7 +5,6 @@ import Embarcacoes.*;
 
 import javax.naming.directory.InvalidAttributesException;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.Random;
 
 /**
  * Regras da CPU Fácil: 1) A CPU insere as peças aleatoriamente, sem critério.
@@ -13,42 +12,35 @@ import java.util.Random;
  * deixar a embarcação na vertical ou horizontal (insere na padrão)....
  */
 public class CpuFacil implements IJogador {
-    private final Random aleatorio = new Random(System.nanoTime());
     private final Tabuleiro meuTabuleiro = new Tabuleiro();
 
     public CpuFacil() {
-        for (int i = 0; i < meuTabuleiro.getMinhaEsquadra().size(); i++) {
-            int linha = this.generateRandom();
-            int coluna = this.generateRandom();
-            boolean result = meuTabuleiro.inserirEmbarcacao(meuTabuleiro.getEmbarcacao(i), linha, coluna);
-            while (!result) {
-                linha = this.generateRandom();
-                coluna = this.generateRandom();
-                result = meuTabuleiro.inserirEmbarcacao(meuTabuleiro.getEmbarcacao(i), linha, coluna);
-            }
+        for (Embarcacao embarcacao : meuTabuleiro.getMinhaEsquadra()) {
+            boolean result;
+            do {
+                int linha = this.randomRow();
+                int coluna = this.randomCol();
+                result = this.inserirEmbarcacao(embarcacao, linha, coluna);
+            } while (!result);
         }
     }
 
-    private int generateRandom() {
-        return ThreadLocalRandom.current().nextInt(0, 14 + 1);
-    }
     /**
-     * Método para gerar uma linha aleatória considerando as linhas do tabuleiro
-     * 
-     * @return uma linha aleatória
+     * Método para gerar um index de linha aleatório.
+     * @return (int) Index gerado para linha.
      */
-    private int linhaAleatoria() {
-        return aleatorio.nextInt(this.meuTabuleiro.getMaxLinhas());
+    private int randomRow() {
+        return ThreadLocalRandom.current().nextInt(0, meuTabuleiro.getMaxLinhas() + 1);
     }
 
     /**
-     * Método para gerar uma coluna aleatória considerando as linhas do tabuleiro
-     * 
-     * @return uma coluna aleatória;
+     * Método para gerar um index de coluna aleatório.
+     * @return (int) Index gerado para coluna.
      */
-    private int colunaAleatoria() {
-        return aleatorio.nextInt(this.meuTabuleiro.getMaxColunas());
+    private int randomCol() {
+        return ThreadLocalRandom.current().nextInt(0, meuTabuleiro.getMaxColunas() + 1);
     }
+
 
     public Tabuleiro getMeuTabuleiro() {
         return meuTabuleiro;
@@ -61,14 +53,7 @@ public class CpuFacil implements IJogador {
 
     @Override
     public boolean inserirEmbarcacao(Embarcacao qual, int coluna, int linha) {
-        linha = linhaAleatoria();
-        coluna = colunaAleatoria();
-
-        do {
-            this.meuTabuleiro.inserirEmbarcacao(qual, linha, coluna);
-        } while (!this.meuTabuleiro.inserirEmbarcacao(qual, linha, coluna));
-
-        return this.meuTabuleiro.inserirEmbarcacao(qual, linha, coluna);
+        return meuTabuleiro.inserirEmbarcacao(qual, linha, coluna);
     }
 
     @Override
@@ -83,9 +68,14 @@ public class CpuFacil implements IJogador {
 
     @Override
     public boolean bombardear(int linha, int coluna) throws InvalidAttributesException {
-        linha = linhaAleatoria();
-        coluna = colunaAleatoria();
+        boolean jaBombardeada;
+        do {
+            linha = randomRow();
+            coluna = randomCol();
+            Casa casa = meuTabuleiro.getCasa(linha, coluna);
+            jaBombardeada = casa.foiBombardeada();
+        } while (jaBombardeada);
+
         return this.meuTabuleiro.bombardear(linha, coluna);
     }
-
 }

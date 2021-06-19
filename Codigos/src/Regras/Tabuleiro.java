@@ -17,7 +17,7 @@ public class Tabuleiro {
                                             "I", "J", "K", "L", "M", "N", "O"};
 
     private final Casa[][] GRADE = new Casa[MAX_LINHAS][MAX_COLUNAS];
-    private ArrayList<Embarcacao> minhaEsquadra = new ArrayList<>();
+    private final ArrayList<Embarcacao> minhaEsquadra = new ArrayList<>();
 
     /**
      * Construtor do tabuleiro
@@ -66,14 +66,6 @@ public class Tabuleiro {
 
     public ArrayList<Embarcacao> getMinhaEsquadra() {
         return minhaEsquadra;
-    }
-
-    public void setMinhaEsquadra(ArrayList<Embarcacao> minhaEsquadra) {
-        this.minhaEsquadra = minhaEsquadra;
-    }
-
-    public Casa[][] getGRADE() {
-        return this.GRADE;
     }
 
     /**
@@ -125,19 +117,6 @@ public class Tabuleiro {
         return aux;
     }
 
-    /**
-     * Atualiza embarcação na lista minhaEsquadra.
-     * @param id (int) Identificador da embarcação.
-     * @param qual (Embarcacao) Embarcação cujos dados foram atualizados.
-     */
-    public void updateEmbarcacao(int id, Embarcacao qual) {
-        for (int i=0; i < this.minhaEsquadra.size(); i++) {
-            Embarcacao aux = this.minhaEsquadra.get(i);
-
-            if (aux.equals(id))
-                this.minhaEsquadra.set(i, qual);
-        }
-    }
 
     /**
      * Método de inserção da embarcação no tabuleiro.
@@ -192,7 +171,6 @@ public class Tabuleiro {
             Embarcacao alvejada = this.getEmbarcacao(casa.getOcupanteID());
             alvejada.atingiu(casa);
 
-            this.updateEmbarcacao(alvejada.getID(), alvejada);
             return true;
         }
         return false;
@@ -204,10 +182,10 @@ public class Tabuleiro {
      */
     public Embarcacao afundou() {
         for(int i=0; i < minhaEsquadra.size(); i++) {
-            Embarcacao embarcacao = minhaEsquadra.get(i);
+            Embarcacao embarcacao = this.minhaEsquadra.get(i);
 
             if( embarcacao.afundou() ) {
-                minhaEsquadra.remove(i);
+                this.minhaEsquadra.remove(i);
                 return embarcacao;
             }
         }

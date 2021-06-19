@@ -25,24 +25,19 @@ public class Encouracados extends Embarcacao {
      */
     @Override
     public ArrayList<Casa> setCoordenadas(int linha, int coluna) {
-        if (this.orientacaoVertical)                             // Se embarcação estiver na vertical.
-            for (int i = 0; i < this.tamanho; i++) {             // - Próximas casas recebem
-                Casa pedaco = this.embarcacao.get(i);
-                pedaco.setCoordenadas(linha + i, coluna); // mesma linha mas colunas diferentes.
-                pedaco.setCor(this.corFonte, this.corFundo);
-                pedaco.setOcupante(this.ID);
+        for (int i = 0; i < this.tamanho; i++) {
+            Casa pedaco = this.embarcacao.get(i);
 
-                embarcacao.set(i, pedaco);
-            }
-        else // Se não.
-            for (int i = 0; i < this.tamanho; i++) {             // - Próximas casas recebem
-                Casa pedaco = this.embarcacao.get(i);
-                pedaco.setCoordenadas(linha, coluna + i); // mesma coluna mas linhas diferentes.
-                pedaco.setCor(this.corFonte, this.corFundo);
-                pedaco.setOcupante(this.ID);
+            if (this.orientacaoVertical)
+                pedaco.setCoordenadas(linha + i, coluna);
+            else
+                pedaco.setCoordenadas(linha, coluna + i);
 
-                embarcacao.set(i, pedaco);
-            }
+            pedaco.setCor(this.corFonte, this.corFundo);
+            pedaco.setOcupante(this.ID);
+
+            embarcacao.set(i, pedaco);
+        }
         return embarcacao;
     }
 

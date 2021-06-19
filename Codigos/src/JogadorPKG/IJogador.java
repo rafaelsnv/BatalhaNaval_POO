@@ -8,7 +8,7 @@ public interface IJogador {
 
     public void setTabuleiro(Tabuleiro tabuleiro);
 
-    public boolean inserirEmbarcacao(Embarcacao qual, int coluna, int linha);
+    public boolean inserirEmbarcacao(Embarcacao qual, int linha, int coluna);
 
     public void girarVertical(Embarcacao embarcacao);
 
