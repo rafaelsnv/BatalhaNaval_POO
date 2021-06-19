@@ -3,6 +3,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import Regras.*;
 import Embarcacoes.*;
+import java.util.concurrent.CancellationException;
 
 public class Menu {
 
@@ -118,14 +119,10 @@ public class Menu {
      * @return tabuleiro (Tabuleiro) - Retorna o tabuleiro atualizado
      * 
      */
-    public Tabuleiro orientacaoEmbarcacao(Scanner teclado, Tabuleiro tabuleiro, Embarcacao qual) {
+    public boolean orientacaoEmbarcacao(Scanner teclado, Tabuleiro tabuleiro, Embarcacao qual) {
         int escolha = 1;
-        boolean inserido;
-        do {
-            inserido=false;
             boolean orientacaoValida = true;
-            try {
-
+            
                 do {
                     orientacaoValida = true;
                     System.out.println("\n----------------------------------\n");
@@ -136,7 +133,6 @@ public class Menu {
                         System.out.println("\nÉ possível orientar da seguinte forma: ");
                         System.out.println(qual.toString());
                     }
-
                     else {
                         System.out.println("\nÉ possível orientar das seguintes formas: ");
                         System.out.println("1 - Horizontal:\n");
@@ -151,15 +147,23 @@ public class Menu {
 
                     if (!(qual.getDescricao().equals("OVNI") || qual.getDescricao().equals("Submarino"))) {
                         System.out.println("\nQual orientação gostaria de utilizar?");
-                        escolha = teclado.nextInt();
 
+                        try {
+                        escolha = teclado.nextInt();
+                    
+                    } catch(InputMismatchException stringOutexception){
+                        System.out.println("Caracter inválido");
+                        System.out.println("Tente novamente: ");
+                        orientacaoValida=false;
+                        teclado.nextLine();
+                            System.out.println("Use apenas números");
+                    }
                         switch (escolha){
                             case 1:
-//                                inserirEmbarcacao();
+                            qual.setOrientacao(false);
                                 break;
                             case 2:
-                                qual.inverteOrientacao();
-//                                inserirEmbarcacao();
+                               qual.setOrientacao(true);
                                 break;
                             default:
                                 orientacaoValida = false;
@@ -167,32 +171,28 @@ public class Menu {
                                 break;
                         }
                     }
-
+           
                 } while (!orientacaoValida);
-
-            } catch (InputMismatchException exception) {
-                System.out.println("\nOrientação inválida");
-                System.out.println("Orientação horizontal adotada\n");
-            }
-            if (escolha == 1) {
-                qual.inverteOrientacao();
-            }
+          
+            return true;
+}
 
 
+    /**
+     * Insere a embarcação no tabuleiro
+     * 
+     * @param tabuleiro (Tabueliro)
+     * @param qual      (Embarcacao)
+     * @return tabuleiro (Tabuleiro)
+     */
+    public boolean inserirEmbarcacao(Scanner teclado, Tabuleiro tabuleiro, Embarcacao qual) {
+        //limparTela();
+    boolean inserido=false;
 
-
-
-
-
-
-
-
-
-
-            if (!(qual.getDescricao() == "OVNI" || qual.getDescricao() == "Submarino")){
+    do{
+         inserido=false;
             System.out.println(tabuleiro.toStringPlayer());
             System.out.println("\n----------------------------------\n");
-            }
             System.out.println("\nSeguindo as coordenadas do tabuleiro de coluna(A-N) e linha(1-15)");
             System.out.println("E lembrando que seguimos como referência esta casa da embarcação");
             System.out.println("↓");
@@ -205,114 +205,87 @@ public class Menu {
 
             boolean linhaValida = true;
             boolean colunaValida = true;
-
-            char col = coord.charAt(0);
-            String lin = coord.substring(1);
-            col = Character.toUpperCase(col);
+            
             int linha=0;
 
             try{
-            linha = Integer.parseInt(lin);
+            linha = linhaCoord(coord);
             }catch(NumberFormatException linhaException){
                 System.out.println("Linha informada errada");
-                linha =0;
+                linha = 0;
                 linhaValida = false;
             }
 
             linha--;
-
         
             if (linha < 0 || linha > 14) {
                 linhaValida = false;
                 System.out.println("Linha inválida");
             }
 
-            int coluna = 0;
-            switch (col) {
-                case 'A':
-                    coluna = 0;
-                    break;
-                case 'B':
-                    coluna = 1;
-                    break;
-                case 'C':
-                    coluna = 2;
-                    break;
-                case 'D':
-                    coluna = 3;
-                    break;
-                case 'E':
-                    coluna = 4;
-                    break;
-                case 'F':
-                    coluna = 5;
-                    break;
-                case 'G':
-                    coluna = 6;
-                    break;
-                case 'H':
-                    coluna = 7;
-                    break;
-                case 'I':
-                    coluna = 8;
-                    break;
-                case 'J':
-                    coluna = 9;
-                    break;
-                case 'K':
-                    coluna = 10;
-                    break;
-                case 'L':
-                    coluna = 11;
-                    break;
-                case 'M':
-                    coluna = 12;
-                    break;
-                case 'N':
-                    coluna = 13;
-                    break;
-                case 'O':
-                    coluna = 14;
-                    break;
-                default:
-                    System.out.println("Coluna inválida");
-                    colunaValida = false;
-                    break;
+            int colCoord = colCoord(coord);
+
+            if(colCoord==-1){
+                System.out.println("Coluna inválida.");
+                colunaValida=false;
             }
 
             if (colunaValida && linhaValida) {
-                qual.setCoordenadas(linha, coluna);
-                inserirEmbarcacao(teclado, tabuleiro, qual);
-                inserido = true;
+                qual.setCoordenadas(linha, colCoord);
+                inserido = tabuleiro.inserirEmbarcacao(qual, linha, colCoord);
             }
 
-            if (!inserido) {
-                System.out.println("\nNÃO FOI POSSÍVEL INSERIR A EMBARCAÇÃO.\n");
+            if(!inserido){
+                System.out.println("Tente novamente.");
             }
-        } while (!inserido);
+        }
+
+        while(!inserido);
         tabuleiro.toStringPlayer();
-        System.out.println("\nEmbarcação inserida com sucesso.\n");
-        return tabuleiro;
-
+        return inserido;
     }
 
-    /**
-     * Insere a embarcação no tabuleiro
-     * 
-     * @param tabuleiro (Tabueliro)
-     * @param qual      (Embarcacao)
-     * @return tabuleiro (Tabuleiro)
-     */
-    public Tabuleiro inserirEmbarcacao(Scanner teclado, Tabuleiro tabuleiro, Embarcacao qual) {
-        limparTela();
-        ArrayList<Casa> aux = new ArrayList<>();
-        aux = qual.getMinhasCasas();
-        Casa casa = aux.get(0);
-        int linha = casa.getLinha();
-        int coluna = casa.getColuna();
-        tabuleiro.inserirEmbarcacao(qual, linha, coluna);
+    public int colCoord (String coord){
+        int coluna = -1;
+        char col = coord.charAt(0);
+        col = Character.toUpperCase(col);
+        switch (col){
+            case 'A':
+                return coluna = 0;
+            case 'B':
+                return coluna = 1;
+            case 'C':
+                return coluna = 2;
+            case 'D':
+                return coluna = 3;
+            case 'E':
+                return coluna = 4;
+            case 'F':
+                return coluna = 5;
+            case 'G':
+                return coluna = 6;
+            case 'H':
+                return coluna = 7;
+            case 'I':
+                return coluna = 8;
+            case 'J':
+                return coluna = 9;
+            case 'K':
+                return coluna = 10;
+            case 'L':
+                return coluna = 11;
+            case 'M':
+                return coluna = 12;
+            case 'N':
+                return coluna = 13;
+            case 'O':
+                return coluna = 14;
+        }
+        return coluna;
+    }
 
-        return tabuleiro;
+    public int linhaCoord (String coord){
+        return Integer.parseInt(coord.substring(1));
     }
 
 }

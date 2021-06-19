@@ -51,15 +51,12 @@ public class App {
             System.out.println("");
             // Orientação e inserção
             for (int i = 0; i < player.getMeuTabuleiro().getMinhaEsquadra().size(); i++) {
-                Random random = new Random();
-                boolean inseriu = false;
-                do {
-                    int col = random.nextInt(14 + 1);
-                    int linha = random.nextInt(14 + 1);
-                    inseriu = player.inserirEmbarcacao(player.getMeuTabuleiro().getEmbarcacao(i),linha, col);
-                }while(!inseriu);
-            }
+                System.out.println("Orientação número " + (i+1));
+                
+                menuApp.orientacaoEmbarcacao(teclado, player.getMeuTabuleiro(),
+                        player.getMeuTabuleiro().getEmbarcacao(i));
 
+                menuApp.inserirEmbarcacao(teclado, player.getMeuTabuleiro(), player.getMeuTabuleiro().getEmbarcacao(i));
             // In-Game
             int round = 1;
 
