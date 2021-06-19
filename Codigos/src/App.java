@@ -42,8 +42,12 @@ public class App {
             }
 
             for (int i = 0; i < player.getMeuTabuleiro().getMinhaEsquadra().size(); i++) {
+                System.out.println("Orientação número " + (i+1));
                 menuApp.orientacaoEmbarcacao(teclado, player.getMeuTabuleiro(),
                         player.getMeuTabuleiro().getEmbarcacao(i));
+
+                menuApp.inserirEmbarcacao(teclado, menuApp.orientacaoEmbarcacao(teclado, player.getMeuTabuleiro(),
+                        player.getMeuTabuleiro().getEmbarcacao(i)))
             }
 
             System.out.println("In progress...");
