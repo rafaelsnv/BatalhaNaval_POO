@@ -81,39 +81,47 @@ public class Menu {
         int escolha = 0;
         boolean inserido = false;
         do {
-            System.out.println("\n----------------------------------");
-            System.out.println("");
-            System.out.println(tabuleiro.toStringPlayer());
-            System.out.println("\nVocê deve inserir o " + qual.getDescricao() + " no tabuleiro acima");
-            System.out.println("\nÉ possível inserir das seguintes formas: ");
-            System.out.println("\nHorizontal: ");
-            if (qual.getDescricao() == "OVNI") {
-                System.out.println("\n↓ utilizaremos essa casa como referência para posicionar");
-            } else {
-                System.out.println("\n↓ utilizaremos essa casa como referência para posicionar");
-            }
-            System.out.println(qual.toString());
-            System.out.println("");
-            qual.inverteOrientacaoVertical();
-            System.out.println("Vertical:");
-            if (qual.getDescricao() == "OVNI")
-                System.out.println("\n↓ utilizaremos essa casa como referência para posicionar");
-            else
-                System.out.println("\n↓ utilizaremos essa casa como referência para posicionar");
-            System.out.println(qual.toString());
-            System.out.println("");
-            System.out.println("Qual orientação gostaria de utilizar?");
-            System.out.println("\n1. Horizontal");
-            System.out.println("2. Vertical");
-            System.out.println("");
-            System.out.print("Digite a orientação: ");
-
+            boolean orientacaoValida = true;
             try {
-                escolha = teclado.nextInt();
+
+                do {
+                    orientacaoValida = true;
+                    System.out.println("\n----------------------------------");
+                    System.out.println("");
+                    System.out.println(tabuleiro.toStringPlayer());
+                    System.out.println("\nVocê deve inserir o " + qual.getDescricao() + " no tabuleiro acima");
+                    System.out.println("\nÉ possível inserir das seguintes formas: ");
+                    System.out.println("\nHorizontal: ");
+                    if (qual.getDescricao() == "OVNI") {
+                        System.out.println("\n↓ utilizaremos essa casa como referência para posicionar");
+                    } else {
+                        System.out.println("\n↓ utilizaremos essa casa como referência para posicionar");
+                    }
+                    System.out.println(qual.toString());
+                    System.out.println("");
+                    qual.inverteOrientacaoVertical();
+                    System.out.println("Vertical:");
+                    if (qual.getDescricao() == "OVNI")
+                        System.out.println("\n↓ utilizaremos essa casa como referência para posicionar");
+                    else
+                        System.out.println("\n↓ utilizaremos essa casa como referência para posicionar");
+                    System.out.println(qual.toString());
+                    System.out.println("");
+                    System.out.println("Qual orientação gostaria de utilizar?");
+                    System.out.println("\n1. Horizontal");
+                    System.out.println("2. Vertical");
+                    System.out.println("");
+                    System.out.print("Digite a orientação: ");
+                    escolha = teclado.nextInt();
+
+                    if (!(escolha == 1 || escolha == 2))
+                        orientacaoValida = false;
+                } while (!orientacaoValida);
             } catch (InputMismatchException exception) {
                 System.out.println("Orientação inválida");
-            }
+                System.out.println("Orientação horizontal adotada");
 
+            }
             if (escolha == 1) {
                 qual.inverteOrientacaoVertical();
             }

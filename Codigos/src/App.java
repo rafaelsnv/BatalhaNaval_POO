@@ -23,7 +23,7 @@ public class App {
 
             int dificuldade = menuApp.dificuldade(teclado);
 
-            switch (dificuldade){
+            switch (dificuldade) {
                 case 0:
                     opcao = dificuldade;
                     break;
@@ -41,13 +41,13 @@ public class App {
                     break;
             }
 
-            for (int i=0;i<player.getMeuTabuleiro().getMinhaEsquadra().size();i++){
-                menuApp.orientacaoEmbarcacao(teclado, player.getMeuTabuleiro(), player.getMeuTabuleiro().getEmbarcacao(i));
+            for (int i = 0; i < player.getMeuTabuleiro().getMinhaEsquadra().size(); i++) {
+                menuApp.orientacaoEmbarcacao(teclado, player.getMeuTabuleiro(),
+                        player.getMeuTabuleiro().getEmbarcacao(i));
             }
 
             System.out.println("In progress...");
-        }
-        else{
+        } else {
             System.out.println("FIM");
         }
     }
