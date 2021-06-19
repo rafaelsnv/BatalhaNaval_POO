@@ -27,6 +27,7 @@ public class Humano implements IJogador {
 
      @Override
      public boolean bombardear(Jogador inimigo,int linha, int coluna) throws InvalidAttributesException {
-          return inimigo.bombardear(inimigo, linha, coluna);
+          Tabuleiro tabuleiroInimigo = inimigo.getMeuTabuleiro();
+          return tabuleiroInimigo.bombardear(linha, coluna);
      }
 }

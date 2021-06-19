@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Random;
 import java.util.Scanner;
 
 import Embarcacoes.*;
@@ -16,18 +18,15 @@ public class App {
         String nickApp = "";
         Jogador cpu = new Jogador();
 
-        String coordTest = "A1";
-        System.out.println(coordTest.substring(1));
-
-
+        // Menu inicial
         opcao = menuApp.welcome(teclado);
-
         if (opcao == 1) {
+            // Inserir apelido
             nickApp = menuApp.nickname(teclado);
             Jogador player = new Jogador(nickApp, 0);
 
+            // Seleção da dificuldade
             int dificuldade = menuApp.dificuldade(teclado);
-
             switch (dificuldade) {
                 case 0:
                     opcao = dificuldade;
@@ -49,74 +48,40 @@ public class App {
                     break;
             }
 
+            System.out.println("");
+            // Orientação e inserção
             for (int i = 0; i < player.getMeuTabuleiro().getMinhaEsquadra().size(); i++) {
-                System.out.println("Orientação número " + (i+1));
-                menuApp.orientacaoEmbarcacao(teclado, player.getMeuTabuleiro(),
-                        player.getMeuTabuleiro().getEmbarcacao(i));
+                Random random = new Random();
+                boolean inseriu = false;
+                do {
+                    int col = random.nextInt(14 + 1);
+                    int linha = random.nextInt(14 + 1);
+                    inseriu = player.inserirEmbarcacao(player.getMeuTabuleiro().getEmbarcacao(i),linha, col);
+                }while(!inseriu);
             }
 
+            // In-Game
             int round = 1;
-            do {
+
+            while (!player.perdeu() | !cpu.perdeu()){
                 System.out.println("ROUND " + round);
-                System.out.print("Digite a coordenada que deseja bombardear");
-                String coord = teclado.nextLine();
 
-                int coluna = -1;
-                switch (coord.charAt(0)){
-                    case 'A':
-                        coluna = 0;
-                        break;
-                    case 'B':
-                        coluna = 1;
-                        break;
-                    case 'C':
-                        coluna = 2;
-                        break;
-                    case 'D':
-                        coluna = 3;
-                        break;
-                    case 'E':
-                        coluna = 4;
-                        break;
-                    case 'F':
-                        coluna = 5;
-                        break;
-                    case 'G':
-                        coluna = 6;
-                        break;
-                    case 'H':
-                        coluna = 7;
-                        break;
-                    case 'I':
-                        coluna = 8;
-                        break;
-                    case 'J':
-                        coluna = 9;
-                        break;
-                    case 'K':
-                        coluna = 10;
-                        break;
-                    case 'L':
-                        coluna = 11;
-                        break;
-                    case 'M':
-                        coluna = 12;
-                        break;
-                    case 'N':
-                        coluna = 13;
-                        break;
-                    case 'O':
-                        coluna = 14;
-                        break;
-                }
+                System.out.println("\n   MEU TABULEIRO");
+                System.out.println(player.getMeuTabuleiro().toStringPlayer());
+                System.out.println("\n   TABULEIRO INIMIGO");
+                System.out.println(cpu.getMeuTabuleiro().toStringPlayer());
 
-                int linha = Integer.parseInt(coord.substring(1));
+                System.out.print("\nDigite a coordenada que deseja bombardear: ");
+                String coord = teclado.next().toUpperCase();
+
+                int coluna = menuApp.colCoord(coord);
+                int linha = menuApp.linhaCoord(coord);
 
                 player.bombardear(cpu,linha, coluna);
-
                 cpu.bombardear(player);
+
                 round++;
-            }while (!player.perdeu() | !cpu.perdeu());
+            }
 
         } else {
             System.out.println("FIM");
