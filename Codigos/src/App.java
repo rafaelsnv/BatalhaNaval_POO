@@ -63,8 +63,10 @@ public class App {
             // In-Game
             int round = 1;
 
+            int linha = 0;
+            int coluna = 0;
             while (!player.perdeu() | !cpu.perdeu()){
-                System.out.println("ROUND " + round);
+                System.out.println("\n\nROUND " + round);
 
                 System.out.println("\n   MEU TABULEIRO");
                 System.out.println(player.getMeuTabuleiro().toStringPlayer());
@@ -72,15 +74,22 @@ public class App {
                 System.out.println(cpu.getMeuTabuleiro().toStringPlayer());
 
                 System.out.print("\nDigite a coordenada que deseja bombardear: ");
-                String coord = teclado.next().toUpperCase();
+//                String coord = teclado.next().toUpperCase();
 
-                int coluna = menuApp.colCoord(coord);
-                int linha = menuApp.linhaCoord(coord);
+//                int coluna = menuApp.colCoord(coord);
+//                int linha = menuApp.linhaCoord(coord);
 
                 player.bombardear(cpu,linha, coluna);
                 cpu.bombardear(player);
 
                 round++;
+
+                if (coluna<14){
+                    coluna++;
+                }else {
+                    linha++;
+                    coluna=0;
+                }
             }
 
         } else {
