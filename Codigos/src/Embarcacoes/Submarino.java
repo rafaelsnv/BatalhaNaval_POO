@@ -31,6 +31,6 @@ public class Submarino extends Embarcacao {
    @Override
    public String toString() {
       Casa casa = minhasCasas.get(0);
-      return casa.toString();
+      return casa.toStringPlayer();
    }
 }
