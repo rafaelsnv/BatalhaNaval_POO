@@ -20,12 +20,7 @@ public class Humano implements IJogador {
      }
 
      @Override
-     public void girarVertical(Embarcacao embarcacao) {
-
-     }
-
-     @Override
-     public void girarHorizontal(Embarcacao embarcacao) {
+     public void inverterOrientacao(Embarcacao embarcacao) {
 
      }
 

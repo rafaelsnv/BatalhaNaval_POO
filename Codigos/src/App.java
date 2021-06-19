@@ -46,8 +46,9 @@ public class App {
                 menuApp.orientacaoEmbarcacao(teclado, player.getMeuTabuleiro(),
                         player.getMeuTabuleiro().getEmbarcacao(i));
 
-                menuApp.inserirEmbarcacao(teclado, menuApp.orientacaoEmbarcacao(teclado, player.getMeuTabuleiro(),
-                        player.getMeuTabuleiro().getEmbarcacao(i)))
+//                menuApp.inserirEmbarcacao(
+//                        teclado, menuApp.orientacaoEmbarcacao(teclado, player.getMeuTabuleiro(),
+//                        player.getMeuTabuleiro().getEmbarcacao(i)));
             }
 
             System.out.println("In progress...");
