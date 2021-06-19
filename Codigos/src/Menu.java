@@ -78,78 +78,78 @@ public class Menu {
      * 
      */
     public Tabuleiro orientacaoEmbarcacao(Scanner teclado, Tabuleiro tabuleiro, Embarcacao qual) {
-        int escolha = 0;
-        boolean inserido = false;
+        int escolha = 1;
+        boolean inserido;
         do {
+            inserido=false;
             boolean orientacaoValida = true;
             try {
-
                 do {
                     orientacaoValida = true;
                     System.out.println("\n----------------------------------");
-                    System.out.println("");
                     System.out.println(tabuleiro.toStringPlayer());
                     System.out.println("\nVocê deve inserir o " + qual.getDescricao() + " no tabuleiro acima");
+                    if (qual.getDescricao() == "OVNI" || qual.getDescricao()=="Submarino") 
+                        System.out.println("\nÉ possível inserir da seguinte forma: ");
+                    else {        
                     System.out.println("\nÉ possível inserir das seguintes formas: ");
-                    System.out.println("\nHorizontal: ");
-                    if (qual.getDescricao() == "OVNI") {
-                        System.out.println("\n↓ utilizaremos essa casa como referência para posicionar");
-                    } else {
-                        System.out.println("\n↓ utilizaremos essa casa como referência para posicionar");
-                    }
+                    System.out.println("Horizontal: ");
+                    System.out.println("↓ utilizaremos essa casa como referência para posicionar\n");
                     System.out.println(qual.toString());
-                    System.out.println("");
                     qual.inverteOrientacaoVertical();
-                    System.out.println("Vertical:");
-                    if (qual.getDescricao() == "OVNI")
-                        System.out.println("\n↓ utilizaremos essa casa como referência para posicionar");
-                    else
-                        System.out.println("\n↓ utilizaremos essa casa como referência para posicionar");
+                    System.out.println("\nVertical:");
+                    }
+                    System.out.println("↓ utilizaremos essa casa como referência para posicionar");
                     System.out.println(qual.toString());
-                    System.out.println("");
-                    System.out.println("Qual orientação gostaria de utilizar?");
-                    System.out.println("\n1. Horizontal");
+                    if (!(qual.getDescricao() == "OVNI" || qual.getDescricao()=="Submarino")) {
+                    System.out.println("\nQual orientação gostaria de utilizar?");
+                    System.out.println("1. Horizontal");
                     System.out.println("2. Vertical");
-                    System.out.println("");
-                    System.out.print("Digite a orientação: ");
                     escolha = teclado.nextInt();
-
+                    }
                     if (!(escolha == 1 || escolha == 2))
                         orientacaoValida = false;
                 } while (!orientacaoValida);
             } catch (InputMismatchException exception) {
-                System.out.println("Orientação inválida");
-                System.out.println("Orientação horizontal adotada");
-
+                System.out.println("\nOrientação inválida");
+                System.out.println("Orientação horizontal adotada\n");
             }
             if (escolha == 1) {
                 qual.inverteOrientacaoVertical();
             }
+            if (!(qual.getDescricao() == "OVNI" || qual.getDescricao()=="Submarino")){
             System.out.println(tabuleiro.toStringPlayer());
-            System.out.println("\n----------------------------------");
-            System.out.println("");
-            tabuleiro.toStringPlayer();
-            System.out.println("");
-            System.out.println("Seguindo as coordenadas do tabuleiro de coluna(A-N) e linha(1-15)");
+            System.out.println("\n----------------------------------\n");
+            }
+            System.out.println("\nSeguindo as coordenadas do tabuleiro de coluna(A-N) e linha(1-15)");
             System.out.println("E lembrando que seguimos como referência esta casa da embarcação");
             System.out.println("↓");
             System.out.println(qual.toString());
-            System.out.println("");
-            System.out.println("Insira no seguinte formato (ColunaLinha), onde quer posicionar sua embarcação. ");
+            System.out.println("\nInsira no seguinte formato (ColunaLinha), onde quer posicionar sua embarcação. ");
             System.out.println("Ex.: A2; B5; G8 ... ");
             System.out.print("Digite a coordenada: ");
-            teclado.nextLine();
-            String coord = teclado.nextLine();
-            char col = coord.charAt(0);
-            String lin = coord.substring(1);
-            col = Character.toUpperCase(col);
-
-            int linha = Integer.parseInt(lin);
-            linha--;
+            String coord="";
+            coord = teclado.next();
 
             boolean linhaValida = true;
             boolean colunaValida = true;
 
+            char col = coord.charAt(0);
+            String lin = coord.substring(1);
+            col = Character.toUpperCase(col);
+            int linha=0;
+
+            try{
+            linha = Integer.parseInt(lin);
+            }catch(NumberFormatException linhaException){
+                System.out.println("Linha informada errada");
+                linha =0;
+                linhaValida = false;
+            }
+
+            linha--;
+
+        
             if (linha < 0 || linha > 14) {
                 linhaValida = false;
                 System.out.println("Linha inválida");
