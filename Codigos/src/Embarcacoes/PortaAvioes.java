@@ -7,14 +7,12 @@ import Regras.*;
 public class PortaAvioes extends Embarcacao {
     private static final int TAMANHO = 5; // Quantidade de casas que irá ocupar.
     private static final String DESC = "Porta-Aviões";
-    private static final int id = 0;
 
     public PortaAvioes(int id) {
         super(TAMANHO);
         this.descricao = DESC;
         this.ID = id;
-        this.corFonte = "\u001B[33m";
-        this.corFundo = "\u001B[43m";
+        this.setCor("\u001B[33m", "\u001B[43m");
     }
 
     /**
@@ -22,34 +20,30 @@ public class PortaAvioes extends Embarcacao {
      * 
      * @param linha  (int)
      * @param coluna (int)
-     * @return embarcacao (ArrayList<Casa>)
+     * @return (ArrayList<Casa>) Casas pertencentes à embarcação.
      */
     @Override
     public ArrayList<Casa> setCoordenadas(int linha, int coluna) {
         for (int i = 0; i < this.tamanho; i++) {
-            Casa pedaco = this.embarcacao.get(i);
+            Casa casa = this.minhasCasas.get(i);
+            casa.setOcupante(this.ID);
 
             if (this.orientacaoVertical)
-                pedaco.setCoordenadas(linha + i, coluna);
+                casa.setCoordenadas(linha + i, coluna);
             else
-                pedaco.setCoordenadas(linha, coluna + i);
-
-            pedaco.setCor(this.corFonte, this.corFundo);
-            pedaco.setOcupante(this.ID);
-
-            embarcacao.set(i, pedaco);
+                casa.setCoordenadas(linha, coluna + i);
         }
-
-        return embarcacao;
+        return minhasCasas;
     }
 
-    // @Override
-    // public String toString() {
-    // String str = "";
-    // for (int i = 0; i < this.embarcacao.size(); i++) {
-    // Casa pedaco = embarcacao.get(i);
-    // str = str.concat(pedaco.toString());
-    // }
-    // return str;
-    // }
+    @Override
+    public String toString() {
+        String str = "";
+        for (Casa casa : this.minhasCasas) {
+            str = str.concat(casa.toString());
+            if(this.orientacaoVertical)
+                str += "\n";
+        }
+        return str;
+    }
 }

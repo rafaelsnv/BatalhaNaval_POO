@@ -10,7 +10,7 @@ public class Tabuleiro {
     private static final int MAX_COLUNAS = 15;
     private static final int MAX_PORTA_AVIAO = 1;
     private static final int MAX_ENCOURACADO = 2;
-    private static final int MAX_OVNI = 4;
+    private static final int MAX_OVNI = 3;
     private static final int MAX_SUBMARINO = 4;
     private static final int MAX_CRUZADOR = 3;
     private static final String[] LETRAS = {"A", "B", "C", "D", "E", "F", "G", "H",
@@ -30,7 +30,7 @@ public class Tabuleiro {
         }
 
         for(int j=0; j < MAX_ENCOURACADO; j++) {
-            this.minhaEsquadra.add(new Encouracados(id));
+            this.minhaEsquadra.add(new Encouracado(id));
             id++;
         }
 
@@ -142,7 +142,7 @@ public class Tabuleiro {
         else
             return false;
 
-        for (Casa casa : qual.getEmbarcacao())
+        for (Casa casa : qual.getMinhasCasas())
             this.setCasa(casa);
 
         qual.setInserido();
@@ -169,7 +169,7 @@ public class Tabuleiro {
 
         if (casa.foiOcupada()) {
             Embarcacao alvejada = this.getEmbarcacao(casa.getOcupanteID());
-            alvejada.atingiu(casa);
+            alvejada.bombardear(casa);
 
             return true;
         }

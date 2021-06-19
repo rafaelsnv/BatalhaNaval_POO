@@ -99,7 +99,7 @@ public class Menu {
                     }
                     System.out.println(qual.toString());
                     System.out.println("");
-                    qual.inverteOrientacaoVertical();
+                    qual.inverteOrientacao();
                     System.out.println("Vertical:");
                     if (qual.getDescricao() == "OVNI")
                         System.out.println("\n↓ utilizaremos essa casa como referência para posicionar");
@@ -123,7 +123,7 @@ public class Menu {
 
             }
             if (escolha == 1) {
-                qual.inverteOrientacaoVertical();
+                qual.inverteOrientacao();
             }
             System.out.println(tabuleiro.toStringPlayer());
             System.out.println("\n----------------------------------");
@@ -234,7 +234,7 @@ public class Menu {
     private Tabuleiro inserirEmbarcacao(Scanner teclado, Tabuleiro tabuleiro, Embarcacao qual) {
         limparTela();
         ArrayList<Casa> aux = new ArrayList<>();
-        aux = qual.getEmbarcacao();
+        aux = qual.getMinhasCasas();
         Casa casa = aux.get(0);
         int linha = casa.getLinha();
         int coluna = casa.getColuna();
