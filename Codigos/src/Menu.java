@@ -83,7 +83,6 @@ public class Menu {
             boolean orientacaoValida = true;
             
                 do {
-                    
                     orientacaoValida = true;
                     System.out.println("\n----------------------------------\n");
                     System.out.println(tabuleiro.toStringPlayer());
@@ -107,12 +106,15 @@ public class Menu {
 
                     if (!(qual.getDescricao().equals("OVNI") || qual.getDescricao().equals("Submarino"))) {
                         System.out.println("\nQual orientação gostaria de utilizar?");
+
                         try {
                         escolha = teclado.nextInt();
-                    } catch (InputMismatchException exceptionInputMismatch) {
-                        System.out.println("\nOrientação inválida ");
+                    
+                    } catch(InputMismatchException stringOutexception){
                         System.out.println("Caracter inválido");
-                    } catch(StringIndexOutOfBoundsException stringOutexception){
+                        System.out.println("Tente novamente: ");
+                        orientacaoValida=false;
+                        teclado.nextLine();
                             System.out.println("Use apenas números");
                     }
                         switch (escolha){
@@ -143,7 +145,7 @@ public class Menu {
      * @return tabuleiro (Tabuleiro)
      */
     public boolean inserirEmbarcacao(Scanner teclado, Tabuleiro tabuleiro, Embarcacao qual) {
-        limparTela();
+        //limparTela();
     boolean inserido=false;
 
     do{
@@ -180,8 +182,6 @@ public class Menu {
                 System.out.println("Linha inválida");
             }
 
-            int coluna = 0;
-
             int colCoord = colCoord(coord);
 
             if(colCoord==-1){
@@ -190,8 +190,8 @@ public class Menu {
             }
 
             if (colunaValida && linhaValida) {
-                qual.setCoordenadas(linha, coluna);
-                inserido = tabuleiro.inserirEmbarcacao(qual, linha, coluna);
+                qual.setCoordenadas(linha, colCoord);
+                inserido = tabuleiro.inserirEmbarcacao(qual, linha, colCoord);
             }
 
             if(!inserido){
