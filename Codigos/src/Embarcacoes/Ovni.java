@@ -12,8 +12,8 @@ public class Ovni extends Embarcacao {
         super(TAMANHO);
         this.descricao = DESC;
         this.ID = id;
-        this.corFonte = "\u001B[37m";
-        this.corFundo = "\u001B[47m";
+        this.corFonte = "\u001B[36m";
+        this.corFundo = "\u001B[46m";
     }
 
     /**
