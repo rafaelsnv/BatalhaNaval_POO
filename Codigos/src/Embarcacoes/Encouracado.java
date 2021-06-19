@@ -40,7 +40,7 @@ public class Encouracado extends Embarcacao {
     public String toString() {
         String str = "";
         for (Casa casa : this.minhasCasas) {
-            str = str.concat(casa.toString());
+            str = str.concat(casa.toStringPlayer());
             if(this.orientacaoVertical)
                 str += "\n";
         }

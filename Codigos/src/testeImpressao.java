@@ -1,5 +1,5 @@
 import Embarcacoes.Cruzador;
-import Embarcacoes.Encouracados;
+import Embarcacoes.Encouracado;
 import Embarcacoes.Ovni;
 import JogadorPKG.CpuFacil;
 import Regras.Tabuleiro;
@@ -185,12 +185,12 @@ public class testeImpressao {
 
     public static void main(String[] args) throws InvalidAttributesException {
 
-        CpuFacil cpuTest = new CpuFacil();
+        CpuFacil cpu = new CpuFacil();
 
-        Encouracados ovni = new Encouracados(0);
-        tab.inserirEmbarcacao(ovni, 5, 5);
+        Encouracado ovni = new Encouracado(0);
 
         Tabuleiro tab = cpu.getMeuTabuleiro();
+        tab.inserirEmbarcacao(ovni, 5, 5);
         System.out.println(tab.toStringPlayer());
 
 
