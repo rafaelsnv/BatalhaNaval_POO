@@ -84,32 +84,51 @@ public class Menu {
             inserido=false;
             boolean orientacaoValida = true;
             try {
+
                 do {
                     orientacaoValida = true;
-                    System.out.println("\n----------------------------------");
+                    System.out.println("\n----------------------------------\n");
                     System.out.println(tabuleiro.toStringPlayer());
-                    System.out.println("\nVocê deve inserir o " + qual.getDescricao() + " no tabuleiro acima");
-                    if (qual.getDescricao() == "OVNI" || qual.getDescricao()=="Submarino") 
-                        System.out.println("\nÉ possível inserir da seguinte forma: ");
-                    else {        
-                    System.out.println("\nÉ possível inserir das seguintes formas: ");
-                    System.out.println("Horizontal: ");
-                    System.out.println("↓ utilizaremos essa casa como referência para posicionar\n");
-                    System.out.println(qual.toString());
-                    qual.inverteOrientacaoVertical();
-                    System.out.println("\nVertical:");
+                    System.out.println("\nVocê deve orientar o " + qual.getDescricao() + " para inserir no tabuleiro acima");
+
+                    if (qual.getDescricao().equals("OVNI") || qual.getDescricao().equals("Submarino")) {
+                        System.out.println("\nÉ possível orientar da seguinte forma: ");
+                        System.out.println(qual.toString());
                     }
-                    System.out.println("↓ utilizaremos essa casa como referência para posicionar");
-                    System.out.println(qual.toString());
-                    if (!(qual.getDescricao() == "OVNI" || qual.getDescricao()=="Submarino")) {
-                    System.out.println("\nQual orientação gostaria de utilizar?");
-                    System.out.println("1. Horizontal");
-                    System.out.println("2. Vertical");
-                    escolha = teclado.nextInt();
+
+                    else {
+                        System.out.println("\nÉ possível orientar das seguintes formas: ");
+                        System.out.println("1 - Horizontal:\n");
+                        System.out.println(qual.toString());
+
+                        Embarcacao barcoAux =  qual;
+                        barcoAux.inverteOrientacaoVertical();
+
+                        System.out.println("2 - Vertical:");
+                        System.out.println(barcoAux.toString());
                     }
-                    if (!(escolha == 1 || escolha == 2))
-                        orientacaoValida = false;
+
+                    if (!(qual.getDescricao().equals("OVNI") || qual.getDescricao().equals("Submarino"))) {
+                        System.out.println("\nQual orientação gostaria de utilizar?");
+                        escolha = teclado.nextInt();
+
+                        switch (escolha){
+                            case 1:
+//                                inserirEmbarcacao();
+                                break;
+                            case 2:
+                                qual.inverteOrientacaoVertical();
+//                                inserirEmbarcacao();
+                                break;
+                            default:
+                                orientacaoValida = false;
+                                System.out.println("Opção inválida.");
+                                break;
+                        }
+                    }
+
                 } while (!orientacaoValida);
+
             } catch (InputMismatchException exception) {
                 System.out.println("\nOrientação inválida");
                 System.out.println("Orientação horizontal adotada\n");
@@ -117,6 +136,18 @@ public class Menu {
             if (escolha == 1) {
                 qual.inverteOrientacaoVertical();
             }
+
+
+
+
+
+
+
+
+
+
+
+
             if (!(qual.getDescricao() == "OVNI" || qual.getDescricao()=="Submarino")){
             System.out.println(tabuleiro.toStringPlayer());
             System.out.println("\n----------------------------------\n");
@@ -231,7 +262,7 @@ public class Menu {
      * @param qual      (Embarcacao)
      * @return tabuleiro (Tabuleiro)
      */
-    private Tabuleiro inserirEmbarcacao(Scanner teclado, Tabuleiro tabuleiro, Embarcacao qual) {
+    public Tabuleiro inserirEmbarcacao(Scanner teclado, Tabuleiro tabuleiro, Embarcacao qual) {
         limparTela();
         ArrayList<Casa> aux = new ArrayList<>();
         aux = qual.getEmbarcacao();
