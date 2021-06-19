@@ -25,7 +25,7 @@ public class CpuDificil implements IJogador {
     }
 
     @Override
-    public boolean bombardear(int linha, int coluna) {
+    public boolean bombardear(Jogador inimigo, int linha, int coluna) {
         return false;
     }
 }

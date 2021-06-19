@@ -128,14 +128,12 @@ public class Tabuleiro {
     public boolean inserirEmbarcacao(Embarcacao qual, int linha, int coluna) {
         ArrayList<Casa> casasEmbarcacao;
 
-        if (coordenadaValida(linha, coluna) & !casaOcupada(linha, coluna)) {
+        if (coordenadaValida(linha, coluna) && !casaOcupada(linha, coluna)) {
             casasEmbarcacao = qual.setCoordenadas(linha, coluna);
             for (Casa casa : casasEmbarcacao) {
                 int lin = casa.getLinha();
                 int col = casa.getColuna();
-                if (!coordenadaValida(lin, col))
-                    return false;
-                if(casaOcupada(lin, col))
+                if (!coordenadaValida(lin, col) || casaOcupada(lin, col))
                     return false;
             }
         }

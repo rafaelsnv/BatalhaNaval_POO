@@ -3,8 +3,8 @@ package JogadorPKG;
 import Regras.*;
 import Embarcacoes.*;
 
+import java.util.Random;
 import javax.naming.directory.InvalidAttributesException;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Regras da CPU Fácil: 1) A CPU insere as peças aleatoriamente, sem critério.
@@ -30,7 +30,8 @@ public class CpuFacil implements IJogador {
      * @return (int) Index gerado para linha.
      */
     private int randomRow() {
-        return ThreadLocalRandom.current().nextInt(0, meuTabuleiro.getMaxLinhas() + 1);
+        Random random = new Random();
+        return random.nextInt(this.meuTabuleiro.getMaxLinhas() + 1);
     }
 
     /**
@@ -38,12 +39,16 @@ public class CpuFacil implements IJogador {
      * @return (int) Index gerado para coluna.
      */
     private int randomCol() {
-        return ThreadLocalRandom.current().nextInt(0, meuTabuleiro.getMaxColunas() + 1);
+        Random random = new Random();
+        return random.nextInt(this.meuTabuleiro.getMaxColunas() + 1);
     }
-
 
     public Tabuleiro getMeuTabuleiro() {
         return meuTabuleiro;
+    }
+
+    public void inverterOrientacao(Embarcacao embarcacao) {
+        embarcacao.inverteOrientacao();
     }
 
     @Override
@@ -57,17 +62,7 @@ public class CpuFacil implements IJogador {
     }
 
     @Override
-    public void girarVertical(Embarcacao embarcacao) {
-
-    }
-
-    @Override
-    public void girarHorizontal(Embarcacao embarcacao) {
-
-    }
-
-    @Override
-    public boolean bombardear(int linha, int coluna) throws InvalidAttributesException {
+    public boolean bombardear(Jogador inimigo, int linha, int coluna) throws InvalidAttributesException {
         boolean jaBombardeada;
         do {
             linha = randomRow();
@@ -76,6 +71,7 @@ public class CpuFacil implements IJogador {
             jaBombardeada = casa.foiBombardeada();
         } while (jaBombardeada);
 
-        return this.meuTabuleiro.bombardear(linha, coluna);
+        Tabuleiro tabuleiroInimigo = inimigo.getMeuTabuleiro();
+        return tabuleiroInimigo.bombardear(linha, coluna);
     }
 }
