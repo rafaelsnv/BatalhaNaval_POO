@@ -10,10 +10,15 @@ import javax.naming.directory.InvalidAttributesException;
 * Os métodos serão aplicados com valores fornecidos pelo user
 */
 public class Humano implements IJogador {
+     private final Tabuleiro meuTabuleiro = new Tabuleiro();
 
      @Override
      public void setTabuleiro(Tabuleiro tabuleiro) {
+     }
 
+     @Override
+     public Tabuleiro getMeuTabuleiro() {
+          return this.meuTabuleiro;
      }
 
      @Override

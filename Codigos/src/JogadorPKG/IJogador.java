@@ -8,6 +8,8 @@ public interface IJogador {
 
     void setTabuleiro(Tabuleiro tabuleiro);
 
+    Tabuleiro getMeuTabuleiro();
+
     boolean inserirEmbarcacao(Embarcacao qual, int linha, int coluna);
 
     void inverterOrientacao(Embarcacao embarcacao);

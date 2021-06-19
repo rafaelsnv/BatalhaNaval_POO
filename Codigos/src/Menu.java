@@ -167,8 +167,7 @@ public class Menu {
                 linhaValida = false;
             }
 
-            linha--;
-        
+
             if (linha < 0 || linha > 14) {
                 linhaValida = false;
                 System.out.println("Linha inválida");
@@ -236,7 +235,7 @@ public class Menu {
     }
 
     public int linhaCoord (String coord){
-        return Integer.parseInt(coord.substring(1));
+        return Integer.parseInt(coord.substring(1))-1;
     }
 
 }

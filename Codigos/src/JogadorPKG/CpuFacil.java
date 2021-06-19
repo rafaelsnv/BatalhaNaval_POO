@@ -51,9 +51,10 @@ public class CpuFacil implements IJogador {
     }
 
     public Tabuleiro getMeuTabuleiro() {
-        return meuTabuleiro;
+        return this.meuTabuleiro;
     }
 
+    @Override
     public void inverterOrientacao(Embarcacao embarcacao) {
         embarcacao.inverteOrientacao();
     }

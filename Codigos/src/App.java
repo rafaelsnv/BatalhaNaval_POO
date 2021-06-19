@@ -27,31 +27,12 @@ public class App {
 
             // Seleção da dificuldade
             int dificuldade = menuApp.dificuldade(teclado);
-            switch (dificuldade) {
-                case 0:
-                    opcao = dificuldade;
-                    break;
-                case 1:
-                    CpuFacil facil = new CpuFacil();
-                    cpu.setiJogador(facil);
-                    break;
-                case 2:
-                    CpuMedio medio = new CpuMedio();
-                    cpu.setiJogador(medio);
-                    break;
-                case 3:
-                    CpuDificil dificil = new CpuDificil();
-                    cpu.setiJogador(dificil);
-                    break;
-                default:
-                    System.out.println("error");
-                    break;
-            }
 
-            System.out.println("");
+            cpu.setiJogador(dificuldade);
+
             // Orientação e inserção
             for (int i = 0; i < player.getMeuTabuleiro().getMinhaEsquadra().size(); i++) {
-                System.out.println("Orientação número " + (i + 1));
+                System.out.println("\nOrientação número " + (i + 1));
 
                 menuApp.orientacaoEmbarcacao(teclado, player.getMeuTabuleiro(),
                         player.getMeuTabuleiro().getEmbarcacao(i));
@@ -76,9 +57,9 @@ public class App {
                 int coluna = menuApp.colCoord(coord);
                 int linha = menuApp.linhaCoord(coord);
 
+                player.bombardear(cpu, linha, coluna);
                 cpu.bombardear(player);
                 round++;
-
             }
 
         } else {
