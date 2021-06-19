@@ -3,15 +3,21 @@ package JogadorPKG;
 import Regras.*;
 import Embarcacoes.*;
 
+import javax.naming.directory.InvalidAttributesException;
+
 public class Jogador {
     private String nome;
-    private int tipoJogador; // 0 para Humano; 1 para CpuFacil; 2 para CpuMedio; 3 para CpuDificil.
-    private IJogador iJogador;
     private Tabuleiro meuTabuleiro;
+    private IJogador iJogador;
+
+    public Jogador() {
+        this.setNome("");
+        this.setMeuTabuleiro(new Tabuleiro());
+    }
 
     /**
      * Método construtor com parâmetros.
-     * 
+     *
      * @param oNome o nome a ser atribuído.
      * @param oTipo o tipo de IJogador a ser atribuído.
      */
@@ -108,5 +114,13 @@ public class Jogador {
      */
     public boolean inserirEmbarcacao(Embarcacao qual, int linha, int col) {
         return this.meuTabuleiro.inserirEmbarcacao(qual, linha, col);
+    }
+
+    public boolean bombardear(Jogador inimigo, int linha, int coluna) throws InvalidAttributesException {
+        return this.iJogador.bombardear(inimigo, linha, coluna);
+    }
+
+    public boolean bombardear(Jogador inimigo) throws InvalidAttributesException {
+        return this.iJogador.bombardear(inimigo, -1,-1);
     }
 }

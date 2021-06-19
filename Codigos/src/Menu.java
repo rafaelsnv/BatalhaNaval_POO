@@ -48,7 +48,6 @@ public class Menu {
      * @return (int) escolha 1.Fácil 2.Médio 3.Difícil
      */
     public int dificuldade(Scanner teclado) {
-        limparTela();
         int escolha = 9;
         System.out.println("\n----------------------------------\n");
         System.out.println("Selecione o nível da dificuldade do oponente: ");
