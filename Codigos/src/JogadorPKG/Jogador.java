@@ -11,22 +11,32 @@ public class Jogador {
 
     /**
      * Método construtor com parâmetros.
+     * 
      * @param oNome o nome a ser atribuído.
      * @param oTipo o tipo de IJogador a ser atribuído.
      */
-    public Jogador(String oNome, int oTipo){
+    public Jogador(String oNome, int oTipo) {
         this.setNome(oNome);
         switch (oTipo) {
-            case (0) -> this.iJogador = new Humano();
-            case (1) -> this.iJogador = new CpuFacil();
-            case (2) -> this.iJogador = new CpuMedio();
-            case (3) -> this.iJogador = new CpuDificil();
+            case (0):
+                this.iJogador = new Humano();
+                break;
+            case (1):
+                this.iJogador = new CpuFacil();
+                break;
+            case (2):
+                this.iJogador = new CpuMedio();
+                break;
+            case (3):
+                this.iJogador = new CpuDificil();
+                break;
         }
         this.meuTabuleiro = new Tabuleiro();
     }
 
     /**
      * Método get para o nome.
+     * 
      * @return o nome do Jogador.
      */
     public String getNome() {
@@ -35,6 +45,7 @@ public class Jogador {
 
     /**
      * Método set para o nome.
+     * 
      * @param qualNome o valor a ser atribuído.
      */
     public void setNome(String qualNome) {
@@ -43,6 +54,7 @@ public class Jogador {
 
     /**
      * Método get para o tipoJogador.
+     * 
      * @return o tipo de Jogador (Humano/CpuFacil/CpuMedio/CpuDificil).
      */
     public IJogador getiJogador() {
@@ -51,6 +63,7 @@ public class Jogador {
 
     /**
      * Método set para o qualTipo.
+     * 
      * @param qualTipo o tipo a ser atribuído.
      */
     public void setiJogador(IJogador qualTipo) {
@@ -59,6 +72,7 @@ public class Jogador {
 
     /**
      * Método get para meuTabuleiro
+     * 
      * @return o tabuleiro do Jogador.
      */
     public Tabuleiro getMeuTabuleiro() {
@@ -67,6 +81,7 @@ public class Jogador {
 
     /**
      * Método set para qualTabuleiro.
+     * 
      * @param qualTabuleiro o Tabuleiro a ser armazenado no Jogador.
      */
     public void setMeuTabuleiro(Tabuleiro qualTabuleiro) {
@@ -75,20 +90,23 @@ public class Jogador {
 
     /**
      * Método para informar quando o jogador perdeu.
+     * 
      * @return ! Esperando definição da implementação do naufrágio !
      */
-    public boolean perdeu ( ){
+    public boolean perdeu() {
         return this.meuTabuleiro.getMinhaEsquadra().size() == 0;
     }
 
     /**
-     * Método para inserir Embarcacao, é delegada a responsabilidade de inserção para a classe Tabuleiro.
-     * @param qual A Embarcacao a ser inserida.
+     * Método para inserir Embarcacao, é delegada a responsabilidade de inserção
+     * para a classe Tabuleiro.
+     * 
+     * @param qual  A Embarcacao a ser inserida.
      * @param linha A linha em que a embarcação será inserida.
-     * @param col A coluna em que a embarcação será inserida.
+     * @param col   A coluna em que a embarcação será inserida.
      * @return true se for possível inserir, false se não foi possível.
      */
-    public boolean inserirEmbarcacao (Embarcacao qual, int linha, int col){
+    public boolean inserirEmbarcacao(Embarcacao qual, int linha, int col) {
         return this.meuTabuleiro.inserirEmbarcacao(qual, linha, col);
     }
 }

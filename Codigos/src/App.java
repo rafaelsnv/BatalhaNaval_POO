@@ -2,31 +2,58 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Embarcacoes.*;
+import JogadorPKG.CpuFacil;
 import JogadorPKG.Humano;
 import JogadorPKG.Jogador;
 import Regras.*;
 
 public class App {
 
-    private final static Scanner scanner = new Scanner(System.in);
-
-    public static int typePlayerChoice(){
-        String choice = scanner.nextLine();
-        switch (choice){
-            case ("Humano") -> {
-                return 0;
-            }
-        }
-        return -1;
-    }
-
     public static void main(String[] args) {
+        Scanner teclado = new Scanner(System.in);
+        Menu menuApp = new Menu();
+        int opcao = -1;
+        String nickApp = "";
 
-        String selected_col = "O";
+        opcao = menuApp.welcome(teclado);
 
-        System.out.println(selected_col.charAt(0) - 'A');
+        if (opcao == 1) {
+            nickApp = menuApp.nickname(teclado);
+            Jogador player = new Jogador(nickApp, 0);
 
-        Jogador player1 = new Jogador("Player 1", 0);
+            int dificuldade = menuApp.dificuldade(teclado);
+
+            switch (dificuldade) {
+                case 0:
+                    opcao = dificuldade;
+                    break;
+                case 1:
+                    Jogador cpuFacil = new Jogador("CPU", dificuldade);
+                    break;
+                case 2:
+                    Jogador cpuMedio = new Jogador("CPU", dificuldade);
+                    break;
+                case 3:
+                    Jogador cpuDificil = new Jogador("CPU", dificuldade);
+                    break;
+                default:
+                    System.out.println("error");
+                    break;
+            }
+
+            for (int i = 0; i < player.getMeuTabuleiro().getMinhaEsquadra().size(); i++) {
+                System.out.println("Orientação número " + (i+1));
+                
+                menuApp.orientacaoEmbarcacao(teclado, player.getMeuTabuleiro(),
+                        player.getMeuTabuleiro().getEmbarcacao(i));
+
+                menuApp.inserirEmbarcacao(teclado, player.getMeuTabuleiro(), player.getMeuTabuleiro().getEmbarcacao(i));
+            }
+
+            System.out.println("In progress...");
+        } else {
+            System.out.println("FIM");
+        }
     }
 
 }
