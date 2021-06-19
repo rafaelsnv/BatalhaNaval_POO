@@ -7,60 +7,12 @@ import java.util.concurrent.CancellationException;
 
 public class Menu {
 
-    public static void limparTela() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
-    public int colCoord (String coord){
-        int coluna = -1;
-        switch (coord.charAt(0)){
-            case 'A':
-                return coluna = 0;
-            case 'B':
-                return coluna = 1;
-            case 'C':
-                return coluna = 2;
-            case 'D':
-                return coluna = 3;
-            case 'E':
-                return coluna = 4;
-            case 'F':
-                return coluna = 5;
-            case 'G':
-                return coluna = 6;
-            case 'H':
-                return coluna = 7;
-            case 'I':
-                return coluna = 8;
-            case 'J':
-                return coluna = 9;
-            case 'K':
-                return coluna = 10;
-            case 'L':
-                return coluna = 11;
-            case 'M':
-                return coluna = 12;
-            case 'N':
-                return coluna = 13;
-            case 'O':
-                return coluna = 14;
-        }
-        return coluna;
-    }
-
-    public int linhaCoord (String coord){
-        int numero = Integer.parseInt(coord.substring(1));
-        return numero - 1;
-    }
-
     /**
      * Menu iniciar
      * 
      * @return (int) escolha
      */
     public int welcome(Scanner teclado) {
-        limparTela();
         System.out.println("\n----------------------------------");
         System.out.println("\nBem vindo ao Batalha_magic\n");
         System.out.println("1 - Jogar");
@@ -76,7 +28,6 @@ public class Menu {
      * @return (String) nick
      */
     public String nickname(Scanner teclado) {
-        limparTela();
         System.out.println("\n----------------------------------\n\n");
         System.out.print("Insira um apelido: ");
         String nick = teclado.nextLine();

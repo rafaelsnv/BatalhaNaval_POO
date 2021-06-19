@@ -51,17 +51,17 @@ public class App {
             System.out.println("");
             // Orientação e inserção
             for (int i = 0; i < player.getMeuTabuleiro().getMinhaEsquadra().size(); i++) {
-                System.out.println("Orientação número " + (i+1));
-                
+                System.out.println("Orientação número " + (i + 1));
+
                 menuApp.orientacaoEmbarcacao(teclado, player.getMeuTabuleiro(),
                         player.getMeuTabuleiro().getEmbarcacao(i));
 
                 menuApp.inserirEmbarcacao(teclado, player.getMeuTabuleiro(), player.getMeuTabuleiro().getEmbarcacao(i));
+            }
+
             // In-Game
             int round = 1;
 
-            int linha = 0;
-            int coluna = 0;
             while (!player.perdeu() | !cpu.perdeu()){
                 System.out.println("\n\nROUND " + round);
 
@@ -71,22 +71,14 @@ public class App {
                 System.out.println(cpu.getMeuTabuleiro().toStringPlayer());
 
                 System.out.print("\nDigite a coordenada que deseja bombardear: ");
-//                String coord = teclado.next().toUpperCase();
+                String coord = teclado.next();
 
-//                int coluna = menuApp.colCoord(coord);
-//                int linha = menuApp.linhaCoord(coord);
+                int coluna = menuApp.colCoord(coord);
+                int linha = menuApp.linhaCoord(coord);
 
-                player.bombardear(cpu,linha, coluna);
                 cpu.bombardear(player);
-
                 round++;
 
-                if (coluna<14){
-                    coluna++;
-                }else {
-                    linha++;
-                    coluna=0;
-                }
             }
 
         } else {
