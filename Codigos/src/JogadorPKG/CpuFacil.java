@@ -20,6 +20,7 @@ public class CpuFacil implements IJogador {
             do {
                 int linha = this.randomRow();
                 int coluna = this.randomCol();
+                embarcacao.setOrientacao(this.randomOrientation());
                 result = this.inserirEmbarcacao(embarcacao, linha, coluna);
             } while (!result);
         }
@@ -31,7 +32,7 @@ public class CpuFacil implements IJogador {
      */
     private int randomRow() {
         Random random = new Random();
-        return random.nextInt(this.meuTabuleiro.getMaxLinhas() + 1);
+        return random.nextInt(this.meuTabuleiro.getMaxLinhas());
     }
 
     /**
@@ -40,10 +41,15 @@ public class CpuFacil implements IJogador {
      */
     private int randomCol() {
         Random random = new Random();
-        return random.nextInt(this.meuTabuleiro.getMaxColunas() + 1);
+        return random.nextInt(this.meuTabuleiro.getMaxColunas());
     }
 
-    @Override
+    public boolean randomOrientation() {
+        Random random = new Random();
+        int value = random.nextInt(2);
+        return value == 0;
+    }
+
     public Tabuleiro getMeuTabuleiro() {
         return this.meuTabuleiro;
     }
