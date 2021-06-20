@@ -139,14 +139,14 @@ public class Casa {
    }
 
    public String toStringEnemy() {
-      String aux;
-      if(this.foiOcupada())
-         aux = BACKGROUND_BLACK;
-      else
-         aux = BACKGROUND_WHITE;
+      String aux = BACKGROUND_WHITE;
 
-      if (this.foiBombardeada())
+      if (this.foiBombardeada()) {
+         if (this.foiOcupada())
+            aux = BACKGROUND_BLACK;
+
          aux += ANSI_BLACK;
+      }
       else
          aux += ANSI_WHITE;
 
