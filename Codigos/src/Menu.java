@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import JogadorPKG.Jogador;
 import Regras.*;
 import Embarcacoes.*;
 import java.util.concurrent.CancellationException;
@@ -160,7 +162,7 @@ public class Menu {
             int linha=0;
 
             try{
-            linha = linhaCoord(coord);
+            linha = linhaCoord(coord, tabuleiro);
             }catch(NumberFormatException linhaException){
                 System.out.println("Linha informada errada");
                 linha = 0;
@@ -234,8 +236,12 @@ public class Menu {
         return coluna;
     }
 
-    public int linhaCoord (String coord){
-        return Integer.parseInt(coord.substring(1))-1;
+    public int linhaCoord (String coord, Tabuleiro tabuleiro){
+        int linha = Integer.parseInt(coord.substring(1))-1;
+        if(linha<tabuleiro.getMaxLinhas()){
+            return linha;
+        }
+        return -1;
     }
 
 }
