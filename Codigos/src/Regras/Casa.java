@@ -7,6 +7,7 @@ public class Casa {
    private final static String ANSI_BLUE = "\u001B[34m";
    private final static String BACKGROUND_BLUE = "\u001B[44m";
    private final static String BACKGROUND_WHITE = "\u001B[47m";
+   private final static String BACKGROUND_BLACK = "\u001B[40m";
 
    private int linha;            // - Linha e coluna assumem as coordenadas
    private int coluna;           //   que identificam a casa no tabuleiro;
@@ -138,7 +139,11 @@ public class Casa {
    }
 
    public String toStringEnemy() {
-      String aux = BACKGROUND_WHITE;
+      String aux;
+      if(this.foiOcupada())
+         aux = BACKGROUND_BLACK;
+      else
+         aux = BACKGROUND_WHITE;
 
       if (this.foiBombardeada())
          aux += ANSI_BLACK;
