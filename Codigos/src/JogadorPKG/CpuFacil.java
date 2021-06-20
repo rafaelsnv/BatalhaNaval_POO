@@ -32,7 +32,7 @@ public class CpuFacil implements IJogador {
      */
     private int randomRow() {
         Random random = new Random();
-        return random.nextInt(this.meuTabuleiro.getMaxLinhas() + 1);
+        return random.nextInt(this.meuTabuleiro.getMaxLinhas());
     }
 
     /**
@@ -41,7 +41,7 @@ public class CpuFacil implements IJogador {
      */
     private int randomCol() {
         Random random = new Random();
-        return random.nextInt(this.meuTabuleiro.getMaxColunas() + 1);
+        return random.nextInt(this.meuTabuleiro.getMaxColunas());
     }
 
     public boolean randomOrientation() {
