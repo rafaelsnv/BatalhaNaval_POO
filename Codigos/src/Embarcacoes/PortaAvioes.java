@@ -7,12 +7,12 @@ import Regras.*;
 public class PortaAvioes extends Embarcacao {
     private static final int TAMANHO = 5; // Quantidade de casas que irá ocupar.
     private static final String DESC = "Porta-Aviões";
-    private static final int id =0;
 
     public PortaAvioes(int id) {
         super(TAMANHO);
         this.descricao = DESC;
         this.ID = id;
+        this.setCor("\u001B[33m", "\u001B[43m");
     }
 
     /**
@@ -20,28 +20,30 @@ public class PortaAvioes extends Embarcacao {
      * 
      * @param linha  (int)
      * @param coluna (int)
-     * @return embarcacao (ArrayList<Casa>)
+     * @return (ArrayList<Casa>) Casas pertencentes à embarcação.
      */
     @Override
     public ArrayList<Casa> setCoordenadas(int linha, int coluna) {
-        boolean vertical = this.orientacaoVertical; // Orientação da embarcação, se true = vertical
-        Casa pedaco = this.embarcacao.get(0); // Primeiro pedaço da embarcação.
-        pedaco.setCoordenadas(linha, coluna); // Insere na primeira casa da embarcação as coordenadas.
-        embarcacao.set(0, pedaco); // Insere novas informações de casa na embarcação.
-        pedaco = this.embarcacao.get(1); // Segundo pedaço da embarcação.
+        for (int i = 0; i < this.tamanho; i++) {
+            Casa casa = this.minhasCasas.get(i);
+            casa.setOcupante(this.ID);
 
-        if (!vertical) // Se embarcação estiver na horizontal.
-            for (int i = 1; i < this.tamanho; i++) { // - Próximas casas recebem
-                pedaco = this.embarcacao.get(i);
-                pedaco.setCoordenadas(linha, coluna + i); // mesma linha mas colunas diferentes.
-                embarcacao.set(i, pedaco);
-            }
-        else // Se não.
-            for (int i = 1; i < this.tamanho; i++) { // - Próximas casas recebem
-                pedaco = this.embarcacao.get(i);
-                pedaco.setCoordenadas(linha + i, coluna); // mesma coluna mas linhas diferentes.
-                embarcacao.set(i, pedaco);
-            }
-        return embarcacao;
+            if (this.orientacaoVertical)
+                casa.setCoordenadas(linha + i, coluna);
+            else
+                casa.setCoordenadas(linha, coluna + i);
+        }
+        return minhasCasas;
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        for (Casa casa : this.minhasCasas) {
+            str = str.concat(casa.toStringPlayer());
+            if(this.orientacaoVertical)
+                str += "\n";
+        }
+        return str;
     }
 }

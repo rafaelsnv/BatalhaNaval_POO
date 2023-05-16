@@ -12,6 +12,7 @@ public class Ovni extends Embarcacao {
         super(TAMANHO);
         this.descricao = DESC;
         this.ID = id;
+        this.setCor("\u001B[36m", "\u001B[46m");
     }
 
     /**
@@ -23,25 +24,44 @@ public class Ovni extends Embarcacao {
      */
     @Override
     public ArrayList<Casa> setCoordenadas(int linha, int coluna) {
-        Casa pedaco = this.embarcacao.get(0); // Primeiro pedaço da embarcação.
-        pedaco.setCoordenadas(linha, coluna); // Insere na primeira casa da embarcação as coordenadas.
+        for (Casa casa : this.minhasCasas) {
+            casa.setOcupante(this.ID);
+        }
 
-        embarcacao.set(0, pedaco); // Insere novas informações de casa na embarcação.
+        Casa pedaco = this.minhasCasas.get(0);
+        pedaco.setCoordenadas(linha, coluna);
 
-        pedaco = this.embarcacao.get(1); // Segundo pedaço da embarcação.
-        pedaco.setCoordenadas(linha - 1, coluna + 1); // Segunda casa irá para a próxima coluna e uma linha acima.
+        pedaco = this.minhasCasas.get(1);
+        pedaco.setCoordenadas(linha - 1, coluna + 1);
 
-        embarcacao.set(1, pedaco); // Insere novas informações de casa na embarcação.
+        pedaco = this.minhasCasas.get(2);
+        pedaco.setCoordenadas(linha, coluna + 2);
 
-        pedaco = this.embarcacao.get(2); // Terceiro pedaço da embarcação.
-        pedaco.setCoordenadas(linha, coluna + 2); // Terceira casa irá para a próxima coluna na mesma linha
+        pedaco = this.minhasCasas.get(3);
+        pedaco.setCoordenadas(linha + 1, coluna + 1);
 
-        embarcacao.set(2, pedaco); // Insere novas informações de casa na embarcação.
+        return minhasCasas;
+    }
 
-        pedaco = this.embarcacao.get(3); // Último pedaço da embarcação.
-        pedaco.setCoordenadas(linha + 1, coluna + 1); // Última casa irá para a linha mais alta na coluna central
+    @Override
+    public String toString() {
+        Casa blackBox = new Casa();
+        blackBox.setCor("\u001B[30m", "\u001B[40m");
 
-        embarcacao.set(3, pedaco); // Insere novas informações de casa na embarcação.
-        return embarcacao;
+        String str = blackBox.toStringPlayer();
+        str += this.minhasCasas.get(1).toStringPlayer();
+        str += blackBox.toStringPlayer();
+        str += "\n";
+
+        str += this.minhasCasas.get(0).toStringPlayer();
+        str += blackBox.toStringPlayer();
+        str += this.minhasCasas.get(2).toStringPlayer();
+        str += "\n";
+
+        str += blackBox.toStringPlayer();
+        str += this.minhasCasas.get(3).toStringPlayer();
+        str += blackBox.toStringPlayer();
+
+        return str;
     }
 }

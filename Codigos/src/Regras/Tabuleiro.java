@@ -10,12 +10,14 @@ public class Tabuleiro {
     private static final int MAX_COLUNAS = 15;
     private static final int MAX_PORTA_AVIAO = 1;
     private static final int MAX_ENCOURACADO = 2;
-    private static final int MAX_OVNI = 4;
+    private static final int MAX_OVNI = 3;
     private static final int MAX_SUBMARINO = 4;
     private static final int MAX_CRUZADOR = 3;
+    private static final String[] LETRAS = {"A", "B", "C", "D", "E", "F", "G", "H",
+                                            "I", "J", "K", "L", "M", "N", "O"};
 
     private final Casa[][] GRADE = new Casa[MAX_LINHAS][MAX_COLUNAS];
-    private ArrayList<Embarcacao> minhaEsquadra = new ArrayList<>();
+    private final ArrayList<Embarcacao> minhaEsquadra = new ArrayList<>();
 
     /**
      * Construtor do tabuleiro
@@ -28,7 +30,7 @@ public class Tabuleiro {
         }
 
         for(int j=0; j < MAX_ENCOURACADO; j++) {
-            this.minhaEsquadra.add(new Encouracados(id));
+            this.minhaEsquadra.add(new Encouracado(id));
             id++;
         }
 
@@ -66,14 +68,6 @@ public class Tabuleiro {
         return minhaEsquadra;
     }
 
-    public void setMinhaEsquadra(ArrayList<Embarcacao> minhaEsquadra) {
-        this.minhaEsquadra = minhaEsquadra;
-    }
-
-    public Casa[][] getGRADE() {
-        return this.GRADE;
-    }
-
     /**
      * Adquire casa do tabuleiro.
      * @param linha (int) Coordenada da linha. (0 a MAX_LINHAS-1)
@@ -84,6 +78,15 @@ public class Tabuleiro {
         if (coordenadaValida(linha, coluna))
             return GRADE[linha][coluna];
         return null;
+    }
+
+    /**
+     * Posiciona casa da embarcação no tabuleiro, participando do processo da inserção das embarcações.
+     * Deve ser um método exclusivamente interno do tabuleiro!
+     * @param casa Instância de uma casa da embarcação.
+     */
+    private void setCasa(Casa casa) {
+        this.GRADE[casa.getLinha()][casa.getColuna()] = casa;
     }
 
     /**
@@ -114,19 +117,6 @@ public class Tabuleiro {
         return aux;
     }
 
-    /**
-     * Atualiza embarcação na lista minhaEsquadra.
-     * @param id (int) Identificador da embarcação.
-     * @param qual (Embarcacao) Embarcação cujos dados foram atualizados.
-     */
-    public void updateEmbarcacao(int id, Embarcacao qual) {
-        for (int i=0; i < this.minhaEsquadra.size(); i++) {
-            Embarcacao aux = this.minhaEsquadra.get(i);
-
-            if (aux.equals(id))
-                this.minhaEsquadra.set(i, qual);
-        }
-    }
 
     /**
      * Método de inserção da embarcação no tabuleiro.
@@ -136,21 +126,30 @@ public class Tabuleiro {
      * @return Verdadeiro se a inserção tiver sido realizada com sucesso.
      */
     public boolean inserirEmbarcacao(Embarcacao qual, int linha, int coluna) {
-        boolean inseriu = true;
-        ArrayList<Casa> casas;
+        ArrayList<Casa> casasEmbarcacao;
 
-        if (coordenadaValida(linha, coluna) & !casaOcupada(linha, coluna)) {
-            casas = qual.setCoordenadas(linha, coluna);
-            for (Casa casa : casas)
-                if (!coordenadaValida(casa.getLinha(), casa.getColuna())) {
-                    inseriu = false;
-                    break;
+        if (coordenadaValida(linha, coluna) && !casaOcupada(linha, coluna)) {
+            casasEmbarcacao = qual.setCoordenadas(linha, coluna);
+            for (Casa casa : casasEmbarcacao) {
+                int lin = casa.getLinha();
+                int col = casa.getColuna();
+                if (!coordenadaValida(lin, col)){
+                    return false;
                 }
+                if(casaOcupada(lin, col)){
+                    return false;
+                }
+            }
         }
         else
-            inseriu = false;
+            return false;
 
-        return inseriu;
+        for (Casa casa : qual.getMinhasCasas())
+            this.setCasa(casa);
+
+        qual.setInserido();
+
+        return true;
     }
 
     /**
@@ -163,7 +162,7 @@ public class Tabuleiro {
         Casa casa = this.getCasa(linha, coluna);
 
         if(casa == null)
-            throw new InvalidAttributesException("A casa tem coordenadas inválidas.");
+            throw new InvalidAttributesException("Coordenadas inválidas.");
 
         if (!casa.foiBombardeada())
             casa.bombardear();
@@ -172,9 +171,8 @@ public class Tabuleiro {
 
         if (casa.foiOcupada()) {
             Embarcacao alvejada = this.getEmbarcacao(casa.getOcupanteID());
-            alvejada.atingiu(casa);
+            alvejada.bombardear(casa);
 
-            this.updateEmbarcacao(alvejada.getID(), alvejada);
             return true;
         }
         return false;
@@ -186,10 +184,10 @@ public class Tabuleiro {
      */
     public Embarcacao afundou() {
         for(int i=0; i < minhaEsquadra.size(); i++) {
-            Embarcacao embarcacao = minhaEsquadra.get(i);
+            Embarcacao embarcacao = this.minhaEsquadra.get(i);
 
             if( embarcacao.afundou() ) {
-                minhaEsquadra.remove(i);
+                this.minhaEsquadra.remove(i);
                 return embarcacao;
             }
         }
@@ -210,5 +208,45 @@ public class Tabuleiro {
 
     public int getMaxColunas(){
         return MAX_COLUNAS;
+    }
+
+    public String toStringPlayer() {
+        StringBuilder tab = new StringBuilder();
+        for (int i=0; i < MAX_LINHAS; i++) {
+            tab.append(String.format("%02d ", i + 1));
+            for (int j=0; j < MAX_COLUNAS; j++) {
+                Casa casa = getCasa(i,j);
+                tab.append(casa.toStringPlayer());
+            }
+            tab.append("\n");
+        }
+
+        tab.append("   ");
+        for (String letra : LETRAS) {
+            String aux = "\u200B" + letra + "\u2005";
+            tab.append(aux);
+        }
+
+        return tab.toString();
+    }
+
+    public String toStringEnemy() {
+        StringBuilder tab = new StringBuilder();
+        for (int i=0; i < MAX_LINHAS; i++) {
+            tab.append(String.format("%02d ", i + 1));
+            for (int j=0; j < MAX_COLUNAS; j++) {
+                Casa casa = getCasa(i,j);
+                tab.append(casa.toStringEnemy());
+            }
+            tab.append("\n");
+        }
+
+        tab.append("   ");
+        for (String letra : LETRAS) {
+            String aux = "\u200B" + letra + "\u2005";
+            tab.append(aux);
+        }
+
+        return tab.toString();
     }
 }

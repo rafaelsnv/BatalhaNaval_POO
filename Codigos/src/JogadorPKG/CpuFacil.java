@@ -1,67 +1,85 @@
 package JogadorPKG;
+
 import Regras.*;
 import Embarcacoes.*;
 
-import javax.naming.directory.InvalidAttributesException;
 import java.util.Random;
+import javax.naming.directory.InvalidAttributesException;
 
 /**
- * Regras da CPU Fácil:
- * 1) A CPU insere as peças aleatoriamente, sem critério.
- * 2) A CPU ataca aleatoriamente, sem critério.
- * 3) A CPU não se preocupa em deixar a embarcação na vertical ou horizontal (insere na padrão).
+ * Regras da CPU Fácil: 1) A CPU insere as peças aleatoriamente, sem critério.
+ * 2) A CPU ataca aleatoriamente, sem critério. 3) A CPU não se preocupa em
+ * deixar a embarcação na vertical ou horizontal (insere na padrão)....
  */
 public class CpuFacil implements IJogador {
-    private final Random aleatorio = new Random(System.nanoTime());
     private final Tabuleiro meuTabuleiro = new Tabuleiro();
 
-     /**
-      * Método para gerar uma linha aleatória considerando as linhas do tabuleiro
-      * @return uma linha aleatória
-      */
-    private int linhaAleatoria() {
-        return aleatorio.nextInt(this.meuTabuleiro.getMaxLinhas());
+    public CpuFacil() {
+        for (Embarcacao embarcacao : meuTabuleiro.getMinhaEsquadra()) {
+            boolean result;
+            do {
+                int linha = this.randomRow();
+                int coluna = this.randomCol();
+                embarcacao.setOrientacao(this.randomOrientation());
+                result = this.inserirEmbarcacao(embarcacao, linha, coluna);
+            } while (!result);
+        }
     }
 
-     /**
-      * Método para gerar uma coluna aleatória considerando as linhas do tabuleiro
-      * @return uma coluna aleatória;
-      */
-    private int colunaAleatoria() {
-        return aleatorio.nextInt(this.meuTabuleiro.getMaxColunas());
+    /**
+     * Método para gerar um index de linha aleatório.
+     * @return (int) Index gerado para linha.
+     */
+    private int randomRow() {
+        Random random = new Random();
+        return random.nextInt(this.meuTabuleiro.getMaxLinhas());
     }
 
-     @Override
-     public void setTabuleiro(Tabuleiro tabuleiro) {
+    /**
+     * Método para gerar um index de coluna aleatório.
+     * @return (int) Index gerado para coluna.
+     */
+    private int randomCol() {
+        Random random = new Random();
+        return random.nextInt(this.meuTabuleiro.getMaxColunas());
+    }
 
-     }
+    public boolean randomOrientation() {
+        Random random = new Random();
+        int value = random.nextInt(2);
+        return value == 0;
+    }
 
-     @Override
-     public boolean inserirEmbarcacao(Embarcacao qual, int coluna, int linha) {
-        linha = linhaAleatoria();
-        coluna = colunaAleatoria();
+    public Tabuleiro getMeuTabuleiro() {
+        return this.meuTabuleiro;
+    }
 
+    @Override
+    public void inverterOrientacao(Embarcacao embarcacao) {
+        embarcacao.inverteOrientacao();
+    }
+
+    @Override
+    public void setTabuleiro(Tabuleiro meuTabuleiro) {
+
+    }
+
+    @Override
+    public boolean inserirEmbarcacao(Embarcacao qual, int coluna, int linha) {
+        return meuTabuleiro.inserirEmbarcacao(qual, linha, coluna);
+    }
+
+    @Override
+    public boolean bombardear(Jogador inimigo, int linha, int coluna) throws InvalidAttributesException {
+        Tabuleiro tabuleiroInimigo = inimigo.getMeuTabuleiro();
+        boolean jaBombardeada;
         do {
-            this.meuTabuleiro.inserirEmbarcacao(qual, linha, coluna);
-        }while (!this.meuTabuleiro.inserirEmbarcacao(qual, linha, coluna));
+            linha = randomRow();
+            coluna = randomCol();
+            Casa casa = tabuleiroInimigo.getCasa(linha, coluna);
+            jaBombardeada = casa.foiBombardeada();
+        } while (jaBombardeada);
 
-        return this.meuTabuleiro.inserirEmbarcacao(qual, linha, coluna);
-     }
-
-     @Override
-     public void girarVertical(Embarcacao embarcacao) {
-
-     }
-
-     @Override
-     public void girarHorizontal(Embarcacao embarcacao) {
-
-     }
-
-     @Override
-     public boolean bombardear(int linha, int coluna) throws InvalidAttributesException {
-        linha = linhaAleatoria();
-        coluna = colunaAleatoria();
-        return this.meuTabuleiro.bombardear(linha, coluna);
-     }
+        return tabuleiroInimigo.bombardear(linha, coluna);
+    }
 }

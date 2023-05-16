@@ -4,16 +4,15 @@ import java.util.ArrayList;
 
 import Regras.*;
 
-public class Cruzador extends Embarcacao {
-    private static final int TAMANHO = 2; // Quantidade de casas que irá ocupar.
-    private static final String DESC = "Cruzador";
+public class Encouracado extends Embarcacao {
+    private static final int TAMANHO = 4; // Quantidade de casas que irá ocupar.
+    private static final String DESC = "Encouraçado";
 
-    /** Método construtor sem parâmetros */
-    public Cruzador(int id) {
+    public Encouracado(int id) {
         super(TAMANHO);
         this.descricao = DESC;
         this.ID = id;
-        this.setCor("\u001B[35m", "\u001B[45m");
+        this.setCor("\u001B[31m", "\u001B[41m");
     }
 
     /**
@@ -33,8 +32,8 @@ public class Cruzador extends Embarcacao {
                 casa.setCoordenadas(linha + i, coluna);
             else
                 casa.setCoordenadas(linha, coluna + i);
-
         }
+
         return minhasCasas;
     }
 

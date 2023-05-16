@@ -8,18 +8,19 @@ public class Embarcacao {
     protected int ID;                     // Identificador da embarcação
     protected String descricao;           //
     protected boolean orientacaoVertical; // false = horizontal | true = vertical
-    protected ArrayList<Casa> embarcacao; //
-    protected boolean inserido;           //
-    protected int tamanho;                // Número de casas que a embarcação ocupa
+    protected ArrayList<Casa> minhasCasas; //
+    protected boolean inserido;  //
+    protected int tamanho;       // Número de casas que a embarcação ocupa
 
     /**
      * Construtor sem parâmetros. Cria sempre uma embarcação ocupando apenas uma
      * casa.
      */
     public Embarcacao() {
-        embarcacao = new ArrayList<>();
-        this.embarcacao.add(new Casa());
+        minhasCasas = new ArrayList<>();
+        this.minhasCasas.add(new Casa());
         this.descricao = "Não Identificado.";
+        this.orientacaoVertical = false;
     }
 
     /**
@@ -29,24 +30,28 @@ public class Embarcacao {
      * @param size (int) - Tamanho da embarcação desejada.
      */
     public Embarcacao(int size) {
-        embarcacao = new ArrayList<>();
+        this.minhasCasas = new ArrayList<>();
         this.setTamanho(size);
         for (int i = 0; i < this.tamanho; i++) {
-            embarcacao.add(new Casa());
+            Casa casa = new Casa();
+            this.minhasCasas.add(casa);
         }
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        this.descricao = "Não Identificado.";
+        this.orientacaoVertical = false;
     }
 
     /**
-     * 
-     * @param vertical (boolean) - Se true = embarcação na vertical - Se false =
-     *                 embarcação na horizontal
+     * Inverte a orientação da embarcação
      */
-    public void setOrientacaoVertical(boolean vertical) {
-        this.orientacaoVertical = true;
+    public void inverteOrientacao() {
+        this.orientacaoVertical = !this.orientacaoVertical;
+    }
+
+    /**
+     * @param vertical true = vertical false = horizontal
+     */
+    public void setOrientacao(boolean vertical) {
+        this.orientacaoVertical = vertical;
     }
 
     public void setInserido() {
@@ -57,12 +62,9 @@ public class Embarcacao {
         this.tamanho = size;
     }
 
-    public void setID(int id) {
-        this.ID = id;
-    }
-
-    public int getID() {
-        return this.ID;
+    protected void setCor(String corFonte, String corFundo) {
+        for (Casa casa : minhasCasas)
+            casa.setCor(corFonte, corFundo);
     }
 
     public String getDescricao() {
@@ -72,7 +74,7 @@ public class Embarcacao {
     /**
      * @return false = horizontal | true = vertical
      */
-    public boolean getOrientacaoVertical() {
+    public boolean getOrientacao() {
         return this.orientacaoVertical;
     }
 
@@ -85,39 +87,19 @@ public class Embarcacao {
     }
 
     /** @return (ArrayList<Casa>) Retorna a embarcação. */
-    public ArrayList<Casa> getEmbarcacao() {
-        return this.embarcacao;
+    public ArrayList<Casa> getMinhasCasas() {
+        return this.minhasCasas;
     }
 
     /**
-     * @param casaAtingida (Casa) - Casa do tabuleiro onde foi efetuado o disparo.
-     * @return (boolean) - True se o disparo tiver atingido a embarcação.
+     * @param atingida (Casa) - Casa do tabuleiro onde foi efetuado o disparo.
      */
-    public boolean atingiu(Casa casaAtingida) {
-        boolean atingiu = false;
-
-        for (int i = this.embarcacao.size()-1; i > 0; i--) { // Percorre todas as casas da embarcação, até encontrar a
-                                                           // certa.
-            boolean linhaMatch = false; // - Variáveis usadas para comparar
-            boolean colunaMatch = false; //
-
-            Casa aux = this.embarcacao.get(i); // Auxiliar para comparação
-
-            if (casaAtingida.getColuna() == aux.getColuna())
-                colunaMatch = true;
-
-            if (casaAtingida.getLinha() == aux.getLinha())
-                linhaMatch = true;
-
-            if (colunaMatch && linhaMatch) { // Se encontrar a casa certa
-                atingiu = true; // Embarcação atingida.
-                aux.bombardear(); // Casa bombardeada.
-                embarcacao.set(i, aux);
-                i = 0; // Força o fim do loop.
+    public void bombardear(Casa atingida) {
+        for(Casa casa : minhasCasas) {
+            if(casa.getLinha() == atingida.getLinha() & casa.getColuna() == atingida.getColuna()) {
+                casa.bombardear();
             }
         }
-        // this.afundou(); // Testa se a embarcação afundou.
-        return atingiu;
     }
 
     /**
@@ -125,16 +107,11 @@ public class Embarcacao {
      *         retorna true.
      */
     public boolean afundou() {
-        int size = this.embarcacao.size();
-        for (int i = size; i > 0; i--) { // Percorre todas as casas da embarcação.
-            Casa aux = this.embarcacao.get(i);
-            if (aux.foiBombardeada()) // Testa se a casa foi bombardeada.
-                size--;
+        for(Casa casa : minhasCasas) {
+            if (!casa.foiBombardeada())
+                return false;
         }
-        if (size == 0)
-            return true;
-        else
-            return false;
+        return true;
     }
 
     public boolean equals(int id) {
@@ -143,5 +120,9 @@ public class Embarcacao {
 
     public ArrayList<Casa> setCoordenadas(int linha, int coluna) {
         return null;
+    }
+
+    public String toString() {
+        return "";
     }
 }
