@@ -5,6 +5,10 @@ import JogadorPKG.Jogador;
 import java.util.ArrayList;
 public class BatalhaNaval {
 
+    public int getTurno() {
+        return turno;
+    }
+
     private int turno;
     private Jogador vencedor;
     ArrayList <Jogador> jogadores = new ArrayList<>();

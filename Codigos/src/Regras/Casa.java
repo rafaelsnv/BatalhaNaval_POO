@@ -1,17 +1,26 @@
 package Regras;
 
 public class Casa {
-   private final static String ANSI_RESET = "\u001B[0m";
-   private final static String ANSI_BLACK = "\u001B[30m";
-   private final static String ANSI_WHITE = "\u001B[37m";
-   private final static String ANSI_BLUE = "\u001B[34m";
-   private final static String BACKGROUND_BLUE = "\u001B[44m";
-   private final static String BACKGROUND_WHITE = "\u001B[47m";
-   private final static String BACKGROUND_BLACK = "\u001B[40m";
+   public final static String ANSI_RESET = "\u001B[0m";
+   public final static String ANSI_BLACK = "\u001B[30m";
+   public final static String ANSI_WHITE = "\u001B[37m";
+   public final static String ANSI_BLUE = "\u001B[34m";
+   public final static String BACKGROUND_BLUE = "\u001B[44m";
+   public final static String BACKGROUND_WHITE = "\u001B[47m";
+   public final static String BACKGROUND_BLACK = "\u001B[40m";
 
    private int linha;            // - Linha e coluna assumem as coordenadas
    private int coluna;           //   que identificam a casa no tabuleiro;
    private boolean bombardeada;  // - Define se a casa foi bombardeada;
+
+   public String getCorFonte() {
+      return this.corFonte;
+   }
+
+   public String getCorFundo() {
+      return this.corFundo;
+   }
+
    private String corFonte;      // - Cor da fonte para o X do bombardeado;
    private String corFundo;      // - Cor de fundo para a casa (Água ou Embarcação);
    private int ocupanteID;       // - Define qual embarcação ocupou a casa (ID da embarcação).
