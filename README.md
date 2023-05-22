@@ -1,16 +1,14 @@
 # Batalha Naval - POO
 
-Trabalho acadêmico da discplina de Programação Orientada a Objetos
+Trabalho acadêmico da discplina de Teste e Manutenção de Software
 
 ## Diagrama de Classes - UML
-![Diagrama de Classes - UML](UML/Diagrama1.png)
+![Diagrama de Classes - UML](UML/Diagrama1_v2.png)
 
 
 ## Integrantes
 
-* Daniel Trindade Nunes
-* Gabriel de Oliveira Fávero
-* Frederico Henrique Pires da Silva
-* João Dias
+* Gabriel Araujo
 * Rafael Santos Nunes Vieira
+* Victor Augusto
 
