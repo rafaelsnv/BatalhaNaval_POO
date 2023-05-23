@@ -10,12 +10,12 @@ import javax.naming.directory.InvalidAttributesException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CpuFacilTest {
-    CpuFacil cut;
+class HumanoTest {
+    Humano cut;
 
     @BeforeEach
     void setUp() {
-        cut = new CpuFacil();
+        cut = new Humano();
     }
 
     @Test
@@ -23,15 +23,6 @@ class CpuFacilTest {
         Tabuleiro exp = new Tabuleiro();
         cut.setTabuleiro(exp);
         assertEquals(exp, cut.getMeuTabuleiro());
-    }
-
-    @Test
-    void inverterOrientacao() {
-        Embarcacao embarcacao = cut.getMeuTabuleiro().getMinhaEsquadra().get(0);
-        cut.inverterOrientacao(embarcacao);
-
-        assertEquals(embarcacao.getOrientacao(),
-                        cut.getMeuTabuleiro().getMinhaEsquadra().get(0).getOrientacao());
     }
 
     @Test
@@ -43,11 +34,20 @@ class CpuFacilTest {
     }
 
     @Test
-    void bombardear() throws InvalidAttributesException {
-        Jogador jogador = new Jogador("Player", 0);
-        Cruzador cruzador = new Cruzador(1);
-        jogador.inserirEmbarcacao(cruzador, 1, 1);
+    void inverterOrientacao() {
+        Embarcacao embarcacao = cut.getMeuTabuleiro().getMinhaEsquadra().get(0);
+        cut.inverterOrientacao(embarcacao);
 
-        assertTrue(cut.bombardear(jogador, 1, 1));
+        assertEquals(embarcacao.getOrientacao(),
+                cut.getMeuTabuleiro().getMinhaEsquadra().get(0).getOrientacao());
+    }
+
+    @Test
+    void bombardear() throws InvalidAttributesException {
+        Jogador inimigo = new Jogador("Player", 0);
+        Cruzador cruzador = new Cruzador(1);
+        inimigo.inserirEmbarcacao(cruzador, 1, 1);
+
+        assertTrue(cut.bombardear(inimigo, 1, 1));
     }
 }

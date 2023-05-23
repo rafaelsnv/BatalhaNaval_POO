@@ -10,12 +10,12 @@ import javax.naming.directory.InvalidAttributesException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CpuFacilTest {
-    CpuFacil cut;
+class CpuMedioTest {
+    CpuMedio cut;
 
     @BeforeEach
     void setUp() {
-        cut = new CpuFacil();
+        cut = new CpuMedio();
     }
 
     @Test
@@ -31,7 +31,7 @@ class CpuFacilTest {
         cut.inverterOrientacao(embarcacao);
 
         assertEquals(embarcacao.getOrientacao(),
-                        cut.getMeuTabuleiro().getMinhaEsquadra().get(0).getOrientacao());
+                cut.getMeuTabuleiro().getMinhaEsquadra().get(0).getOrientacao());
     }
 
     @Test

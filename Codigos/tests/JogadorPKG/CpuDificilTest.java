@@ -3,6 +3,7 @@ package JogadorPKG;
 import Embarcacoes.Cruzador;
 import Embarcacoes.Embarcacao;
 import Regras.Tabuleiro;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,12 +11,12 @@ import javax.naming.directory.InvalidAttributesException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CpuFacilTest {
-    CpuFacil cut;
+class CpuDificilTest {
+    CpuDificil cut;
 
     @BeforeEach
     void setUp() {
-        cut = new CpuFacil();
+        cut = new CpuDificil();
     }
 
     @Test
@@ -31,7 +32,7 @@ class CpuFacilTest {
         cut.inverterOrientacao(embarcacao);
 
         assertEquals(embarcacao.getOrientacao(),
-                        cut.getMeuTabuleiro().getMinhaEsquadra().get(0).getOrientacao());
+                cut.getMeuTabuleiro().getMinhaEsquadra().get(0).getOrientacao());
     }
 
     @Test

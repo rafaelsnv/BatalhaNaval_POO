@@ -10,28 +10,39 @@ import javax.naming.directory.InvalidAttributesException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CpuFacilTest {
-    CpuFacil cut;
+class JogadorTest {
+    Jogador cut;
 
     @BeforeEach
     void setUp() {
-        cut = new CpuFacil();
+        cut = new Jogador("Test", 0);
+    }
+
+    @Test
+    void getNome() {
+        cut.setNome("Teste");
+
+        assertEquals("Teste", cut.getNome());
+    }
+
+    @Test
+    void getiJogador() {
+        cut.setiJogador(3);
+
+        assertEquals("CpuDificil",
+                      cut.getiJogador().getClass().getSimpleName());
     }
 
     @Test
     void getMeuTabuleiro() {
         Tabuleiro exp = new Tabuleiro();
-        cut.setTabuleiro(exp);
+        cut.setMeuTabuleiro(exp);
         assertEquals(exp, cut.getMeuTabuleiro());
     }
 
     @Test
-    void inverterOrientacao() {
-        Embarcacao embarcacao = cut.getMeuTabuleiro().getMinhaEsquadra().get(0);
-        cut.inverterOrientacao(embarcacao);
-
-        assertEquals(embarcacao.getOrientacao(),
-                        cut.getMeuTabuleiro().getMinhaEsquadra().get(0).getOrientacao());
+    void perdeu() {
+        assertFalse(cut.perdeu());
     }
 
     @Test
