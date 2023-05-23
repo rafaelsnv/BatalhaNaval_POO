@@ -20,17 +20,14 @@ class HumanoTest {
 
     @Test
     void getMeuTabuleiro() {
-        Tabuleiro exp = new Tabuleiro();
-        cut.setTabuleiro(exp);
-        assertEquals(exp, cut.getMeuTabuleiro());
+        assertNotNull(cut.getMeuTabuleiro());
     }
 
     @Test
     void inserirEmbarcacao() {
         Embarcacao embarcacao = cut.getMeuTabuleiro().getEmbarcacao(1);
-        cut.inserirEmbarcacao(embarcacao, 1, 1);
 
-        assertTrue(cut.getMeuTabuleiro().getEmbarcacao(1).getInserido());
+        assertTrue(cut.inserirEmbarcacao(embarcacao, 1, 1));
     }
 
     @Test

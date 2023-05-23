@@ -50,11 +50,6 @@ public class CpuMedio implements IJogador {
     }
 
     @Override
-    public void setTabuleiro(Tabuleiro meuTabuleiro) {
-
-    }
-
-    @Override
     public boolean inserirEmbarcacao(Embarcacao qual, int coluna, int linha) {
         return meuTabuleiro.inserirEmbarcacao(qual, linha, coluna);
     }

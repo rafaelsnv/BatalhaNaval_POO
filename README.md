@@ -11,4 +11,3 @@ Trabalho acadêmico da discplina de Teste e Manutenção de Software
 * Gabriel Araujo
 * Rafael Santos Nunes Vieira
 * Victor Augusto
-

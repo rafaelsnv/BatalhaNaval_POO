@@ -2,6 +2,7 @@ package Regras;
 
 import Embarcacoes.Embarcacao;
 import Embarcacoes.Ovni;
+import Embarcacoes.Submarino;
 import javafx.scene.control.Tab;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,8 +38,7 @@ class TabuleiroTest {
 
     @Test
     void getEmbarcacao() {
-
-
+        assertTrue(cut.getEmbarcacao(1).equals(1));
     }
 
     @Test
@@ -55,8 +55,11 @@ class TabuleiroTest {
     }
 
     @Test
-    void afundou() {
-        assertNull(cut.afundou());
+    void afundou() throws InvalidAttributesException {
+        cut.inserirEmbarcacao(cut.getMinhaEsquadra().get(6),10,10);
+        cut.bombardear(10,10);
+
+        assertEquals(cut.getMinhaEsquadra().get(6), cut.afundou());
     }
 
     @Test
@@ -76,9 +79,11 @@ class TabuleiroTest {
 
     @Test
     void toStringPlayer() {
+        fail();
     }
 
     @Test
     void toStringEnemy() {
+        fail();
     }
 }

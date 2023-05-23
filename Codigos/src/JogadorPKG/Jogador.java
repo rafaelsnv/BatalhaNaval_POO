@@ -82,14 +82,6 @@ public class Jogador {
         return this.getiJogador().getMeuTabuleiro();
     }
 
-    /**
-     * Método set para qualTabuleiro.
-     * 
-     * @param qualTabuleiro o Tabuleiro a ser armazenado no Jogador.
-     */
-    public void setMeuTabuleiro(Tabuleiro qualTabuleiro) {
-        this.getiJogador().setTabuleiro(qualTabuleiro);
-    }
 
     /**
      * Método para informar quando o jogador perdeu.

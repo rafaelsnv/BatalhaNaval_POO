@@ -6,8 +6,6 @@ import javax.naming.directory.InvalidAttributesException;
 
 public interface IJogador {
 
-    void setTabuleiro(Tabuleiro tabuleiro);
-
     Tabuleiro getMeuTabuleiro();
 
     boolean inserirEmbarcacao(Embarcacao qual, int linha, int coluna);

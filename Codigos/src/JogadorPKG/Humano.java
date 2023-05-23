@@ -13,17 +13,13 @@ public class Humano implements IJogador {
      private final Tabuleiro meuTabuleiro = new Tabuleiro();
 
      @Override
-     public void setTabuleiro(Tabuleiro tabuleiro) {
-     }
-
-     @Override
      public Tabuleiro getMeuTabuleiro() {
           return this.meuTabuleiro;
      }
 
      @Override
      public boolean inserirEmbarcacao(Embarcacao qual, int coluna, int linha) {
-          return true;
+          return this.meuTabuleiro.inserirEmbarcacao(qual, linha, coluna);
      }
 
      @Override
